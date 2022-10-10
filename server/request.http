@@ -1,0 +1,56 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "abc",
+  "password": "ttrung0301"
+}
+
+###
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "dominhquan",
+  "password": "mquan1102"
+}
+
+###
+
+POST http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmY2NWFkZjdkYWQ4NzZkYzM2MzI5NTAiLCJpYXQiOjE2NjA3MjA0ODl9.-HiJmk7GZol3m4l-6zEPy0bDvScrFyvMOrY21-pchz8
+
+{
+  "title": "Python",
+  "description": "",
+  "url": "python.com",
+  "status": ""
+}
+
+###
+
+GET http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmY2NWFkZjdkYWQ4NzZkYzM2MzI5NTAiLCJpYXQiOjE2NjAzNjQxMjl9.iZHGtFmYmEQ8zsaBO9VyvJRSz7RDKm8NUE_k8evamuM
+
+###
+
+PUT http://localhost:5000/api/posts/62f6662676a0e76fdaf3f042
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmY2NWFkZjdkYWQ4NzZkYzM2MzI5NTAiLCJpYXQiOjE2NjAzNjQxMjl9.iZHGtFmYmEQ8zsaBO9VyvJRSz7RDKm8NUE_k8evamuM
+
+{
+  "title": "Vue",
+  "description": "frontend",
+  "url": "vuejs.org",
+  "status": "LEARNING"
+}
+
+###
+
+DELETE http://localhost:5000/api/posts/62f6662676a0e76fdaf3f042
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmY2NWFkZjdkYWQ4NzZkYzM2MzI5NTAiLCJpYXQiOjE2NjAzNjQxMjl9.iZHGtFmYmEQ8zsaBO9VyvJRSz7RDKm8NUE_k8evamuM
+
