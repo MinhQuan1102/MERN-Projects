@@ -1,0 +1,87 @@
+GET http://localhost:5000/api/hotels
+
+###
+
+GET http://localhost:5000/api/hotels/631099a0b3afb4949701a08f
+
+###
+
+POST http://localhost:5000/api/hotels
+Content-Type: application/json
+
+{
+  "name": "Croissant Hotel",
+  "type": "hotel",
+  "city": "Paris",
+  "address": "somewhere",
+  "distance": "2000km",
+  "title": "Coastal",
+  "desc": "hotel desc",
+  "rating": 4.8,
+  "cheapestPrice": 140,
+  "featured": true
+}
+
+###
+
+PUT http://localhost:5000/api/hotels/631099a0b3afb4949701a08f
+Content-Type: application/json
+
+{
+  "name": "Hotel Minh Quan",
+  "type": "hotel",
+  "city": "Ha Noi",
+  "address": "somewhere",
+  "distance": "2000km",
+  "title": "Coastal",
+  "desc": "hotel desc",
+  "rating": 4.8,
+  "cheapestPrice": 140,
+  "featured": true
+}
+
+###
+
+DELETE http://localhost:5000/api/hotels/631099a0b3afb4949701a08f
+
+###
+
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "dotritrung",
+  "email": "tritrung0301@gmail.com",
+  "password": "ttrung0301"
+}
+
+###
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "dotritrunga",
+  "email": "tritrung0301@gmail.com",
+  "password": "ttrung0301"
+}
+
+###
+
+GET http://localhost:5000/api/users/checkauthentication
+
+###
+
+GET http://localhost:5000/api/users/checkuser/asd
+
+###
+GET http://localhost:5000/api/users/6310af469f37dcaf20959452
+
+###
+
+PUT http://localhost:5000/api/users/6310af469f37dcaf20959452
+{
+  "username": "dominhduke",
+  "email": "tritrung0301@gmail.com",
+  "password": "ttrung0301"
+}
