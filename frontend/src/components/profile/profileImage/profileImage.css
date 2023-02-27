@@ -1,0 +1,358 @@
+.profileImage {
+  width: 100%;
+}
+
+.coverImageContainer {
+  width: 100%;
+  height: 350px;
+}
+
+.coverHeader {
+  position: relative;
+  width: 72%;
+  height: 100%;
+  margin: auto;
+}
+
+.coverHeader .coverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.coverImage {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 50px;
+}
+
+.coverImageEditBtn {
+  text-align: right;
+}
+
+.coverImageEditBtn .editCoverBtn {
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 20px;
+  font-size: 13px;
+  background-color: #fff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #333;
+  position: relative;
+}
+
+.coverImageEditBtn .editCoverBtn:hover {
+  background-color: #f2f2f2;
+}
+
+.coverImageEditBtn .editCoverBtn span {
+  margin-left: 5px;
+}
+
+.coverImageEditBtn .editCoverOptions {
+  position: absolute;
+  right: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  background-color: white;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  z-index: 1000;
+  text-align: left !important;
+}
+
+.editCoverOptionsContainer {
+  margin: 8px;
+}
+
+.coverImageEditBtn .editCoverOption {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.coverImageEditBtn .editCoverOption:hover {
+  background-color: #f2f2f2;
+}
+
+.editCoverIcon {
+  margin-right: 10px;
+}
+
+.editCoverOption span {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.profileContainer {
+  width: 70%;
+  height: 140px;
+  border-bottom: 1px solid #ccced2;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 4fr 4fr;
+  padding-bottom: 15px;
+}
+
+.profileContainerRequest {
+  width: 70%;
+  height: 120px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 4fr 4fr;
+}
+
+.profileImageSite {
+  position: relative;
+  max-width: 145px;
+  max-height: 145px;
+  border: 3px solid #fff;
+  margin-left: 20px;
+  transform: translateY(-30px);
+  background-color: #333;
+  border-radius: 50%;
+}
+
+.profileImage .userAvatar {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profileImage img:hover {
+  filter: brightness(0.9);
+}
+
+.profileImage .editImg {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  cursor: pointer;
+  padding: 5px 5px;
+  border-radius: 50%;
+  background-color: #d5d5d5;
+  font-size: 18px;
+  color: #333;
+}
+
+/* .profileNameInfo {
+  margin-left: -20px;
+} */
+
+.profileNameInfo h1 {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 25px;
+  color: #000;
+  font-weight: 500;
+}
+
+.profileNameInfo p {
+  font-size: 14px;
+  color: #333;
+  margin-left: 10px;
+}
+
+.profileNameInfo p span {
+  cursor: pointer;
+  color: #65676b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.friendImages {
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 200px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.friendImage {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: #333;
+  margin-left: -3px;
+  cursor: pointer;
+}
+
+.friendImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.b {
+  transform: translateX(-3px);
+}
+
+.c {
+  transform: translateX(-6px);
+}
+
+.d {
+  transform: translateX(-9px);
+}
+
+.e {
+  transform: translateX(-12px);
+}
+
+.last {
+  position: relative;
+  overflow: hidden;
+  transform: translateX(-15px);
+}
+
+.last .moreFriend {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #3338;
+  color: #fff8;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.profileButtonSite {
+  width: 100%;
+}
+
+.btnSite {
+  width: 100%;
+  margin-top: 75px;
+  margin-bottom: 75px;
+  text-align: right;
+  position: relative;
+}
+
+.btnSite .btn {
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 14px;
+  width: 35%;
+  background-color: #1877f2;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.btnIcon {
+  margin-right: 5px;
+}
+
+.addStoryBtn:hover {
+  background-color: #1771e6;
+}
+
+.editProfileBtn {
+  background-color: #e4e6e9 !important;
+  color: #333 !important;
+}
+
+.editProfileBtn:hover {
+  background-color: #d8dadf !important;
+}
+
+.respondRequest {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f8fa;
+  margin-bottom: 10px !important;
+}
+
+.requestText {
+  padding: 15px;
+  color: #050505;
+  font-weight: 500;
+}
+
+.respondBtns {
+  margin: 10px;
+}
+
+.respondBtns span {
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 14px;
+  width: 35%;
+  background-color: #1877f2;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.editFriendOptions {
+  position: absolute;
+  left: 210px;
+  top: 40px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  background-color: white;
+  color: #000;
+  display: flex;
+  width: 200px;
+  z-index: 1000;
+  text-align: left !important;
+}
+
+.editFriendOptionsContainer {
+  width: 100%;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.editFriendOptionsContainer .editFriendOption {
+  padding: 5px 10px;
+}
+
+.editFriendOptionsContainer .editFriendOption:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.editFriendOption .editFriendIcon {
+  margin-right: 10px;
+}
+
+.editFriendOption span {
+  color: #050505;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100px;
+}

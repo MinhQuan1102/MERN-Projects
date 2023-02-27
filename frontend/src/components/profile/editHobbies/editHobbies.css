@@ -1,0 +1,150 @@
+.editHobbies {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 550px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #3339;
+  z-index: 11;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.editHobbies .header {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #3333;
+  padding: 0 0 15px 0;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editHobbies .header p {
+  text-align: center;
+  font-size: 20px !important;
+  color: #333 !important;
+  font-weight: bolder !important;
+}
+
+.editHobbies .header .hobbiesImg {
+  width: 100%;
+  height: 90%;
+  padding: 0;
+}
+
+.editHobbies .header .smallDesc {
+  padding: 0 20px 5px 20px;
+  text-align: center;
+}
+
+.editHobbies .header .closeBtn {
+  position: absolute;
+  top: 10%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  font-size: 12px !important;
+  text-align: center;
+  line-height: 30px;
+  padding: 5px;
+}
+
+.editHobbies .body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 25%;
+  padding: 5px 15px;
+  overflow-y: scroll;
+}
+
+.editHobbies .body .hobbiesTitle {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #333 !important;
+}
+
+.editHobbies .body .hobbyItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.editHobbies .body .hobbyItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 15px;
+  border-radius: 25px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.editHobbies .body .hobbyItem:hover {
+  background-color: #e3e5ec !important;
+}
+.activeIcon {
+  color: #1877f2 !important;
+}
+
+.editHobbies .audienceButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.editHobbies .audienceButtons button {
+  padding: 5px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.editHobbies .audienceButtons .cancel {
+  color: #1877f2;
+}
+
+.editHobbies .audienceButtons .done {
+  color: #fff;
+  background-color: #1877f2;
+  margin-right: 5px;
+}
+
+.editHobbies .audienceButtons .cancel:hover {
+  background-color: #d8dadf !important;
+}
+
+.editHobbies .audienceButtons .done:hover {
+  background-color: #1771e6 !important;
+}
+
+.hide {
+  display: none;
+}
+
+.selected {
+  color: #1771e6 !important;
+  font-weight: 400;
+}

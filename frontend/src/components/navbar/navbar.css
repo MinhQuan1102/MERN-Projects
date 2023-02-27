@@ -1,0 +1,129 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+  height: 50px;
+  top: 0;
+  left: 0;
+}
+
+.navbar .navbarContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-bottom: 1px solid lightgray;
+  background-color: white;
+  position: relative;
+}
+
+.navbar .left {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .left span {
+  font-weight: bold;
+  font-size: 20px;
+  color: #1877f2;
+}
+
+.center {
+  flex: 4.5;
+  position: relative;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #F0F2F5;
+}
+
+.search:hover {
+  background-color:  #D8DADF !important;
+
+}
+
+.searchIcon {
+  font-size: 24px !important;
+  padding-left: 2px;
+  margin-left: 5px;
+  color: #606266;
+}
+.search input {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  color: #000;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.navbar .right {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.messenger {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #F0F2F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messenger:hover {
+  background-color:  #D8DADF !important;
+}
+
+.messengerIcon {
+  font-size: 19px !important;
+  color: #606266;
+}
+
+.searchProfile {
+  width: 300px;
+}
+
+.messenger input {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  color: #000;
+}
+
+.notificationIcon {
+  font-size: 20px !important;
+}
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avaButton {
+  background-color: white !important;
+  padding: 0 !important;
+}
+
+.avaButton:hover {
+  background-color: white !important;
+}
+

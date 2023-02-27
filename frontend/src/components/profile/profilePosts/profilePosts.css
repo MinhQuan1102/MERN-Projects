@@ -1,0 +1,29 @@
+.profilePosts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px 10px 0 10px;
+  flex: 5;
+  width: 100%;
+  opacity: inherit;
+}
+
+.pinnedPost, .otherPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.postText {
+  color: #95979A;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.otherPosts .profileOtherPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+}

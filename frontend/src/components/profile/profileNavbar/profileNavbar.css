@@ -1,0 +1,73 @@
+.profileNavbar {
+  width: 100%;
+	border-bottom: 1px solid #3335;
+
+}
+
+.profileNavbarContainer {
+  width: 70%;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	border-top: 1px solid #3335;
+}
+
+.profileNavbarContainer .btnList {
+  padding: 0px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+}
+
+.profileNavbarContainer .btnText {
+  display: inline-block;
+	padding: 15px 12px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #707070;
+	cursor: pointer;
+	margin-left: -5px;
+	transform: 0.3s;
+}
+
+.profileNavbarContainer .btnText:hover {
+  background-color: #E4E6E9;
+}
+
+.active {
+  position: relative;
+  background-color: #fff !important;
+  color: #1877F2 !important;
+}
+
+.active .moreIcon {
+  color: #1877F2 !important;
+}
+
+.active:after {
+  position: absolute;
+	content: '';
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 3px;
+	background-color: #1877F2;
+}
+
+.navBtn {
+  text-align: right;
+}
+
+.navBtn .navBtnIcon {
+  font-size: 16px;
+	padding:7px 12px;
+	background-color: #E4E6E9;
+	border-radius: 5px;
+	color: #707070;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.navBtn .navBtnIcon:hover {
+  background-color: #D8DADF;
+	color: #333;
+}

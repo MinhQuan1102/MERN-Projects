@@ -1,0 +1,274 @@
+.profileLeftbar {
+  flex: 4;
+  display: flex;
+  height: 250vh;
+  justify-content: flex-end;
+  overflow-y: scroll;
+}
+
+.profileLeftbarContainer {
+  width: 65%;
+  display: grid;
+  /* grid-template-columns: 2fr 3fr; */
+  height: 100px;
+  grid-column-gap: 15px;
+}
+
+.aboutInfo {
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 1px 2px #3335;
+  background-color: #fff;
+  margin-bottom: 15px;
+  
+}
+
+.aboutInfo .aboutTitle {
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+}
+
+.aboutInfo .bioText {
+  font-size: 15px;
+  padding: 10px 0px;
+  color: #333;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.btn {
+  width: 100%;
+  padding: 5px 0px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: #e4e6eb;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #d8dadf;
+}
+
+.aboutInfo ul {
+  margin-bottom: 0;
+  padding: 5px 0;
+}
+
+.aboutInfo ul li {
+  list-style: none;
+  font-size: 13px;
+  color: #333;
+  padding: 7px 2px;
+  position: relative;
+}
+
+.aboutInfo .bioIcon {
+  margin-right: 5px;
+  color: #3339;
+  font-size: 14px;
+}
+
+.aboutInfo ul li p {
+  position: absolute;
+  left: 25px;
+  top: 7px;
+}
+
+.aboutInfo ul li span {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 600;
+}
+
+.aboutInfo ul li span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.inputbox {
+  width: 100%;
+  padding: 10px 10px 50px 10px;
+  background-color: #e4e6eb;
+  border: 1px solid #1877f2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  color: #333;
+  text-align: center;
+  font-size: 15px;
+}
+
+.lengthText {
+  font-size: 11px !important;
+  color: #333 !important;
+  text-align: right !important;
+  padding: 3px !important;
+}
+
+.publicIcon {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.buttons {
+  padding: 0;
+}
+
+.buttons .btn {
+  margin: 0px 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #e4e6eb;
+  border-radius: 3px;
+  color: #000;
+}
+
+.buttons .btn:hover {
+  background-color: #d8dadf;
+}
+
+.buttons button:last-child {
+  background-color: #1877f2;
+  color: #fff;
+}
+
+.buttons button:last-child:hover {
+  background-color: #1771e6;
+}
+
+.friendSite {
+  position: relative;
+}
+
+.hobbies {
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.hobbies span {
+  padding: 8px 10px;
+  border: 1px solid #e4e6eb;
+  background-color: #fff;
+  color: #333;
+  font-size: 13px;
+  margin: 4px 1px 4px 1px;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hobbies span .hobbyIcon {
+  margin-right: 5px;
+}
+
+.boxDesign {
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px #3335;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.imageSite {
+  position: relative;
+  padding: 15px;
+}
+
+.imageSite span {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+.seeAllImages {
+  font-size: 14px !important;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  text-decoration: none;
+  color: #1771e6 !important;
+}
+
+.seeAllImages:hover {
+  text-decoration: underline;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 3px;
+  padding: 10px 0px 0px 0px;
+}
+
+.image {
+  padding: 2px 1px;
+}
+
+.image img {
+  width: 100%;
+  height: 120px;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.image p {
+  font-size: 11px;
+  padding: 3px 5px;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.image p:hover {
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+.friendSite {
+  padding: 15px;
+}
+
+.friendSite .friendTitle {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+.friendSite span p {
+  font-size: 14px !important;
+  color: #3339 !important;
+  margin-top: 5px !important;
+}
+
+.friendSite span p:hover {
+  text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}

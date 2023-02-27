@@ -1,0 +1,149 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginWrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+}
+
+.loginLeft,
+.loginRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px;
+}
+
+.loginLogo {
+  font-size: 50px;
+  font-weight: 800;
+  color: #1775ee;
+  margin-bottom: 10px;
+}
+
+.loginDesc {
+  font-size: 24px;
+}
+
+.loginBox {
+  height: 450px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.passwordInput {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginInput {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.loginInput:focus {
+  outline: none;
+}
+
+.loginButton {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1775ee;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.line {
+  border: 1px solid black;
+  margin-top: 5px;
+}
+
+.oauthLogin {
+  height: 50px;
+  padding-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.googleLogin {
+  background-color: white;
+  border: 1px solid black;
+  width: 50%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  font-weight: 500;
+}
+
+.googleIcon {
+  height: 100%;
+  object-fit: cover;
+}
+
+.githubLogin {
+  background-color: white;
+  border: 1px solid black;
+  width: 50%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-weight: 500;
+}
+
+.githubIcon {
+  height: 70%;
+  object-fit: cover;
+}
+
+.loginForgot {
+  text-align: center;
+  color: #1775ee;
+}
+
+.registerButton {
+  text-align: center;
+}
+
+.loginRegisterButton {
+  width: 60%;
+  align-self: center;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #42b72a;
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: auto;
+}
+
+.showIcon {
+  cursor: pointer;
+}

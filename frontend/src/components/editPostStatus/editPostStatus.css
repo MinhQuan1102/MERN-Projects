@@ -1,0 +1,49 @@
+.editPostStatus {
+  position: absolute;
+  top: 55px;
+  right: 25px;
+  width: 300px;
+  height: auto;
+  z-index: 200;
+  overflow: scroll;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  padding-bottom: 0 !important;
+}
+
+.editPostStatus ul {
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+}
+
+.editPostStatus ul li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.editPostStatus ul li:hover {
+  background-color: #F2F2F2;
+}
+
+.editPostStatus ul li p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.editPostStatus ul li .editStatusIcon {
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+}
+
+.hide {
+  display: none;
+}

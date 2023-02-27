@@ -1,0 +1,445 @@
+.profilePost {
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px #3335;
+  background-color: #fff;
+  padding: 10px 0;
+  min-width: 74%;
+  max-width: 74%;
+  position: relative;
+}
+
+.timeline {
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px #3335;
+  background-color: #fff;
+  padding: 10px 0;
+  max-width: 100%;
+}
+
+.profilePostContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 0 20px;
+  height: auto;
+  overflow-x: auto;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.profilePostLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profilePostImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profilePostImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profilePostInfo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.profilePostInfo .postUsername {
+  font-size: 16px;
+  margin: 0;
+  cursor: pointer;
+  font-weight: bold;
+  word-wrap: wrap;
+  display: inline-block;
+}
+
+.profilePostInfo .username {
+  font-size: 16px;
+  margin: 0;
+  cursor: pointer;
+  word-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: gray
+}
+
+.profilePostInfo .username h2 {
+  font-weight: bold;
+  width: auto;
+  color: #080708;
+}
+
+.profilePostInfo .username h2:hover {
+  text-decoration: underline;
+}
+
+.profilePostInfo .postUsername p {
+  font-size: 14px;
+  font-weight: normal;
+  color: #9a9b9e;
+}
+
+.profilePostInfo .postStatus {
+  font-size: 11px;
+  color: #3339;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.audienceIcon {
+  cursor: pointer;
+}
+
+.profilePostRight{
+  position: relative;
+  width: 30px;
+  height: 30px;
+  max-height: 300px;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editPostStatusIcon {
+  font-size: 20px;
+  color: #333;
+  padding: 5px; 
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profilePostRight:hover {
+  background-color: #e4e6e9;
+}
+
+.postInfo {
+  padding: 10px;
+}
+
+.sendTo {
+  font-size: 14px;
+  color: #606770;
+}
+.likeComment {
+  border-top: 1px solid #3333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px 0 5px;
+  /* border-bottom: 1px solid #3335; */
+}
+
+.noLike {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px 0 5px;
+}
+
+.likeCount {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.reactIcons {
+  display: flex;
+  align-items: center;
+}
+
+.iconShow {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.count {
+  text-align: left !important;
+  margin-left: 10px;
+}
+
+.top {
+  transform: translateX(-10px);
+}
+.mid {
+  transform: translateX(-5px);
+}
+.low {
+  transform: translateX(0px);
+}
+
+.loveIconBg {
+  background-image: linear-gradient(to bottom, #fd5976, #e81e44);
+}
+.likeIconBg {
+  background-image: linear-gradient(to bottom, #11a6fc, #036fe4);
+}
+
+.reactIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: #fff;
+}
+
+.iconShow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.commentShareSite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.commentShareSite p:hover {
+  text-decoration: underline;
+}
+
+.reactButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+  padding: 5px 0px;
+  margin: 0px 10px;
+  border-top: 1px solid #3333;
+  cursor: pointer;
+  position: relative;
+}
+
+.reactButton {
+  border-radius: 5px;
+  position: relative;
+}
+
+.reactButton:hover {
+  background-color: #e4e6e9;
+}
+
+.reactButton p {
+  padding: 6px 0px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #707070;
+}
+
+.reactButtonIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.commentSite {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #3333;
+  padding-top: 12px;
+  margin: 0px 20px;
+}
+
+.commentProfilePicture {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.commentProfilePicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.commentText {
+  width: 90%;
+}
+
+.commentText input {
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #e4e6e9;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 9px 10px;
+  padding-right: 120px;
+  text-indent: 5px;
+}
+
+.commentIcons {
+  position: absolute;
+  top: 60%;
+  right: 15px;
+  transform: translateY(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 3px;
+  width: 110px;
+  padding: 8px 0px;
+}
+
+.commentItem {
+  width: 22px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 22px;
+  cursor: pointer;
+}
+
+.commentItem .commentIcon {
+  font-size: 15px;
+  color: #707070;
+  padding: 4px 3px;
+}
+
+.reactions {
+  position: absolute;
+  top: -45px;
+  left: -5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 230px;
+  opacity: 1;
+  transition: visibility 0s, opacity 2s ease-in-out;
+  background-color: #f2f3f5;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.reactionsHide {
+  position: absolute;
+  top: -50px;
+  left: -5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 230px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  background-color: #f2f3f5;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.reactButton:hover + .reactionsHide {
+  visibility: visible;
+  opacity: 1;
+}
+
+.reactionIcon {
+  transform: scale(0.9);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.reactIconShow {
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reactIconShow:hover {
+  transform: scale(1.3);
+  transition: 0.2s ease-in-out;
+}
+
+.heartIconBg {
+  background-color: #ea223d;
+}
+
+.hahaIconBg {
+  background-color: #fee86e;
+}
+
+.likedIcon,
+.likedText {
+  color: #056be1;
+  font-size: 16px;
+}
+
+.reactedIcon {
+  width: 20px !important;
+  height: 20px !important;
+}
+.heartedText {
+  color: #ea223d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.hahaedText {
+  color: #FBDD66;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wowedText {
+  color: #EAA823;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sadedText {
+  color: #EAA823;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.angriedText {
+  color: #DD6B0E;
+  font-size: 16px;
+  font-weight: 500;
+}

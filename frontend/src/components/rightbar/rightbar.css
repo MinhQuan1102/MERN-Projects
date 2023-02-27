@@ -1,0 +1,99 @@
+.rightbar {
+  flex: 3;
+  position: sticky;
+  top: 50px;
+  right: 0;
+  background-color: #F0F2F5;
+  overflow: hidden;
+  height: calc(100vh - 50px);
+}
+
+.rightbar:hover {
+  overflow: scroll;
+}
+
+.rightbarContainer {
+  padding: 20px;
+  margin-left: 40px;
+}
+
+.rightbarContainer .title{
+  color: gray;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.birthday {
+  margin-bottom: 15px;
+}
+
+.birthdayText b {
+  font-weight: 600;
+}
+
+.birthdayInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.user {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+.user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+}
+
+.online {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: limegreen;
+  position: absolute;
+  bottom: 1px;
+  left: 20px;
+  border: 1px solid white;
+}
+
+.userInfo span {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

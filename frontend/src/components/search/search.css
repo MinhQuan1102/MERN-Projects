@@ -1,0 +1,108 @@
+.searchUser {
+  width: 100%;
+  
+}
+
+.searchUser .searchContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+ 
+}
+
+.searchContainer .searchUsers {
+  flex: 4.5;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 7px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+}
+
+.searchContainer .searchUsers .recentSearch {
+  font-size: 17px;
+  color: #000000;
+  font-weight: 500;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.searchContainer .searchItem {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  height: 45px;
+  border-radius: 4px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.searchContainer .searchItem .searchLeft {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  min-width: 95%;
+}
+
+.searchContainer .searchItem:hover {
+  background-color: #e3e4e5;
+}
+
+.searchContainer .searchItem .userAva {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 5px;
+}
+
+.searchContainer .searchItem .friendInfo  {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchContainer .searchItem .friendInfo .isFriend {
+  color: gray;
+  font-size: 12px;
+}
+
+.searchContainer .searchItem .searchRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5px;
+  
+}
+
+.deleteFromSearch {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.deleteFromSearch:hover {
+  background-color: lightgray;
+}
+
+.searchContainer .searchLeft {
+  flex: 3;
+}
+
+.searchContainer .searchRight {
+  flex: 3;
+}
+
+.hide {
+  display: none;
+}

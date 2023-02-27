@@ -1,0 +1,209 @@
+.editDetails {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #3339;
+  z-index: 1111;
+  display: flex;
+  flex-direction: column;
+}
+
+.editDetails .header {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #3333;
+  padding: 15px 10px;
+}
+
+.editDetails .header p {
+  text-align: center;
+  font-size: 20px !important;
+  color: #333 !important;
+  font-weight: bolder !important;
+}
+
+.editDetails .header .closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  font-size: 12px !important;
+  text-align: center;
+  line-height: 30px;
+  padding: 5px;
+}
+
+.editDetails .body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 10px;
+}
+
+.editDetails .body .description {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.editDetails .body .description .bigDesc {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333 !important;
+}
+
+.editDetails .body .description .smallDesc {
+  font-size: 13px;
+}
+
+.editDetails .content {
+  width: 98%;
+  padding-left: 18px;
+  height: 250px;
+  overflow-y: scroll;
+  background-color: #fff5;
+}
+
+.content ul {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.content ul li {
+  list-style: none;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.content ul li:hover {
+  background-color: #eaf3ff;
+}
+
+.content ul li .detailTitle {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333 !important;
+}
+
+.content ul li .detailBody {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+
+.content .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  overflow: hidden;
+}
+
+.content .icon .statusIcon {
+  padding: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.textArea {
+  padding-left: 10px;
+  position: relative;
+}
+
+.textArea h2 {
+  font-size: 17px;
+  color: #333;
+  margin-top: 7px;
+}
+
+.textArea p {
+  font-size: 13px !important;
+  color: #707070 !important;
+}
+
+.textArea .checkIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #707070;
+}
+
+.onlyMe {
+  margin-top: 16px !important;
+}
+
+.activeIcon {
+  color: #1877f2 !important;
+}
+
+.editDetails .audienceButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px;
+}
+
+.editDetails .audienceButtons button {
+  padding: 5px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.editDetails .audienceButtons .cancel {
+  color: #1877f2;
+}
+
+.editDetails .audienceButtons .done {
+  color: #fff;
+  background-color: #1877f2;
+  margin-right: 5px;
+}
+
+.editDetails .audienceButtons .cancel:hover {
+  background-color: #d8dadf !important;
+}
+
+.editDetails .audienceButtons .done:hover {
+  background-color: #1771e6 !important;
+}
+
+.hide {
+  display: none;
+}
+
+.inputBox {
+  width: 70%;
+  padding: 5px;
+  background-color: #e4e6eb;
+  border: 1px solid #1877f2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  color: #333;
+  text-align: center;
+  font-size: 15px;
+}

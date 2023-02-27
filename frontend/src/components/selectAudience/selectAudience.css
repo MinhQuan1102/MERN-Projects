@@ -1,0 +1,194 @@
+.selectAudience {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 430px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #3339;
+  z-index: 111;
+}
+
+.selectAudience .header {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #3333;
+  padding: 15px 10px;
+}
+
+.selectAudience .header p {
+  text-align: center;
+  font-size: 20px !important;
+  color: #333 !important;
+  font-weight: bolder !important;
+}
+
+.selectAudience .header .backBtn {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  text-align: center;
+}
+
+.selectAudience .header .closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  text-align: center;
+}
+
+.selectAudience .body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.selectAudience .body .description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+.selectAudience .body .description .bigDesc {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333 !important;
+}
+
+.selectAudience .body .description .smallDesc {
+  font-size: 13px;
+}
+
+.selectAudience .content {
+  width: 98%;
+  margin: auto;
+  height: 210px;
+  overflow-y: scroll;
+  background-color: #fff5;
+}
+
+.content ul {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.content ul .audienceOptions {
+  list-style: none;
+  padding: 10px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.content ul li:hover {
+  background-color: #eaf3ff;
+}
+
+.content .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  overflow: hidden;
+}
+
+.content .icon .statusIcon {
+  padding: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.textArea {
+  padding-left: 10px;
+  position: relative;
+}
+
+.textArea h2 {
+  font-size: 17px;
+  color: #333;
+  margin-top: 7px;
+}
+
+.textArea p {
+  font-size: 13px !important;
+  color: #707070 !important;
+}
+
+.textArea .checkIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #707070;
+}
+
+.onlyMe {
+  margin-top: 16px !important;
+}
+
+.activeIcon {
+  color: #1877f2 !important;
+}
+
+.selectAudience .audienceButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.selectAudience .audienceButtons button {
+  padding: 5px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.selectAudience .audienceButtons .cancel {
+  color: #1877f2;
+}
+
+.selectAudience .audienceButtons .done {
+  color: #fff;
+  background-color: #1877f2;
+  margin-right: 5px;
+}
+
+.selectAudience .audienceButtons .cancel:hover {
+  background-color: #d8dadf !important;
+}
+
+.selectAudience .audienceButtons .done:hover {
+  background-color: #1771e6 !important;
+}
+
+.hide {
+  display: none;
+}

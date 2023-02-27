@@ -1,0 +1,133 @@
+.updateAvatar {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 500px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px #3339;
+  z-index: 3100;
+  padding-top: 20px;
+  display: flex !important;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.updateAvatar .header {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 1px solid #3333;
+  padding: 0 0 15px 0;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.updateAvatar .header p {
+  text-align: center;
+  font-size: 21px !important;
+  color: #333 !important;
+  font-weight: bolder !important;
+}
+
+.updateAvatar .header .closeBtn {
+  position: absolute;
+  top: 10%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  font-size: 12px !important;
+  text-align: center;
+  line-height: 30px;
+  padding: 5px;
+}
+
+.updateAvatar .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: 80%;
+  padding: 5px 15px;
+  overflow-y: scroll;
+  border-bottom: 1px solid #3333; 
+}
+
+.updateAvatar .body .updateDesc {
+  width: 100%;
+  padding: 25px 5px;
+  background-color: #e4e6eb;
+  border: 1px solid #1877f2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  color: #333;
+  text-align: center;
+  font-size: 15px;
+  height: 50px;
+}
+
+.updateAvatar .body .newAvatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding-bottom: 15px;
+}
+
+.updateAvatar .audienceButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  height: 10%;
+}
+
+.updateAvatar .audienceButtons button {
+  padding: 5px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.updateAvatar .audienceButtons .cancel {
+  color: #1877f2;
+}
+
+.updateAvatar .audienceButtons .done {
+  color: #fff;
+  background-color: #1877f2;
+  margin-right: 5px;
+}
+
+.updateAvatar .audienceButtons .cancel:hover {
+  background-color: #d8dadf !important;
+}
+
+.updateAvatar .audienceButtons .done:hover {
+  background-color: #1771e6 !important;
+}
+
+.hide {
+  display: none;
+}
+
+.selected {
+  color: #1771e6 !important;
+  font-weight: 400;
+}
