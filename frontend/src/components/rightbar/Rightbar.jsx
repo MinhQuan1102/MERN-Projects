@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Rightbar = () => {
   const { currentUser } = useContext(AuthContext);
+  console.log(currentUser.friends)
   return (
     <div className="rightbar">
       {currentUser && (
