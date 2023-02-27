@@ -58,3 +58,7 @@ a {
   background-color: var(--color-febd69);
   color: #131921;
 }
+
+.app {
+  overflow-x: hidden;
+}

@@ -1,11 +1,67 @@
-import React from "react";
-import "./login.css"
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import "./login.css";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Container from "../../components/Container/Container";
-import CustomInput from "../../components/CustomInput/CustomInput";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { setCurrentUser, setToken } = useContext(AuthContext);
+  const toast = useToast();
+  const history = useHistory();
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const login = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://e-commerce-production-c466.up.railway.app/api/auth/login",
+        { email: credentials.email, password: credentials.password },
+        config
+      );
+      toast({
+        title: "Login successful",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      const token = response.data.data.token;
+      setToken(token);
+      const { data } = await axios.get(`https://e-commerce-production-c466.up.railway.app/api/customer/account`, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setCurrentUser(data.data)
+      history.push("/");
+    } catch (error) {
+      toast({
+        title: "An error occurred while trying to login",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+
   return (
     <>
       <BreadCrumb title="Login" />
@@ -13,23 +69,33 @@ const Login = () => {
         <div className="row">
           <div className="col-12">
             <div className="auth-card">
-              <h3 className="text-center mb-3">Login</h3>
+              <h3 className="text-center mb-3" style={{ fontSize: "27px", fontWeight: "500"}}>Login</h3>
               <form action="" className="d-flex flex-column gap-15">
-                <CustomInput type="email" name="email" placeholder="Email" />
-                <CustomInput
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="Email"
+                  onChange={(e) => handleChange(e)}
+                  className={`form-control`}
+                />
+                <input
                   type="password"
-                  name="password"
+                  id="password"
                   placeholder="Password"
+                  onChange={(e) => handleChange(e)}
+                  className={`form-control`}
                 />
                 <div>
-                  <Link to="/forgot-password">Forgot Password?</Link>
-
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button border-0" type="submit">
+                    <button
+                      className="button border-0"
+                      type="submit"
+                      onClick={login}
+                    >
                       Login
                     </button>
-                    <Link to="/Register" className="button signup">
-                      SignUp
+                    <Link to="/register" className="button signup">
+                      Sign Up
                     </Link>
                   </div>
                 </div>

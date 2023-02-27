@@ -58,3 +58,57 @@ a {
   background-color: var(--color-febd69);
   color: #131921;
 }
+
+.chooseRoleSection {
+  width: 100%;
+
+}
+
+.chooseRoleSection .chooseRoleText {
+  text-align: center;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.chooseRoleSection .chooseRoleImages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px 0 50px;
+}
+
+.chooseRoleSection .chooseRoleImages .roleItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+
+
+.chooseRoleSection .chooseRoleImages img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 130px;
+  height: 130px;
+  filter: grayscale();
+  cursor: pointer;
+}
+
+.chooseRoleSection .chooseRoleImages img:hover {
+  filter: none;
+}
+
+.chooseRoleSection .chooseRoleImages .customerImg {
+  width: 120px;
+  height: 120px;
+}
+
+.selected {
+  filter: none !important;
+}
+
+.loginText {
+  text-align: center;
+  padding-top: 20px;
+}
