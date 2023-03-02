@@ -1,79 +1,90 @@
 .header-top-strip {
-  border-bottom: 1px solid var(--color-3b4149);
-  background-color: var(--color-131921);
+    border-bottom: 1px solid var(--color-3b4149);
+    background-color: var(--color-131921);
 }
 .header-upper {
-  background-color: var(--color-131921);
+    background-color: #0c1d26;
 }
 .header-bottom {
-  background-color: var(--color-232f3e);
+    background-color: var(--color-232f3e);
 }
 .header-upper .input-group-text {
-  background-color: var(--color-febd69);
+    background-color: var(--color-febd69);
 }
 .header-upper.header-upper-links img {
-  width: 35px;
-  height: 35px;
+    width: 35px;
+    height: 35px;
 }
 .header-bottom .menu-links a,
 .header-bottom .dropdown button {
-  color: white;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
-  letter-spacing: 0.3;
-  text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: 0.3;
+    text-transform: uppercase;
 }
 
 .header-bottom .dropdown button:focus {
-  box-shadow: none;
+    box-shadow: none;
 }
 .header-bottom .dropdown-menu {
-  background-color: var(--color-131921);
-  width: 100%;
-  transform: translate3d(0px, 57px, 0px) !important;
+    background-color: var(--color-131921);
+    width: 100%;
+    transform: translate3d(0px, 57px, 0px) !important;
 }
 .header-bottom .dropdown-item {
-  padding: 20px;
-  margin-bottom: 3px;
-  border-bottom: 1px solid var(--color-3b4149);
+    padding: 20px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid var(--color-3b4149);
 }
 .header-bottom .dropdown-item:hover {
-  background-color: transparent;
-  color: var(--color-febd69) !important;
+    background-color: transparent;
+    color: var(--color-febd69) !important;
 }
 
 .userSetting {
-	position: relative;
+    position: relative;
 }
 
 .userSetting .userAvatar {
-  width: 45px;
-	height: 45px;
-	border-radius: 50%;
-	object-fit: cover;
-	cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .userSetting .userOptions {
-	position: absolute;
-	top: 50px;
-	right: 0;
-	z-index: 100;
-	width: 170px;
-	height: auto;
-  background-color: var(--color-131921);
-	color: white;
-	border-radius: 5px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: 100;
+    width: 170px;
+    height: auto;
+    background-color: var(--color-131921);
+    color: white;
+    border-radius: 5px;
 }
 
 .userSetting .userOptions li {
-	padding: 10px 15px;
-	cursor: pointer;
-	list-style: none;
-  border-bottom: 1px solid var(--color-3b4149);
+    padding: 10px 15px;
+    cursor: pointer;
+    list-style: none;
+    border-bottom: 1px solid var(--color-3b4149);
 }
 
 .userSetting .userOptions li:hover {
-	color: var(--color-febd69) !important;
+    color: var(--color-febd69) !important;
+}
+
+.right-aligned-elements {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
 }
