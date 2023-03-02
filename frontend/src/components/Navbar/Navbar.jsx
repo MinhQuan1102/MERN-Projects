@@ -3,6 +3,7 @@ import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../../images/compare.svg";
+import logo from "../../images/image-removebg-preview.png";
 import wishlist from "../../images/wishlist.svg";
 import user from "../../images/user.svg";
 import cart from "../../images/cart.svg";
@@ -29,14 +30,15 @@ const Navbar = () => {
   return (
     <>
       <header className="header-upper py-3">
+        
         <div className="container-xxl">
           <div className="row align-items-center">
             <div className="col-2">
-              <h2>
-                <Link to="/" className="text-white">
-                  BazaarBay
-                </Link>
-              </h2>
+            <div class="logo">
+              <Link to="/">
+                <img src={logo} alt="logo" />
+              </Link>
+            </div>
             </div>
             <div className="col-5">
               <div className="input-group">
@@ -56,7 +58,7 @@ const Navbar = () => {
               className="col-3"
               style={{ display: "flex", justifyContent: "flex-end" }}
             >
-              <div className="header-upper-links d-flex align-items-center justify-content-between">
+              <div className="right-aligned-elements header-upper-links d-flex align-items-center justify-content-between">
                 <div>
                   <Link
                     to="/wishlist"
