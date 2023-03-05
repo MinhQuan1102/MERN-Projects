@@ -4,15 +4,15 @@
 }
 
 .profileShareContainer {
-  border-radius: 10px;
+	border-radius: 10px;
 	box-shadow: 0px 1px 2px #3335;
 	background-color: #fff;
 	padding: 10px;
-  width: 74%;
+	width: 74%;
 }
 
 .uploadPost {
-  display: flex;
+	display: flex;
 	align-items: center;
 	gap: 15px;
 	border-bottom: 1px solid #3333;
@@ -22,13 +22,13 @@
 }
 
 .uploadImage {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 .uploadImage img {
-  width: 100%;
+	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	border-radius: 50%;
@@ -36,19 +36,19 @@
 }
 
 .uploadText {
-  position: relative;
+	position: relative;
 	width: 100%;
 	padding: 7px 10px;
 	box-sizing: border-box;
 	border-radius: 25px;
 	background-color: #E4E6EB;
 	cursor: pointer;
-  
+
 }
 
 
 .uploadText span {
-  position: absolute;
+	position: absolute;
 	left: 15px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -64,14 +64,14 @@
 }
 
 .photoUpload {
-  display: grid;
+	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 5px;
 	padding: 10px 0px 0px 0px;
 }
 
 .uploadItem {
-  width: 100%;
+	width: 100%;
 	padding: 5px 5px;
 	box-sizing: border-box;
 	background-color: #fff;
@@ -80,31 +80,31 @@
 }
 
 .uploadItem:hover {
-  background-color: #E4E6EB;
+	background-color: #E4E6EB;
 }
 
 .uploadItem p {
-  padding: 5px 0px;
+	padding: 5px 0px;
 	text-align: center;
 	font-size: 14px;
 	color: #333;
 }
 
 .uploadItem p .uploadIcon {
-  margin-right: 5px;
-  font-size: 20px;
+	margin-right: 5px;
+	font-size: 20px;
 }
 
 .uploadItem p .uploadVideo {
-  color: #E42645;
+	color: #E42645;
 }
 
 .uploadItem p .uploadPhoto {
-  color: #41B35D;
+	color: #41B35D;
 }
 
 .uploadItem p .uploadEvent {
-  color: #3AA8CB;
+	color: #3AA8CB;
 }
 
 .uploadItem p .uploadVideo.notOwn {
@@ -120,7 +120,13 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .profileShareContainer {
-    width: 100%;
-  }
+	.profileShareContainer {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1700px) {
+	.profileShareContainer {
+		width: 69%;
+	}
 }

@@ -81,6 +81,7 @@
 .messenger {
   width: 35px;
   height: 35px;
+  padding: 8px;
   border-radius: 50%;
   background-color: #F0F2F5;
   display: flex;
@@ -127,3 +128,12 @@
   background-color: white !important;
 }
 
+@media screen and (min-width: 1400px) {
+  .navbar .left {
+    flex: 4;
+  }
+
+  .navbar .right {
+    flex: 4.5;
+  }
+}

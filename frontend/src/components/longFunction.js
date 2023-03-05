@@ -295,17 +295,17 @@ export const displayReact = (
   angry,
   currentUserId
 ) => {
-  if (like.includes(currentUserId)) {
+  if (like.map(item => item._id).includes(currentUserId)) {
     return "like";
-  } else if (heart.includes(currentUserId)) {
+  } else if (heart.map(item => item._id).includes(currentUserId)) {
     return "heart";
-  } else if (wow.includes(currentUserId)) {
+  } else if (wow.map(item => item._id).includes(currentUserId)) {
     return "wow";
-  } else if (haha.includes(currentUserId)) {
+  } else if (haha.map(item => item._id).includes(currentUserId)) {
     return "haha";
-  } else if (sad.includes(currentUserId)) {
+  } else if (sad.map(item => item._id).includes(currentUserId)) {
     return "sad";
-  } else if (angry.includes(currentUserId)) {
+  } else if (angry.map(item => item._id).includes(currentUserId)) {
     return "angry";
   } else return "";
 };
@@ -425,7 +425,7 @@ export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => 
       return (
         <div className="iconShow low">
           <img src={reactImages[index1]} alt="" />
-          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+          {likeCount > 1 && <span className="reactCount">{likeCount}</span>}
         </div>
       );
     } else if (index2 !== -1 && index3 === -1) {
@@ -437,7 +437,7 @@ export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => 
           <div className="iconShow mid">
             <img src={reactImages[index2]} alt="" />
           </div>
-          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+          {likeCount > 1 && <span className="reactCount">{likeCount}</span>}
 
         </>
       );
@@ -453,7 +453,7 @@ export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => 
           <div className="iconShow top">
             <img src={reactImages[index3]} alt="" />
           </div>
-          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+          {likeCount > 1 && <span className="reactCount">{likeCount}</span>}
 
         </>
       );
@@ -472,15 +472,15 @@ export const sendFriendRequest = async (
   try {
     sentFriendRequest
       ? await axios.put(
-          `http://localhost:5000/api/users/unsendFriendRequest/${user._id}`,
-          { userId },
-          config
-        )
+        `http://localhost:5000/api/users/unsendFriendRequest/${user._id}`,
+        { userId },
+        config
+      )
       : await axios.put(
-          `http://localhost:5000/api/users/sendFriendRequest/${user._id}`,
-          { userId },
-          config
-        );
+        `http://localhost:5000/api/users/sendFriendRequest/${user._id}`,
+        { userId },
+        config
+      );
     setSentFriendRequest(!sentFriendRequest);
   } catch (error) {
     toast({
@@ -907,9 +907,8 @@ export const handleDisplayTag = (username, taggedPeople) => {
     );
   } else if (taggedPeople.length === 2) {
     return (
-      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()} and ${
-        taggedPeople[1].fullName
-      }`}</span>
+      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()} and ${taggedPeople[1].fullName
+        }`}</span>
     );
   } else if (taggedPeople.length === 3) {
     return (
@@ -917,9 +916,8 @@ export const handleDisplayTag = (username, taggedPeople) => {
     );
   } else {
     return (
-      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()}, ${taggedPeople[1].fullName.trim()}, ${taggedPeople[2].fullName.trim()} and ${
-        taggedPeople.length - 3
-      } other${taggedPeople.length - 3 === 1 ? "" : "s"}`}</span>
+      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()}, ${taggedPeople[1].fullName.trim()}, ${taggedPeople[2].fullName.trim()} and ${taggedPeople.length - 3
+        } other${taggedPeople.length - 3 === 1 ? "" : "s"}`}</span>
     );
   }
 };
@@ -1408,11 +1406,11 @@ export const fetchComments = async (postId, setComments, config, toast) => {
     setComments(response.data.comments)
   } catch (error) {
     toast({
-        title: "An error occurred",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      });
+      title: "An error occurred",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
   }
 }

@@ -1,5 +1,6 @@
 .profileImage {
   width: 100%;
+  background-color: #fff;
 }
 
 .coverImageContainer {
@@ -97,10 +98,11 @@
 .profileContainer {
   width: 70%;
   height: 140px;
-  border-bottom: 1px solid #ccced2;
   margin: auto;
-  display: grid;
-  grid-template-columns: 2fr 4fr 4fr;
+  display: flex;
+
+  /* display: grid;
+  grid-template-columns: 2fr 4fr 4fr; */
   padding-bottom: 15px;
 }
 
@@ -123,6 +125,10 @@
   transform: translateY(-30px);
   background-color: #333;
   border-radius: 50%;
+}
+
+.profileNameInfo {
+  padding-left: 20px;
 }
 
 .profileImage .userAvatar {
@@ -434,5 +440,15 @@
 
   .profileButtonSite .btnSite .btn {
     margin: 0 5px;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .profileImage .coverImageContainer {
+    height: 450px;
+  }
+
+  .profileImage .coverImageContainer .coverHeader, .profileContainer {
+    width: 65%;
   }
 }

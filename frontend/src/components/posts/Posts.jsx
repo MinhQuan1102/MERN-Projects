@@ -27,7 +27,7 @@ const Posts = () => {
         `http://localhost:5000/api/posts/timeline/${currentUser._id}`,
         config
       );
-      setPosts(response.data.posts);
+      setPosts(response.data.posts.slice(0, 5));
     } catch (error) {
       toast({
         title: "An error occured!",

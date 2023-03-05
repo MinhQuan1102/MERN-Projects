@@ -106,3 +106,21 @@
 .hide {
   display: none;
 }
+
+@media screen and (min-width: 1700px) {
+  .searchContainer .searchLeft {
+    flex: 4
+  }
+  .searchContainer .searchUsers {
+    flex: 4.5;
+    gap: 5px;
+  }
+
+  .recentSearch {
+    padding-bottom: 0;
+  }
+
+  .searchContainer .searchRight {
+    flex: 4.5
+  }
+}

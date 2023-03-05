@@ -25,7 +25,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 import { format } from "timeago.js";
 import {
-  reactPost,
+  fetchComments,
   reactedPost,
   displayReact,
   displayReactCount,
@@ -38,17 +38,13 @@ import {
 import { useToast } from "@chakra-ui/react";
 import EditPost from "../../editPost/EditPost";
 import PostDetail from "../../postDetail/PostDetail";
+import Comment from "../../comment/Comment";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
-  const { like, haha, sad, wow, heart, angry } = post;
+  const { react, like, haha, sad, wow, heart, angry } = post;
   const likeCount =
-    like.length +
-    haha.length +
-    sad.length +
-    wow.length +
-    heart.length +
-    angry.length;
+    react.length
   const [reacted, setReacted] = useState(
     displayReact(like, heart, wow, haha, sad, angry, currentUser._id)
   );
@@ -61,6 +57,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const [editImage, setEditImage] = useState(post.images.length > 0);
   const [tagPeople, setTagPeople] = useState(false);
   const [isOpenPostDetail, setIsOpenPostDetail] = useState(false);
+  const [comments, setComments] = useState([])
   const postInitialStatus = post.status;
   const toast = useToast();
   const config = {
@@ -69,6 +66,11 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  useEffect(() => {
+    fetchComments(post._id, setComments, config, toast);
+  }, []);
+
 
   // useEffect(() => {
   //   const controller = new AbortController();
@@ -160,9 +162,8 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
                 <p className="count">
                   {!reacted && likeCount > 0 && <span>{likeCount}</span>}
                   {reacted && likeCount > 1 && (
-                    <span>{`You and ${likeCount - 1} ${
-                      likeCount > 2 ? "others" : "other"
-                    }`}</span>
+                    <span>{`You and ${likeCount - 1} ${likeCount > 2 ? "others" : "other"
+                      }`}</span>
                   )}
                   {reacted && likeCount === 1 && (
                     <span>{currentUser.fullName}</span>
@@ -171,9 +172,9 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
               </div>
             </div>
             <div className="commentShareSite">
-              {/* {post.comments.length > 0 && ( */}
-                <p>0 comment</p>
-              {/* // )} */}
+              {comments.length > 0 && (
+                <p>{`${comments.length} comment${comments.length > 1 ? "s" : ""}`}</p>)
+              }
               {post.shares.length > 0 && <p>{post.shares.length} share</p>}
             </div>
           </div>
@@ -181,7 +182,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       )}
 
       {/* {postInfo ends} */}
-      <div className="reactButtons">
+      <div className="reactButtons" style={{ borderBottom: comments.length > 0 && "1px solid #3333" }}>
         {!reacted ? (
           <div
             className="reactButton"
@@ -261,7 +262,11 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         </div>
       </div>
 
-      {/* {reactButtons ends} */}
+      {comments.length > 0 && <div className="commentSection">
+        {comments.length > 1 && <div className="viewMoreComments" onClick={() => setIsOpenPostDetail(true)}><span>View more comments</span></div>}
+        {comments.length > 0 && <Comment comment={comments[0]} />}
+      </div>}
+
       <div className="commentSite">
         <div className="commentProfilePicture">
           <img

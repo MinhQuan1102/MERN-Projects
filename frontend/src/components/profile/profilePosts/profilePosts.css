@@ -23,7 +23,7 @@
 .otherPosts .profileOtherPosts {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 
   width: 100%;
 }
@@ -34,3 +34,4 @@
     padding: 0;
   }
 }
+

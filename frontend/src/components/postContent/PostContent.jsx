@@ -28,17 +28,17 @@ const PostContent = ({ post, user, postDetail }) => {
     if (isUpdatingProfilePicture) {
       return (
         <div className="postBackground" ref={postBackground}>
-          <div className="postCoverImg">
+          <div className="postCoverImg" style={{ backgroundColor: user.coverPicture && "#E4E6EB"}}>
             <img src={user.coverPicture} alt="" />
           </div>
           <div
             className="postProfileImg"
             style={{
               top: postHeight
-                ? `${postHeight / 2 - 150}px`
+                ? `${postHeight / 2 - 160}px`
                 : `${postBackground.current?.offsetWidth}px`,
               left: postWidth
-                ? `${postWidth / 2 - 150}px`
+                ? `${postWidth / 2 - 170}px`
                 : `${postBackground.current?.offsetHeight}px`,
             }}
           >

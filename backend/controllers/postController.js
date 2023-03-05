@@ -45,10 +45,11 @@ const uploadPost = async (req, res) => {
 const getUserPosts = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const posts = await Post.find({ user: userId })
-      .populate({ path: "user", select: "fullName avatar"})
-      .populate({ path: "sender", select: "fullName avatar"})
-      .populate({ path: "taggedFriends", select: "fullName avatar"})
+    const posts = await Post.find({ user: userId }).populate(
+      "user sender taggedFriends react like heart haha wow sad angry",
+      "fullName avatar"
+    );
+
     res.status(200).json({ message: "Get posts successfully", posts });
   } catch (error) {
     res.status(500).json(error);
@@ -110,7 +111,7 @@ const reactPost = async (req, res) => {
     switch (reactType) {
       case "like":
         update = {
-          $push: { like: userId },
+          $addToSet: { like: userId, react: userId },
           $pull: {
             haha: userId,
             wow: userId,
@@ -122,7 +123,7 @@ const reactPost = async (req, res) => {
         break;
       case "haha":
         update = {
-          $push: { haha: userId },
+          $addToSet: { haha: userId, react: userId },
           $pull: {
             like: userId,
             wow: userId,
@@ -134,7 +135,7 @@ const reactPost = async (req, res) => {
         break;
       case "heart":
         update = {
-          $push: { heart: userId },
+          $addToSet: { heart: userId, react: userId },
           $pull: {
             like: userId,
             wow: userId,
@@ -146,7 +147,7 @@ const reactPost = async (req, res) => {
         break;
       case "wow":
         update = {
-          $push: { wow: userId },
+          $addToSet: { wow: userId, react: userId },
           $pull: {
             like: userId,
             haha: userId,
@@ -158,7 +159,7 @@ const reactPost = async (req, res) => {
         break;
       case "sad":
         update = {
-          $push: { sad: userId },
+          $addToSet: { sad: userId, react: userId },
           $pull: {
             like: userId,
             wow: userId,
@@ -170,7 +171,7 @@ const reactPost = async (req, res) => {
         break;
       case "angry":
         update = {
-          $push: { angry: userId },
+          $addToSet: { angry: userId, react: userId },
           $pull: {
             like: userId,
             wow: userId,
@@ -183,6 +184,7 @@ const reactPost = async (req, res) => {
       case "": {
         update = {
           $pull: {
+            react: userId,
             like: userId,
             wow: userId,
             heart: userId,
@@ -207,16 +209,17 @@ const getTimelinePosts = async (req, res) => {
   try {
     const userId = req.params.userId;
     const currentUser = await User.findById(userId);
-    const userPosts = await Post.find({ user: userId })
-      .populate({ path: "user", select: "fullName avatar"})
-      .populate({ path: "sender", select: "fullName avatar"})
-      .populate({ path: "taggedFriends", select: "fullName avatar"})
+    const userPosts = await Post.find({ user: userId }).populate(
+      "user sender taggedFriends react like heart haha wow sad angry",
+      "fullName avatar"
+    );
+
     const friendPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
-        return Post.find({ user: friendId })
-          .populate({ path: "user", select: "fullName avatar"})
-          .populate({ path: "sender", select: "fullName avatar"})
-          .populate({ path: "taggedFriends", select: "fullName avatar"});
+        return Post.find({ user: friendId }).populate(
+          "user sender taggedFriends react like heart haha wow sad angry",
+          "fullName avatar"
+        );
       })
     );
     res.status(200).json({
@@ -230,10 +233,6 @@ const getTimelinePosts = async (req, res) => {
   }
 };
 
-
-
-
-
 module.exports = {
   uploadPost,
   getUserPosts,
@@ -242,5 +241,4 @@ module.exports = {
   deletePost,
   reactPost,
   getTimelinePosts,
-
 };

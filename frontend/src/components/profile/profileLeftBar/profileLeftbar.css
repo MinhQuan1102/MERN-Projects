@@ -290,3 +290,13 @@
     object-fit: cover;
   }
 }
+
+@media screen and (min-width: 1700px) {
+  .profileLeftbarContainer {
+    width: 57%;
+  }
+
+  .image img {
+    height: 150px;
+  }
+}

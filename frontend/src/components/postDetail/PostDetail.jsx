@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./postDetail.css";
 import {
   faCamera,
@@ -62,13 +62,14 @@ const PostDetail = ({
     displayReact(like, heart, wow, haha, sad, angry, currentUser._id)
   );
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
-  const [isOpenPostDetail, setIsOpenPostDetail] = useState(false);
+  const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(true);
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [commentText, setCommentText] = useState("");
   const [images, setImages] = useState([]);
   const [comments, setComments] = useState([]);
   const postInitialStatus = post.status;
   const toast = useToast();
+  const postDetail = useRef();
   const config = {
     headers: {
       "Content-type": "application/json",
@@ -83,8 +84,22 @@ const PostDetail = ({
   useEffect(() => {
     fetchComments(post._id, setComments, config, toast);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (postDetail.current && !postDetail.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [postDetail]);
+
   return (
-    <div className={open ? "postDetail" : "postDetail hide"}>
+    <div className={open ? "postDetail" : "postDetail hide"} ref={postDetail}>
       <div className="header">
         <p>{`${user.fullName}'s post`}</p>
         <FontAwesomeIcon
@@ -321,10 +336,7 @@ const PostDetail = ({
               <img src={Angry} alt="wow" />
             </div>
           </div>
-          <div
-            className="reactButton"
-            onClick={() => setIsOpenPostDetail(true)}
-          >
+          <div className="reactButton">
             <p>
               <FontAwesomeIcon
                 icon={faCommentAlt}
@@ -403,7 +415,11 @@ const PostDetail = ({
         initialStatus={postInitialStatus}
         fetchPosts={fetchPosts}
       />
-      <ReactDisplay />
+      <ReactDisplay
+        post={post}
+        open={isOpenReactDisplay}
+        setOpen={setIsOpenReactDisplay}
+      />
     </div>
   );
 };

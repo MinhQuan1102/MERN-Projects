@@ -17,7 +17,7 @@
   margin: auto;
 }
 
-.reactDisplay .header {
+.reactDisplay .reactHeader {
   position: relative;
   width: 100%;
   height: 60px;
@@ -32,24 +32,33 @@
   flex-direction: row;
 }
 
-.reactDisplay .header ul {
+.reactDisplay .reactHeader ul {
   display: flex;
   justify-content: flex-start;
-  gap: 0px;
+  align-items: center;
+  gap: 10px;
   padding: 0 20px;
 }
 
-.reactDisplay .header ul li {
+.reactDisplay .reactHeader ul li {
   list-style: none;
-  padding: 15px;
+  padding: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 10px;
 }
 
-.reactDisplay .header ul li p {
+.reactDisplay .reactHeader ul li:hover {
+  background-color: #F2F2F2;
+}
+
+.reactDisplay .reactHeader ul li p {
   font-size: 18px !important;
 }
 
-.reactDisplay .header .closeBtn {
+.reactDisplay .reactHeader .closeBtn {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -65,6 +74,11 @@
   text-align: center;
   line-height: 30px;
   padding: 5px;
+}
+
+.reactDisplay .reactHeader .reactIconShow {
+  width: 25px;
+  height: 25px;
 }
 
 .active {
@@ -85,4 +99,71 @@
 	width: 100%;
 	height: 3px;
 	background-color: #1877F2;
+}
+
+.reactDisplay .reactBody {
+  overflow-y: scroll;
+}
+
+.reactDisplay .reactBody ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.reactDisplay .reactBody ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reactDisplay .reactBody ul li .reactBodyLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.reactDisplay .reactBody ul li .reactBodyLeft span {
+  font-weight: 500;
+}
+
+.reactDisplay .reactBody ul li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reactDisplay .reactBody .reactBodyRight {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background-color: #e4e6e9;
+}
+
+.reactDisplay .reactBody .reactBodyRight .messenger {
+  width: 25px;
+  height: 25px;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e4e6e9;
+
+}
+
+.reactDisplay .reactBody .reactBodyRight .messengerIcon {
+  font-size: 20px !important;
+}
+
+.reactDisplay .reactBody .reactBodyRight span {
+  font-weight: 500;
+}
+
+.hide {
+  display: none !important;
 }

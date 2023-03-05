@@ -1,11 +1,11 @@
 .profileNavbar {
-  width: 100%;
+	width: 100%;
 	border-bottom: 1px solid #3335;
-
+	background-color: #fff;
 }
 
 .profileNavbarContainer {
-  width: 70%;
+	width: 70%;
 	margin: auto;
 	display: grid;
 	grid-template-columns: 4fr 1fr;
@@ -13,13 +13,13 @@
 }
 
 .profileNavbarContainer .btnList {
-  padding: 0px;
+	padding: 0px;
 	margin-bottom: 0px;
 	margin-left: 5px;
 }
 
 .profileNavbarContainer .btnText {
-  display: inline-block;
+	display: inline-block;
 	padding: 15px 12px;
 	font-size: 14px;
 	font-weight: bold;
@@ -30,21 +30,21 @@
 }
 
 .profileNavbarContainer .btnText:hover {
-  background-color: #E4E6E9;
+	background-color: #E4E6E9;
 }
 
 .active {
-  position: relative;
-  background-color: #fff !important;
-  color: #1877F2 !important;
+	position: relative;
+	background-color: #fff !important;
+	color: #1877F2 !important;
 }
 
 .active .moreIcon {
-  color: #1877F2 !important;
+	color: #1877F2 !important;
 }
 
 .active:after {
-  position: absolute;
+	position: absolute;
 	content: '';
 	bottom: 0px;
 	left: 0px;
@@ -54,12 +54,12 @@
 }
 
 .navBtn {
-  text-align: right;
+	text-align: right;
 }
 
 .navBtn .navBtnIcon {
-  font-size: 16px;
-	padding:7px 12px;
+	font-size: 16px;
+	padding: 7px 12px;
 	background-color: #E4E6E9;
 	border-radius: 5px;
 	color: #707070;
@@ -68,7 +68,7 @@
 }
 
 .navBtn .navBtnIcon:hover {
-  background-color: #D8DADF;
+	background-color: #D8DADF;
 	color: #333;
 }
 
@@ -79,5 +79,11 @@
 
 	.btnList {
 		padding: 0 10px !important;
+	}
+}
+
+@media screen and (min-width: 1700px) {
+  .profileNavbarContainer {
+		width: 62%;
 	}
 }

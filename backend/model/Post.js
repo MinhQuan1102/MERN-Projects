@@ -17,6 +17,13 @@ const PostSchema = mongoose.Schema(
       required: false,
       default: [],
     },
+    react: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
     like: [
       {
         type: mongoose.Schema.Types.ObjectId,

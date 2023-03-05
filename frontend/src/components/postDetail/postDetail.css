@@ -59,7 +59,6 @@
   position: relative;
   top: 0px;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   height: 400px;
   overflow-x: auto;
@@ -84,8 +83,22 @@
   display: block;
 }
 
-
-
 .hide {
   display: none;
+}
+
+@media screen and (min-width: 1700px) {
+  .postDetail {
+    width: 720px;
+    min-height: 800px;
+  }
+
+  .postDetail .profilePostContainer {
+    padding-bottom: 0;
+  }
+  .postDetail .body {
+    display: block;
+    min-height: 680px;
+    max-height: 680px;
+  }
 }
