@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./postDetail.css";
 import {
   faCamera,
@@ -29,10 +29,15 @@ import {
   handleUpdatePicture,
   handleDisplayTagTitle,
   handleReactPost,
+  handleComment,
+  fetchComments,
 } from "../longFunction";
 import SelectAudience from "../selectAudience/SelectAudience";
 import PostContent from "../postContent/PostContent";
+import Comment from "../comment/Comment";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
+import ReactDisplay from "../reactDisplay/ReactDisplay";
 
 const PostDetail = ({
   post,
@@ -58,8 +63,10 @@ const PostDetail = ({
   );
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [isOpenPostDetail, setIsOpenPostDetail] = useState(false);
-
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
+  const [commentText, setCommentText] = useState("");
+  const [images, setImages] = useState([]);
+  const [comments, setComments] = useState([]);
   const postInitialStatus = post.status;
   const toast = useToast();
   const config = {
@@ -69,6 +76,13 @@ const PostDetail = ({
     },
   };
 
+  const handleChange = (e) => {
+    setCommentText(e.target.value);
+  };
+
+  useEffect(() => {
+    fetchComments(post._id, setComments, config, toast);
+  }, []);
   return (
     <div className={open ? "postDetail" : "postDetail hide"}>
       <div className="header">
@@ -80,7 +94,10 @@ const PostDetail = ({
         />
       </div>
       <div className="body">
-        <div className="profilePostContainer">
+        <div
+          className="profilePostContainer"
+          style={{ padding: post.taggedFriends.length > 0 && "30px 15px" }}
+        >
           <div className="profilePostLeft">
             <div className="profilePostImg">
               <img
@@ -140,10 +157,19 @@ const PostDetail = ({
                 </div>
               </div>
               <div className="commentShareSite">
-                {post.comments.length > 0 && (
-                  <p>{post.comments.length > 1 ? `${post.comments.length} comments` : `${post.comments.length} comment`}</p>
+                {comments.length > 0 && (
+                  <p>{`${comments.length} comment${
+                    comments.length > 1 && "s"
+                  }`}</p>
                 )}
-                {post.shares.length > 0 && <p>{post.shares.length > 1 ? `${post.shares.length} share` : `${post.shares.length} comment`}</p>}
+
+                {post.shares.length > 0 && (
+                  <p>
+                    {post.shares.length > 1
+                      ? `${post.shares.length} share`
+                      : `${post.shares.length} comment`}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -314,37 +340,59 @@ const PostDetail = ({
             </p>
           </div>
         </div>
-        
+        <div className="commentSection">
+          {comments.length > 0 &&
+            comments.map((comment) => (
+              <Comment comment={comment} key={comment._id} />
+            ))}
+        </div>
       </div>
+
       <div className="commentSite">
-          <div className="commentProfilePicture">
-            <img
-              src={
-                currentUser.avatar
-                  ? currentUser.avatar
-                  : handleNoAva(currentUser)
-              }
-              alt=""
-            />
-          </div>
-          <div className="commentText">
-            <input type="text" placeholder="Write a comment..." />
-            <div className="commentIcons">
-              <div className="commentItem">
-                <FontAwesomeIcon icon={faGrinAlt} className="commentIcon" />
-              </div>
-              <div className="commentItem">
-                <FontAwesomeIcon icon={faCamera} className="commentIcon" />
-              </div>
-              <div className="commentItem">
-                <img src={Sticker} className="commentIcon" />
-              </div>
-              <div className="commentItem">
-                <img src={Gif} className="commentIcon" />
-              </div>
+        <div className="commentProfilePicture">
+          <img
+            src={
+              currentUser.avatar ? currentUser.avatar : handleNoAva(currentUser)
+            }
+            alt=""
+          />
+        </div>
+        <div className="commentText">
+          <input
+            type="text"
+            placeholder="Write a comment..."
+            onChange={(e) => handleChange(e)}
+            value={commentText}
+            onKeyDown={(e) =>
+              handleComment(
+                e,
+                post,
+                currentUser,
+                commentText,
+                setCommentText,
+                images,
+                setImages,
+                config,
+                toast
+              )
+            }
+          />
+          <div className="commentIcons">
+            <div className="commentItem">
+              <FontAwesomeIcon icon={faGrinAlt} className="commentIcon" />
+            </div>
+            <div className="commentItem">
+              <FontAwesomeIcon icon={faCamera} className="commentIcon" />
+            </div>
+            <div className="commentItem">
+              <img src={Sticker} className="commentIcon" />
+            </div>
+            <div className="commentItem">
+              <img src={Gif} className="commentIcon" />
             </div>
           </div>
         </div>
+      </div>
       <SelectAudience
         open={openSelectAudience}
         setOpen={setOpenSelectAudience}
@@ -355,6 +403,7 @@ const PostDetail = ({
         initialStatus={postInitialStatus}
         fetchPosts={fetchPosts}
       />
+      <ReactDisplay />
     </div>
   );
 };

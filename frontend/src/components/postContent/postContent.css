@@ -7,24 +7,33 @@
 
 .noImage {
   max-width: 100%;
+  /* padding: 0 10px; */
   /* height: auto; */
 }
 
 .postContent .postDescContainer {
-  padding: 10px 10px 20px 10px;
+  padding: 10px;
   font-weight: 400 !important;
 }
 
 .postDesc {
   font-size: 24px;
   color: #333;
-  margin-left: 10px;
+  padding: 10px 20px;
+}
+
+.postContent .postDesc {
+  padding: 0 10px;
 }
 
 .postManyDesc {
   font-size: 15px;
   color: #333;
   padding: 10px 10px 20px 10px;
+}
+
+.postDetail .postManyDesc {
+  padding: 10px 10px 15px 10px !important;
 }
 
 .postImage {
@@ -42,6 +51,8 @@
   height: 350px;
   box-sizing: border-box;
   overflow: hidden;
+  /* display: flex;
+  align-items: center; */
 }
 
 .postBackground .postBgContainer {
@@ -70,11 +81,12 @@
 }
 
 .postBackground .postProfileImg {
+  position: absolute;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  transform: translateX(110px) translateY(-140px);
   border: 3px solid #fff;
+  text-align: center;
 }
 
 .postBackground .postProfileImg img {
@@ -108,12 +120,14 @@
 
 .postBackground .imagesContainer .leftImage {
   flex: 2;
-  min-height: 340px;
+  min-height: 342px;
+  min-width: 66%;
+  max-width: 66%;
 }
 
 .postBackground .imagesContainer .rightImages {
   flex: 1;
-  min-height: 340px;
+  min-height: 345px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -122,6 +136,8 @@
 .postBackground .imagesContainer .postImage31 {
   border-radius: 8px;
   min-height: 342px;
+  max-height: 342px;
+  min-width: 100%;
   cursor: pointer;
   object-fit: cover;
 }
@@ -160,4 +176,12 @@
   background-color: #cccdcf;
   color: white;
   opacity: 0.8;
+}
+
+@media screen and (max-width: 1024px) {
+  .postBackground {
+    /* display: flex;
+    align-items: center; */
+    transform: none;
+  }
 }

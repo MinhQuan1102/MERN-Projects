@@ -71,3 +71,13 @@
   background-color: #D8DADF;
 	color: #333;
 }
+
+@media screen and (max-width: 1024px) {
+	.profileNavbarContainer {
+		width: 100%;
+	}
+
+	.btnList {
+		padding: 0 10px !important;
+	}
+}

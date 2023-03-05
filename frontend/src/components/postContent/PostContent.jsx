@@ -1,28 +1,68 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./postContent.css";
 
 const PostContent = ({ post, user, postDetail }) => {
   const { content, images, isUpdatingProfilePicture, isUpdatingCoverPicture } =
     post;
+  const postBackground = useRef();
+  const [postWidth, setPostWidth] = useState(
+    postBackground.current?.offsetWidth
+  );
+  const [postHeight, setPostHeight] = useState(
+    postBackground.current?.offsetHeight
+  );
+
+  useEffect(() => {
+    if (postBackground.current) {
+      setPostWidth(postBackground.current.offsetWidth);
+      setPostHeight(postBackground.current.offsetHeight);
+    }
+    function handleResize() {
+      setPostWidth(postBackground.current?.offsetWidth);
+      setPostHeight(postBackground.current?.offsetHeight);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [postBackground]);
   const body = () => {
     if (isUpdatingProfilePicture) {
       return (
-        <div className="postBackground">
+        <div className="postBackground" ref={postBackground}>
           <div className="postCoverImg">
             <img src={user.coverPicture} alt="" />
           </div>
-          <div className="postProfileImg">
+          <div
+            className="postProfileImg"
+            style={{
+              top: postHeight
+                ? `${postHeight / 2 - 150}px`
+                : `${postBackground.current?.offsetWidth}px`,
+              left: postWidth
+                ? `${postWidth / 2 - 150}px`
+                : `${postBackground.current?.offsetHeight}px`,
+            }}
+          >
             <img src={images[0]} alt="" />
           </div>
         </div>
       );
     } else if (isUpdatingCoverPicture) {
       return (
-        <div className="postBackground">
+        <div className="postBackground" ref={postBackground}>
           <div className="postCoverImg">
             <img src={images} alt="" />
           </div>
-          <div className="postProfileImg">
+          <div
+            className="postProfileImg"
+            style={{
+              top: postHeight
+                ? `${postHeight / 2 - 150}px`
+                : `${postBackground.current?.offsetWidth}px`,
+              left: postWidth
+                ? `${postWidth / 2 - 150}px`
+                : `${postBackground.current?.offsetHeight}px`,
+            }}
+          >
             <img src={user.avatar} alt="" />
           </div>
         </div>
@@ -100,8 +140,15 @@ const PostContent = ({ post, user, postDetail }) => {
     <div className={images.length > 0 ? "postContent" : "noImage"}>
       {user && (
         <>
-          <div className="postDescContainer" style={{ padding: postDetail && "0 10px"}}>
-            <p className={(content.length < 80 && !postDetail) ? "postDesc" : "postManyDesc"}>
+          <div
+            className="postDescContainer"
+            style={{ padding: postDetail && "0 10px" }}
+          >
+            <p
+              className={
+                content.length < 80 && !postDetail ? "postDesc" : "postManyDesc"
+              }
+            >
               {content}
             </p>
           </div>

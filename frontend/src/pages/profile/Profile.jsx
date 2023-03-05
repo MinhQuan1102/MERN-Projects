@@ -53,8 +53,12 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    const controller = new AbortController();
     if (user) {
       document.title = `${user.fullName} | MQSocial`;
+    }
+    return () => {
+      controller.abort();
     }
   }, [user]);
 

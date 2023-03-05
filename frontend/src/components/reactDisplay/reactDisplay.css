@@ -1,0 +1,88 @@
+.reactDisplay {
+  position: fixed;
+  left: 10%;
+  top: 5%;
+  width: 450px;
+  min-height: 420px;
+  max-height: 420px;
+  z-index: 11000;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px #3339;
+  display: flex !important;
+  flex-direction: column;
+  overflow-x: hidden;
+  opacity: 1 !important;
+  margin: auto;
+}
+
+.reactDisplay .header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: none !important;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.reactDisplay .header ul {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0px;
+  padding: 0 20px;
+}
+
+.reactDisplay .header ul li {
+  list-style: none;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.reactDisplay .header ul li p {
+  font-size: 18px !important;
+}
+
+.reactDisplay .header .closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border-bottom: none;
+  background-color: #e4e6e9;
+  cursor: pointer;
+  color: #333;
+  font-size: 12px !important;
+  text-align: center;
+  line-height: 30px;
+  padding: 5px;
+}
+
+.active {
+  position: relative;
+  background-color: #fff !important;
+  color: #1877F2 !important;
+}
+
+.active p {
+  color: #1877F2 !important;
+}
+
+.active:after {
+  position: absolute;
+	content: '';
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 3px;
+	background-color: #1877F2;
+}

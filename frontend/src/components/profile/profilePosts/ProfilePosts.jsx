@@ -57,9 +57,13 @@ const ProfilePosts = ({ user, own }) => {
     }
   };
   useEffect(() => {
+    const controller = new AbortController();
     fetchPosts();
     fetchPinnedPost();
-  }, []);
+    return () => {
+      controller.abort();
+    }
+  }, [user]);
 
   return (
     <div className="profilePosts">

@@ -55,7 +55,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const [openSelectAudience, setOpenSelectAudience] = useState(false);
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [isOpenPostStatus, setIsOpenPostStatus] = useState(false);
-  const [isPinned, setIsPinned] = useState(post.isPinned);
+  const isPinned = post.isPinned;
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [isEditingPost, setIsEditingPost] = useState(false);
   const [editImage, setEditImage] = useState(post.images.length > 0);
@@ -71,7 +71,11 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   };
 
   // useEffect(() => {
+  //   const controller = new AbortController();
   //   fetchPosts();
+  //   return () => {
+  //     controller.abort();
+  //   }
   // }, [reacted]);
 
   const handleUpdateAudience = async (status) => {
@@ -167,9 +171,9 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
               </div>
             </div>
             <div className="commentShareSite">
-              {post.comments.length > 0 && (
-                <p>{post.comments.length} comment</p>
-              )}
+              {/* {post.comments.length > 0 && ( */}
+                <p>0 comment</p>
+              {/* // )} */}
               {post.shares.length > 0 && <p>{post.shares.length} share</p>}
             </div>
           </div>
@@ -183,6 +187,8 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             className="reactButton"
             onClick={() => handleReactPost(currentUser._id, post._id, "like", setReacted, setIsOpenReactIcons, config, toast)}
             onMouseOver={() => setIsOpenReactIcons(true)}
+            onMouseLeave={() => setIsOpenReactIcons(false)}
+
           >
             {reactedPost(reacted)}
           </div>

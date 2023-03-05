@@ -1,0 +1,172 @@
+.postDetail .commentSection {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.postDetail .commentSection .singleComment {
+  display: flex;
+  gap: 10px;
+  padding: 10px 10px 0 10px;
+}
+.postDetail .commentSection .commentUserAva {
+  width: 35px;
+  height: 35px;
+
+}
+
+.postDetail .commentSection .commentUserAva img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.postDetail .commentSection .commentDetail {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.postDetail .commentSection .commentDetail .commentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  background-color: #F0F2F5;
+  min-width: 120px;
+  align-self: flex-start;
+  position: relative;
+}
+
+.postDetail .commentSection .commentDetail .commentInfo h2 {
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.postDetail .commentSection .commentDetail .reactComment {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.postDetail .commentSection .commentDetail .reactComment span {
+  font-size: 13px;
+  color: #6E7074;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.postDetail .commentSection .commentDetail .reactComment span:hover {
+  text-decoration: underline;
+}
+
+.postDetail .commentSection .commentDetail .reactComment .commentTimeAgo {
+  font-weight:  normal !important;
+  font-size: 12px !important;
+}
+
+.commentReactions {
+  position: absolute;
+  top: -45px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 230px;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.commentReactionsHide {
+  position: absolute;
+  top: -45px;
+  left: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 230px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  background-color: #f2f3f5;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.commentLike:hover + .commentReactionsHide {
+  visibility: visible;
+  opacity: 1;
+}
+
+.commentReactDisplay {
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  display: flex;  
+  align-items: center;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38) !important;
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38) !important;
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+}
+
+.commentReactDisplay .commentReactPeople {
+  position: absolute;
+
+  background-color: red;
+  top: 30px;
+  left: 0;
+}
+
+.reactCount {
+  margin-left: -5px;
+  font-size: 15px;
+  color: gray;
+  font-weight: 400;
+}
+
+.heartIconBg {
+  background-color: #ea223d;
+}
+
+.hahaIconBg {
+  background-color: #fee86e;
+}
+
+.likedIcon,
+.likedText {
+  color: #056be1 !important;
+}
+
+.heartedText {
+  color: #ea223d !important;
+}
+
+.hahaedText {
+  color: #FBDD66 !important;
+}
+
+.wowedText {
+  color: #EAA823 !important;
+}
+
+.sadedText {
+  color: #EAA823 !important;
+}
+
+.angriedText {
+  color: #DD6B0E !important;
+}

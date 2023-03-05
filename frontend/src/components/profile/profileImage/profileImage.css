@@ -115,6 +115,8 @@
 .profileImageSite {
   position: relative;
   max-width: 145px;
+  min-width: 145px;
+  min-height: 145px;
   max-height: 145px;
   border: 3px solid #fff;
   margin-left: 20px;
@@ -237,14 +239,20 @@
 
 .profileButtonSite {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .btnSite {
-  width: 100%;
-  margin-top: 75px;
-  margin-bottom: 75px;
+  max-width: 100%;
   text-align: right;
   position: relative;
+  /* display: flex; */
+  /* align-items: center;
+  justify-content: flex-end; */
+  padding-top: 15px;
 }
 
 .btnSite .btn {
@@ -253,17 +261,18 @@
   margin-top: 10px;
   margin-right: 5px;
   font-size: 14px;
-  width: 35%;
+  min-width: 35%;
   background-color: #1877f2;
   cursor: pointer;
   border: none;
   outline: none;
   color: #fff;
   font-weight: 500;
+  text-align: center;
 }
 
 .btnIcon {
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .addStoryBtn:hover {
@@ -355,4 +364,75 @@
   font-size: 16px;
   font-weight: 500;
   width: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+  .coverImageContainer {
+    height: 300px;
+    min-width: 100%;
+    background-color: #fff;
+  }
+
+  .coverImageContainer .coverHeader {
+    min-width: 100%;
+  }
+
+  .profileContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    background-color: #fff;
+    width: 100%;
+  }
+
+  .profileImageSite {
+    transform: translateY(-75px);
+    min-width: 170px;
+    min-height: 170px;
+  }
+
+  .profileImage .userAvatar {
+    width: 170px;
+    height: 170px;
+  }
+
+  .profileNameInfo {
+    margin-top: -75px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .profileNameInfo .profileText {
+    font-weight: bolder;
+    font-size: 30px;
+  }
+
+  .profileNameInfo .friendText {
+    font-size: 16px;
+  }
+
+  .profileNameInfo .friendImages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 10px auto;
+    margin-left: 30px;
+  }
+
+  .profileButtonSite {
+  }
+
+  .profileButtonSite .btnSite {
+    padding: 10px 0;
+    gap: 8px;
+    display: block;
+    margin: auto;
+  }
+
+  .profileButtonSite .btnSite .btn {
+    margin: 0 5px;
+  }
 }

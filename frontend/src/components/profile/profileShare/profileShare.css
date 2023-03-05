@@ -118,3 +118,9 @@
 .uploadItem p .feeling {
 	color: rgb(231, 196, 133) !important;
 }
+
+@media screen and (max-width: 1024px) {
+  .profileShareContainer {
+    width: 100%;
+  }
+}

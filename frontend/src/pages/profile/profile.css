@@ -9,7 +9,16 @@
 .profile {
   position: relative;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   background-color: #F0F2F5;
   opacity:1;
+}
+
+@media screen and (max-width: 1024px) {
+  .profileBody {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
 }

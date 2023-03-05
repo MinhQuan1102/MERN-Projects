@@ -33,7 +33,7 @@ import {
 const ProfileImage = ({ own, user, userFriends }) => {
   const noCoverPicture =
     "https://i.pinimg.com/originals/b3/9f/d8/b39fd8fd5ac2e8c25938e2fd1783d016.jpg";
-  const { currentUser, setCurrentUser, handleNoAva, token } =
+  const { currentUser, handleNoAva, token } =
     useContext(AuthContext);
   const toast = useToast();
   let isFriend = currentUser.friends.some((friend) => friend._id === user._id);
@@ -62,7 +62,7 @@ const ProfileImage = ({ own, user, userFriends }) => {
   const [cover, setCover] = useState(null);
   const [isOpenFriendOption, setIsOpenFriendOption] = useState(false);
   const [isUpdatingAvatar, setIsUpdatingAvatar] = useState(false);
-  const [isUpdatingCover, setIsUpdatingCover] = useState(true);
+  const [isUpdatingCover, setIsUpdatingCover] = useState(false);
   const [openEditCoverOptions, setOpenEditCoverOptions] = useState(false);
   const editCoverOptions = useRef();
   const friendBtn = useRef();
@@ -219,7 +219,7 @@ const ProfileImage = ({ own, user, userFriends }) => {
               <p>
                 <span className="friendText">
                   {userFriends.length}{" "}
-                  {userFriends.length > 1 ? "Friends" : "Friend"}
+                  {userFriends.length > 1 ? "friends" : "friend"}
                   {(!own && mutualFriends) > 0 && (
                     <span> • {mutualFriends} mutual</span>
                   )}

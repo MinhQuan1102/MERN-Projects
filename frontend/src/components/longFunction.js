@@ -101,6 +101,83 @@ export const reactPost = async (postId, reactType, currentUserId, config) => {
   }
 };
 
+export const reactComment = async (commentId, reactType, currentUserId, config) => {
+  switch (reactType) {
+    case "like":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "like",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "heart":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "heart",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "haha":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "haha",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "wow":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "wow",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "sad":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "sad",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "angry":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "angry",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    case "":
+      await axios.put(
+        `http://localhost:5000/api/comments/react/${commentId}`,
+        {
+          reactType: "",
+          userId: currentUserId,
+        },
+        config
+      );
+      return;
+    default:
+      return "";
+  }
+};
+
 export const reactedPost = (reactType) => {
   switch (reactType) {
     case "":
@@ -152,6 +229,55 @@ export const reactedPost = (reactType) => {
       return (
         <p>
           <img src={Angry} alt="" className="reactButtonIcon reactedIcon" />
+          <span className="angriedText">Angry</span>
+        </p>
+      );
+    default:
+      return "";
+  }
+};
+
+export const reactedComment = (reactType) => {
+  switch (reactType) {
+    case "":
+      return (
+        <p>
+          <span>Like</span>
+        </p>
+      );
+    case "like":
+      return (
+        <p>
+          <span className="likedText">Like</span>
+        </p>
+      );
+    case "heart":
+      return (
+        <p>
+          <span className="heartedText">Love</span>
+        </p>
+      );
+    case "haha":
+      return (
+        <p>
+          <span className="hahaedText">Haha</span>
+        </p>
+      );
+    case "wow":
+      return (
+        <p>
+          <span className="wowedText">Wow</span>
+        </p>
+      );
+    case "sad":
+      return (
+        <p>
+          <span className="sadedText">Sad</span>
+        </p>
+      );
+    case "angry":
+      return (
+        <p>
           <span className="angriedText">Angry</span>
         </p>
       );
@@ -251,6 +377,84 @@ export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
           <div className="iconShow top">
             <img src={reactImages[index3]} alt="" />
           </div>
+        </>
+      );
+    }
+  }
+};
+
+export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => {
+  const likeCount =
+    like.length +
+    heart.length +
+    wow.length +
+    sad.length +
+    haha.length +
+    angry.length;
+  const reactArray = [like, heart, wow, haha, sad, angry];
+  const reactImages = [Like, Heart, Wow, Haha, Sad, Angry];
+  if (likeCount === 0) {
+    return <></>;
+  } else {
+    let index1 = 0;
+    let index2 = -1;
+    let index3 = -1;
+
+    for (let i = 1; i < reactArray.length; i++) {
+      if (reactArray[i].length >= reactArray[index1].length) {
+        index3 = index2;
+        index2 = index1;
+        index1 = i;
+      } else if (
+        index2 === -1 ||
+        reactArray[i].length >= reactArray[index2].length
+      ) {
+        index3 = index2;
+        index2 = i;
+      } else if (
+        index3 === -1 ||
+        reactArray[i].length >= reactArray[index3].length
+      ) {
+        index3 = i;
+      }
+    }
+    if (reactArray[index2].length === 0) index2 = -1;
+    if (reactArray[index3].length === 0) index3 = -1;
+
+    if (index2 === -1 && index3 === -1) {
+      return (
+        <div className="iconShow low">
+          <img src={reactImages[index1]} alt="" />
+          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+        </div>
+      );
+    } else if (index2 !== -1 && index3 === -1) {
+      return (
+        <>
+          <div className="iconShow low">
+            <img src={reactImages[index1]} alt="" />
+          </div>
+          <div className="iconShow mid">
+            <img src={reactImages[index2]} alt="" />
+          </div>
+          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="iconShow low">
+            <img src={reactImages[index1]} alt="" />
+          </div>
+          <div className="iconShow mid">
+            <img src={reactImages[index2]} alt="" />
+          </div>
+          <div className="iconShow top">
+            <img src={reactImages[index3]} alt="" />
+          </div>
+          { likeCount > 1 && <span className="reactCount">{likeCount}</span> }
+
         </>
       );
     }
@@ -571,7 +775,6 @@ export const handleStatusIcon = (status) => {
 // };
 
 export const handleImages = (images, number, handleCloseImage, isUploaded) => {
-  console.log(images);
   if (number === 1) {
     return (
       <div className="imagesContainer" style={{ gridTemplateColumns: "1fr" }}>
@@ -969,7 +1172,7 @@ export const uploadPost = async (
         isClosable: true,
         position: "bottom",
       });
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       toast({
         title: "Error uploading post!",
@@ -1151,3 +1354,65 @@ export const handleReactPost = (userId, postId, reactType, setReacted, setIsOpen
     return;
   }
 };
+
+export const handleReactComment = (userId, commentId, reactType, setReacted, setIsOpenReactIcons, config, toast) => {
+  try {
+    reactComment(commentId, reactType, userId, config);
+    setIsOpenReactIcons(false);
+    setReacted(reactType);
+  } catch (error) {
+    toast({
+      title: "An error occurred",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
+    setIsOpenReactIcons(false);
+    return;
+  }
+};
+
+export const handleComment = async (e, post, currentUser, commentText, setCommentText, images, setImages, config, toast) => {
+  if (e.key === "Enter") {
+    try {
+      await axios.post(
+        `http://localhost:5000/api/comments/${post._id}`,
+        { userId: currentUser._id, content: commentText, images: images },
+        config
+      );
+      toast({
+        title: "Comment successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setCommentText("");
+      setImages([]);
+    } catch (error) {
+      toast({
+        title: "An error occurred",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+};
+
+export const fetchComments = async (postId, setComments, config, toast) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/api/comments/${postId}`, config)
+    setComments(response.data.comments)
+  } catch (error) {
+    toast({
+        title: "An error occurred",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+  }
+}

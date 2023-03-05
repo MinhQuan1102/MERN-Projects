@@ -52,3 +52,10 @@
 }
 
 /* width */
+@media screen and (max-width: 1024px) {
+  .leftbar {
+    flex: 0
+  }
+
+  
+}

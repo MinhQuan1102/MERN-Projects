@@ -82,3 +82,9 @@
 .activeNavbar .typeIcon {
   color: #1877f2 !important;
 }
+
+@media screen and (max-width: 1024px) {
+  .profileSetup {
+    width: 100%;
+  }
+}

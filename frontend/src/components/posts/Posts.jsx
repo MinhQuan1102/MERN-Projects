@@ -40,7 +40,11 @@ const Posts = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     fetchTimelinePosts();
+    return () => {
+      controller.abort();
+    }
   }, []);
 
   return (

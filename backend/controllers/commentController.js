@@ -10,7 +10,7 @@ const getComments = async (req, res) => {
     const comments = await Comment.find({ post: postId })
       .populate({
         path: "user",
-        select: "fullName avatar",
+        select: "fullName avatar"
       })
       .populate("replies")
       .sort({ createdAt: -1 });
@@ -36,6 +36,7 @@ const comment = async (req, res) => {
       post: postId
     });
     await comment.save();
+    console.log(comment)
     res.status(200).json({ message: "Commented", comment})
   } catch (error) {
     res.status(500).json(error);

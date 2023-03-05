@@ -8,3 +8,13 @@
   position: absolute;
   top: 50px;
 }
+
+@media screen and (max-width: 1024px) {
+  .homepage .homepageBody {
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F2F5;
+  }
+
+  
+}

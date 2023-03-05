@@ -27,3 +27,10 @@
 
   width: 100%;
 }
+
+@media screen and (max-width: 1024px) {
+  .profilePosts {
+    width: 75%;
+    padding: 0;
+  }
+}

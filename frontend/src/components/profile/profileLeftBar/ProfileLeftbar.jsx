@@ -63,7 +63,7 @@ const ProfileLeftbar = ({ user, own, userFriends, userPhotos }) => {
         userId: user._id,
         desc: bioDescription,
       };
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:5000/api/users/${user._id}`,
         newBioDesc,
         config

@@ -34,7 +34,7 @@
 .postDetail .header p {
   text-align: center;
   font-size: 21px !important;
-  color: #333 !important;
+  color: #333;
   font-weight: bolder !important;
 }
 
@@ -61,7 +61,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  max-height: 400px;
+  height: 400px;
   overflow-x: auto;
   overflow-y: scroll;
   word-wrap: break-word;
@@ -71,31 +71,20 @@
 .postDetail .profilePostContainer {
   display: flex;
   align-items: center;
-  height: 100px;
+  height: auto;
   justify-content: space-between;
   overflow-x: auto;
+  overflow-y: hidden;
   word-wrap: break-word;
   box-sizing: border-box;
   padding: 30px 15px 25px 15px;
 }
 
-.postDetail .commentSite {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 11000;
-  width: 100%;
-  background-color: white;
-  padding: 10px !important;
-  margin: 0 !important;
-  display: flex;
-  align-items: center;
+.postDetail .username {
+  display: block;
 }
 
-.postDetail .commentIcons {
-  /* position: relative; */
-  top: 50%;
-}
+
 
 .hide {
   display: none;
