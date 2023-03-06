@@ -14,10 +14,6 @@ import {
   reactedComment,
   displayReact,
   displayReactCommentCount,
-  handleDisplayPostStatus,
-  handleDisplayPostStatusIcon,
-  handleUpdatePicture,
-  handleDisplayTagTitle,
   handleReactComment,
   handleComment,
   fetchComments,
@@ -53,6 +49,9 @@ const Comment = ({ comment }) => {
     },
   };
   const toast = useToast();
+  // useEffect(() => {
+  //   fetchComments()
+  // }, [reacted])
 
   return (
     <div className="comment">

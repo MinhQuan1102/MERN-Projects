@@ -33,31 +33,36 @@ import {
   handleDisplayPostStatusIcon,
   handleUpdatePicture,
   handleDisplayTagTitle,
-  handleReactPost
+  handleReactPost,
+  handleComment,
 } from "../../longFunction";
 import { useToast } from "@chakra-ui/react";
 import EditPost from "../../editPost/EditPost";
 import PostDetail from "../../postDetail/PostDetail";
 import Comment from "../../comment/Comment";
+import ReactDisplay from "../../reactDisplay/ReactDisplay";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
   const { react, like, haha, sad, wow, heart, angry } = post;
-  const likeCount =
-    react.length
+  const likeCount = react.length;
   const [reacted, setReacted] = useState(
     displayReact(like, heart, wow, haha, sad, angry, currentUser._id)
   );
   const [openSelectAudience, setOpenSelectAudience] = useState(false);
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [isOpenPostStatus, setIsOpenPostStatus] = useState(false);
+  const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(false);
   const isPinned = post.isPinned;
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [isEditingPost, setIsEditingPost] = useState(false);
   const [editImage, setEditImage] = useState(post.images.length > 0);
   const [tagPeople, setTagPeople] = useState(false);
   const [isOpenPostDetail, setIsOpenPostDetail] = useState(false);
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState([]);
+  const [selectedType, setSelectedType] = useState("all");
+  const [commentText, setCommentText] = useState("");
+  const [images, setImages] = useState([]);
   const postInitialStatus = post.status;
   const toast = useToast();
   const config = {
@@ -67,18 +72,25 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
     },
   };
 
+  const handleSeeReact = (selectedType) => {
+    setIsOpenReactDisplay(true);
+    setSelectedType(selectedType);
+  };
+
+  const handleChange = (e) => {
+    setCommentText(e.target.value);
+  };
   useEffect(() => {
     fetchComments(post._id, setComments, config, toast);
   }, []);
 
-
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   fetchPosts();
-  //   return () => {
-  //     controller.abort();
-  //   }
-  // }, [reacted]);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchPosts();
+    return () => {
+      controller.abort();
+    }
+  }, [reacted]);
 
   const handleUpdateAudience = async (status) => {
     try {
@@ -155,15 +167,24 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           <div className={likeCount > 0 ? "likeComment" : "noLike"}>
             <div className="likeCount">
               <div className="reactIcons">
-                {displayReactCount(like, heart, wow, haha, sad, angry)}
+                {displayReactCount(
+                  like,
+                  heart,
+                  wow,
+                  haha,
+                  sad,
+                  angry,
+                  handleSeeReact
+                )}
               </div>
 
               <div className="">
                 <p className="count">
                   {!reacted && likeCount > 0 && <span>{likeCount}</span>}
                   {reacted && likeCount > 1 && (
-                    <span>{`You and ${likeCount - 1} ${likeCount > 2 ? "others" : "other"
-                      }`}</span>
+                    <span>{`You and ${likeCount - 1} ${
+                      likeCount > 2 ? "others" : "other"
+                    }`}</span>
                   )}
                   {reacted && likeCount === 1 && (
                     <span>{currentUser.fullName}</span>
@@ -173,8 +194,10 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             </div>
             <div className="commentShareSite">
               {comments.length > 0 && (
-                <p>{`${comments.length} comment${comments.length > 1 ? "s" : ""}`}</p>)
-              }
+                <p>{`${comments.length} comment${
+                  comments.length > 1 ? "s" : ""
+                }`}</p>
+              )}
               {post.shares.length > 0 && <p>{post.shares.length} share</p>}
             </div>
           </div>
@@ -182,21 +205,43 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       )}
 
       {/* {postInfo ends} */}
-      <div className="reactButtons" style={{ borderBottom: comments.length > 0 && "1px solid #3333" }}>
+      <div
+        className="reactButtons"
+        style={{ borderBottom: comments.length > 0 && "1px solid #3333" }}
+      >
         {!reacted ? (
           <div
             className="reactButton"
-            onClick={() => handleReactPost(currentUser._id, post._id, "like", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "like",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
             onMouseOver={() => setIsOpenReactIcons(true)}
             onMouseLeave={() => setIsOpenReactIcons(false)}
-
           >
             {reactedPost(reacted)}
           </div>
         ) : (
           <div
             className="reactButton"
-            onClick={() => handleReactPost(currentUser._id, post._id, "", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
             onMouseOver={() => setIsOpenReactIcons(true)}
             onMouseOut={() => setIsOpenReactIcons(false)}
           >
@@ -210,7 +255,17 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         >
           <div
             className="reactIconShow likeIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "like", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "like",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <FontAwesomeIcon
               className="reactionIcon likeIcon"
@@ -219,31 +274,81 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           </div>
           <div
             className="reactIconShow heartIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "heart", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "heart",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <FontAwesomeIcon className="reactionIcon likeIcon" icon={faHeart} />
           </div>
           <div
             className="reactIconShow hahaIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "haha", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "haha",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <img src={Haha} alt="haha" />
           </div>
           <div
             className="reactIconShow wowIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "wow", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "wow",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <img src={Wow} alt="wow" />
           </div>
           <div
             className="reactIconShow sadIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "sad", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "sad",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <img src={Sad} alt="wow" />
           </div>
           <div
             className="reactIconShow angryIconBg"
-            onClick={() => handleReactPost(currentUser._id, post._id, "angry", setReacted, setIsOpenReactIcons, config, toast)}
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "angry",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
           >
             <img src={Angry} alt="wow" />
           </div>
@@ -262,10 +367,19 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         </div>
       </div>
 
-      {comments.length > 0 && <div className="commentSection">
-        {comments.length > 1 && <div className="viewMoreComments" onClick={() => setIsOpenPostDetail(true)}><span>View more comments</span></div>}
-        {comments.length > 0 && <Comment comment={comments[0]} />}
-      </div>}
+      {comments.length > 0 && (
+        <div className="commentSection">
+          {comments.length > 1 && (
+            <div
+              className="viewMoreComments"
+              onClick={() => setIsOpenPostDetail(true)}
+            >
+              <span>View more comments</span>
+            </div>
+          )}
+          {comments.length > 0 && <Comment comment={comments[0]} fetchComments={fetchComments}/>}
+        </div>
+      )}
 
       <div className="commentSite">
         <div className="commentProfilePicture">
@@ -277,7 +391,26 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           />
         </div>
         <div className="commentText">
-          <input type="text" placeholder="Write a comment..." />
+          <input
+            type="text"
+            value={commentText}
+            placeholder="Write a comment..."
+            onChange={(e) => handleChange(e)}
+            onKeyDown={(e) =>
+              handleComment(
+                e,
+                post,
+                currentUser,
+                commentText,
+                setCommentText,
+                images,
+                setImages,
+                setComments,
+                config,
+                toast
+              )
+            }
+          />
           <div className="commentIcons">
             <div className="commentItem">
               <FontAwesomeIcon icon={faGrinAlt} className="commentIcon" />
@@ -325,8 +458,17 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             fetchPost={fetchPosts}
             openSelectAudience={openSelectAudience}
             setOpenSelectAudience={setOpenSelectAudience}
+            setSelectedType={setSelectedType}
+            setIsOpenReactDisplay={setIsOpenReactDisplay}
           />
         )}
+      <ReactDisplay
+        post={post}
+        open={isOpenReactDisplay}
+        setOpen={setIsOpenReactDisplay}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      />
     </div>
   );
 };

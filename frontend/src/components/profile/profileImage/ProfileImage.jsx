@@ -33,8 +33,7 @@ import {
 const ProfileImage = ({ own, user, userFriends }) => {
   const noCoverPicture =
     "https://i.pinimg.com/originals/b3/9f/d8/b39fd8fd5ac2e8c25938e2fd1783d016.jpg";
-  const { currentUser, handleNoAva, token } =
-    useContext(AuthContext);
+  const { currentUser, handleNoAva, token } = useContext(AuthContext);
   const toast = useToast();
   let isFriend = currentUser.friends.some((friend) => friend._id === user._id);
   let isFollowing = currentUser.followings.some(
@@ -174,241 +173,262 @@ const ProfileImage = ({ own, user, userFriends }) => {
           </div>
 
           {/* end cover image container */}
-
-          <div
-            className={
-              isRespondFriendReq
-                ? "profileContainerRequest"
-                : "profileContainer"
-            }
-          >
-            <div className="profileImageSite">
-              <div className="profileImage">
-                <img
-                  src={user.avatar ? user.avatar : handleNoAva(user)}
-                  alt=""
-                  className="userAvatar"
-                />
-                {own && (
-                  <label htmlFor="file">
-                    <FontAwesomeIcon icon={faCamera} className="editImg" />
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      id="file"
-                      accept=".png,.jpeg,.jpg"
-                      onChange={(e) => handleAvatarChange(e)}
-                    />
-                  </label>
-                )}
-              </div>
-            </div>
-            {pic && (
-              <UpdateAvatar
-                isUpdatingAvatar={isUpdatingAvatar}
-                setIsUpdatingAvatar={setIsUpdatingAvatar}
-                pic={pic}
-                setPic={setPic}
-              />
-            )}
-            <div className="profileNameInfo">
-              <h1>
-                <span className="profileText">{user.fullName}</span>
-              </h1>
-
-              <p>
-                <span className="friendText">
-                  {userFriends.length}{" "}
-                  {userFriends.length > 1 ? "friends" : "friend"}
-                  {(!own && mutualFriends) > 0 && (
-                    <span> • {mutualFriends} mutual</span>
-                  )}
-                </span>
-              </p>
-
-              <div className="friendImages">
-                {userFriends.slice(0, 6).map((friend, i) => (
-                  <div className={`friendImage ${handleFriendList(i)}`} key={i}>
-                    <img
-                      src={friend.avatar ? friend.avatar : handleNoAva(friend)}
-                      alt=""
-                      onClick={() => handleSwitchProfile(friend._id)}
-                    />
-                    {i > 4 && (
-                      <FontAwesomeIcon
-                        icon={faEllipsis}
-                        className="moreFriend"
+          <div className="profileImageBody">
+            <div
+              className={
+                isRespondFriendReq
+                  ? "profileContainerRequest"
+                  : "profileContainer"
+              }
+            >
+              <div className="profileImageSite">
+                <div className="profileImage">
+                  <img
+                    src={user.avatar ? user.avatar : handleNoAva(user)}
+                    alt=""
+                    className="userAvatar"
+                  />
+                  {own && (
+                    <label htmlFor="file">
+                      <FontAwesomeIcon icon={faCamera} className="editImg" />
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        id="file"
+                        accept=".png,.jpeg,.jpg"
+                        onChange={(e) => handleAvatarChange(e)}
                       />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="profileButtonSite" ref={friendBtn}>
-              {own ? (
-                <div className="btnSite">
-                  <span className="addStoryBtn btn">
-                    <FontAwesomeIcon icon={faPlusCircle} className="btnIcon" />
-                    Add To Story
-                  </span>
-                  <span className="editProfileBtn btn">
-                    <FontAwesomeIcon icon={faPen} className="btnIcon" />
-                    Edit Profile
-                  </span>
+                    </label>
+                  )}
                 </div>
-              ) : (
-                <div className="btnSite">
-                  {isFriend ? (
-                    <>
-                      <span
-                        className="editProfileBtn btn"
-                        onClick={() =>
-                          setIsOpenFriendOption(!isOpenFriendOption)
+              </div>
+              {pic && (
+                <UpdateAvatar
+                  isUpdatingAvatar={isUpdatingAvatar}
+                  setIsUpdatingAvatar={setIsUpdatingAvatar}
+                  pic={pic}
+                  setPic={setPic}
+                />
+              )}
+              <div className="profileNameInfo">
+                <h1>
+                  <span className="profileText">{user.fullName}</span>
+                </h1>
+
+                <p>
+                  <span className="friendText">
+                    {userFriends.length}{" "}
+                    {userFriends.length > 1 ? "friends" : "friend"}
+                    {(!own && mutualFriends) > 0 && (
+                      <span> • {mutualFriends} mutual</span>
+                    )}
+                  </span>
+                </p>
+
+                <div className="friendImages">
+                  {userFriends.slice(0, 6).map((friend, i) => (
+                    <div
+                      className={`friendImage ${handleFriendList(i)}`}
+                      key={i}
+                    >
+                      <img
+                        src={
+                          friend.avatar ? friend.avatar : handleNoAva(friend)
                         }
-                      >
+                        alt=""
+                        onClick={() => handleSwitchProfile(friend._id)}
+                      />
+                      {i > 4 && (
                         <FontAwesomeIcon
-                          icon={faUserCheck}
-                          className="btnIcon"
+                          icon={faEllipsis}
+                          className="moreFriend"
                         />
-                        Friends
-                      </span>
-                      <span className="addStoryBtn btn">
-                        <FontAwesomeIcon icon={faMessage} className="btnIcon" />
-                        Message
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      {isRespondFriendReq ? (
-                        <span className="addStoryBtn btn">
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="profileButtonSite" ref={friendBtn}>
+                {own ? (
+                  <div className="btnSite">
+                    <span className="addStoryBtn btn">
+                      <FontAwesomeIcon
+                        icon={faPlusCircle}
+                        className="btnIcon"
+                      />
+                      Add To Story
+                    </span>
+                    <span className="editProfileBtn btn">
+                      <FontAwesomeIcon icon={faPen} className="btnIcon" />
+                      Edit Profile
+                    </span>
+                  </div>
+                ) : (
+                  <div className="btnSite">
+                    {isFriend ? (
+                      <>
+                        <span
+                          className="editProfileBtn btn"
+                          onClick={() =>
+                            setIsOpenFriendOption(!isOpenFriendOption)
+                          }
+                        >
                           <FontAwesomeIcon
                             icon={faUserCheck}
                             className="btnIcon"
                           />
-                          Respond
+                          Friends
                         </span>
-                      ) : (
-                        <span
-                          className="addStoryBtn btn"
-                          onClick={() =>
-                            sendFriendRequest(
-                              sentFriendRequest,
-                              setSentFriendRequest,
-                              user,
-                              currentUser._id,
-                              config,
-                              toast
-                            )
-                          }
-                        >
-                          {sentFriendRequest ? (
+                        <span className="addStoryBtn btn">
+                          <FontAwesomeIcon
+                            icon={faMessage}
+                            className="btnIcon"
+                          />
+                          Message
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        {isRespondFriendReq ? (
+                          <span className="addStoryBtn btn">
                             <FontAwesomeIcon
-                              icon={faUserMinus}
+                              icon={faUserCheck}
                               className="btnIcon"
                             />
-                          ) : (
-                            <FontAwesomeIcon
-                              icon={faUserPlus}
-                              className="btnIcon"
-                            />
-                          )}
-                          {sentFriendRequest ? "Cancel Request" : "Add friend"}
-                        </span>
-                      )}
-
-                      <span className="editProfileBtn btn">
-                        <FontAwesomeIcon icon={faMessage} className="btnIcon" />
-                        Message
-                      </span>
-                    </>
-                  )}
-                  {isOpenFriendOption && (
-                    <div className="editFriendOptions">
-                      <div className="editFriendOptionsContainer">
-                        {isFollowing ? (
-                          <div
-                            className="editFriendOption"
-                            onClick={() =>
-                              unfollowUser(user, currentUser._id, config, toast)
-                            }
-                          >
-                            <FontAwesomeIcon
-                              icon={faImages}
-                              className="editFriendIcon"
-                            />
-                            <span className="editFriendText">Unfollow</span>
-                          </div>
+                            Respond
+                          </span>
                         ) : (
-                          <div
-                            className="editFriendOption"
+                          <span
+                            className="addStoryBtn btn"
                             onClick={() =>
-                              followUser(user, currentUser._id, config, toast)
+                              sendFriendRequest(
+                                sentFriendRequest,
+                                setSentFriendRequest,
+                                user,
+                                currentUser._id,
+                                config,
+                                toast
+                              )
                             }
                           >
-                            <FontAwesomeIcon
-                              icon={faHandshake}
-                              className="editFriendIcon"
-                            />
-                            <span className="editFriendText">Follow</span>
-                          </div>
+                            {sentFriendRequest ? (
+                              <FontAwesomeIcon
+                                icon={faUserMinus}
+                                className="btnIcon"
+                              />
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faUserPlus}
+                                className="btnIcon"
+                              />
+                            )}
+                            {sentFriendRequest
+                              ? "Cancel Request"
+                              : "Add friend"}
+                          </span>
                         )}
 
-                        <div
-                          className="editFriendOption"
-                          onClick={() =>
-                            unfriend(user, currentUser._id, config, toast)
-                          }
-                        >
+                        <span className="editProfileBtn btn">
                           <FontAwesomeIcon
-                            icon={faUserXmark}
-                            className="editCoverIcon"
+                            icon={faMessage}
+                            className="btnIcon"
                           />
-                          <span className="editFriendText">Unfriend</span>
+                          Message
+                        </span>
+                      </>
+                    )}
+                    {isOpenFriendOption && (
+                      <div className="editFriendOptions">
+                        <div className="editFriendOptionsContainer">
+                          {isFollowing ? (
+                            <div
+                              className="editFriendOption"
+                              onClick={() =>
+                                unfollowUser(
+                                  user,
+                                  currentUser._id,
+                                  config,
+                                  toast
+                                )
+                              }
+                            >
+                              <FontAwesomeIcon
+                                icon={faImages}
+                                className="editFriendIcon"
+                              />
+                              <span className="editFriendText">Unfollow</span>
+                            </div>
+                          ) : (
+                            <div
+                              className="editFriendOption"
+                              onClick={() =>
+                                followUser(user, currentUser._id, config, toast)
+                              }
+                            >
+                              <FontAwesomeIcon
+                                icon={faHandshake}
+                                className="editFriendIcon"
+                              />
+                              <span className="editFriendText">Follow</span>
+                            </div>
+                          )}
+
+                          <div
+                            className="editFriendOption"
+                            onClick={() =>
+                              unfriend(user, currentUser._id, config, toast)
+                            }
+                          >
+                            <FontAwesomeIcon
+                              icon={faUserXmark}
+                              className="editCoverIcon"
+                            />
+                            <span className="editFriendText">Unfriend</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-          {isRespondFriendReq && (
-            <div className="respondRequest">
-              <div className="requestText">{`${user.fullName} sent you a friend request`}</div>
-              <div className="respondBtns">
-                <span
-                  className="addStoryBtn"
-                  onClick={() =>
-                    confirmRequest(
-                      user,
-                      currentUser._id,
-                      setIsSentFriendReq,
-                      config,
-                      toast
-                    )
-                  }
-                >
-                  Confirm Request
-                </span>
-                <span
-                  className="editProfileBtn"
-                  onClick={() =>
-                    deleteRequest(
-                      user,
-                      currentUser._id,
-                      setIsSentFriendReq,
-                      config,
-                      toast
-                    )
-                  }
-                >
-                  Delete Request
-                </span>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
-          )}
-          
+            {isRespondFriendReq && (
+              <div className="respondRequest">
+                <div className="requestText">{`${user.fullName} sent you a friend request`}</div>
+                <div className="respondBtns">
+                  <span
+                    className="addStoryBtn"
+                    onClick={() =>
+                      confirmRequest(
+                        user,
+                        currentUser._id,
+                        setIsSentFriendReq,
+                        config,
+                        toast
+                      )
+                    }
+                  >
+                    Confirm Request
+                  </span>
+                  <span
+                    className="editProfileBtn"
+                    onClick={() =>
+                      deleteRequest(
+                        user,
+                        currentUser._id,
+                        setIsSentFriendReq,
+                        config,
+                        toast
+                      )
+                    }
+                  >
+                    Delete Request
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>

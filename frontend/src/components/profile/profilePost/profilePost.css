@@ -273,6 +273,7 @@
   border-top: 1px solid #3333;
   padding-top: 12px;
   margin: 0px 20px;
+  gap: 10px;
 }
 
 .commentProfilePicture {

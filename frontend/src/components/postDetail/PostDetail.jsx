@@ -20,7 +20,6 @@ import Wow from "../../img/wow.png";
 import Sad from "../../img/sad.png";
 import Angry from "../../img/angry.jpg";
 import {
-  reactPost,
   reactedPost,
   displayReact,
   displayReactCount,
@@ -36,8 +35,6 @@ import SelectAudience from "../selectAudience/SelectAudience";
 import PostContent from "../postContent/PostContent";
 import Comment from "../comment/Comment";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
-import ReactDisplay from "../reactDisplay/ReactDisplay";
 
 const PostDetail = ({
   post,
@@ -48,21 +45,17 @@ const PostDetail = ({
   fetchPosts,
   openSelectAudience,
   setOpenSelectAudience,
+  setSelectedType, 
+  setIsOpenReactDisplay
 }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
-  const { like, haha, sad, wow, heart, angry } = post;
+  const { react, like, haha, sad, wow, heart, angry } = post;
   const likeCount =
-    like.length +
-    haha.length +
-    sad.length +
-    wow.length +
-    heart.length +
-    angry.length;
+    react.length
   const [reacted, setReacted] = useState(
     displayReact(like, heart, wow, haha, sad, angry, currentUser._id)
   );
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
-  const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(true);
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [commentText, setCommentText] = useState("");
   const [images, setImages] = useState([]);
@@ -81,9 +74,22 @@ const PostDetail = ({
     setCommentText(e.target.value);
   };
 
+  const handleSeeReact = (selectedType) => {
+    setIsOpenReactDisplay(true);
+    setSelectedType(selectedType)
+  }
+
   useEffect(() => {
     fetchComments(post._id, setComments, config, toast);
   }, []);
+
+  // const prevCommentsRef = useRef();
+  // useEffect(() => {
+  //   if (prevCommentsRef.current !== comments) {
+  //     fetchComments(post._id, setComments, config, toast);
+  //     prevCommentsRef.current = comments;
+  //   }
+  // }, [comments]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -154,7 +160,7 @@ const PostDetail = ({
             <div className={likeCount > 0 ? "likeComment" : "noLike"}>
               <div className="likeCount">
                 <div className="reactIcons">
-                  {displayReactCount(like, heart, wow, haha, sad, angry)}
+                  {displayReactCount(like, heart, wow, haha, sad, angry, handleSeeReact)}
                 </div>
 
                 <div className="">
@@ -384,6 +390,7 @@ const PostDetail = ({
                 setCommentText,
                 images,
                 setImages,
+                setComments,
                 config,
                 toast
               )
@@ -415,11 +422,13 @@ const PostDetail = ({
         initialStatus={postInitialStatus}
         fetchPosts={fetchPosts}
       />
-      <ReactDisplay
+      {/* <ReactDisplay
         post={post}
         open={isOpenReactDisplay}
         setOpen={setIsOpenReactDisplay}
-      />
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      /> */}
     </div>
   );
 };

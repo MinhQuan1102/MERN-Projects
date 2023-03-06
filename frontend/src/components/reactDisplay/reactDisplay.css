@@ -1,10 +1,11 @@
 .reactDisplay {
   position: fixed;
-  left: 10%;
-  top: 5%;
-  width: 450px;
-  min-height: 420px;
-  max-height: 420px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  min-height: 450px;
+  max-height: 450px;
   z-index: 11000;
   background-color: #fff;
   box-sizing: border-box;
@@ -88,7 +89,35 @@
 }
 
 .active p {
+  font-weight: 500;
+}
+
+.activeall p {
   color: #1877F2 !important;
+}
+
+.activelike p {
+  color: #1877F2 !important;
+}
+
+.activeheart p {
+  color: #ea223d;
+}
+
+.activehaha p {
+  color: #FBDD66;
+}
+
+.activewow p {
+  color: #EAA823;
+}
+
+.activesad p {
+  color: #EAA823;
+}
+
+.activeangry p {
+  color: #DD6B0E;
 }
 
 .active:after {
@@ -128,11 +157,46 @@
   font-weight: 500;
 }
 
-.reactDisplay .reactBody ul li img {
+.reactDisplay .reactBody ul li .userAvatar {
   width: 40px;
   height: 40px;
+  position: relative;
+}
+
+.reactDisplay .reactBody ul li .userAvatar img {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.reactDisplay .reactBody ul li .userAvatar .reactIconShow {
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -4px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.reactDisplay .reactBody ul li .userAvatar .reactionIcon {
+  transform: scale(0.6);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.likeIconBg {
+  background-image: linear-gradient(to bottom, #11a6fc, #036fe4);
+}
+
+.heartIconBg {
+  background-color: #ea223d;
 }
 
 .reactDisplay .reactBody .reactBodyRight {

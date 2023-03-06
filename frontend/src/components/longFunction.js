@@ -8,6 +8,7 @@ import {
   faUserFriends,
   faPlay,
   faGlobeEurope,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Like from "../img/like.png";
@@ -101,7 +102,12 @@ export const reactPost = async (postId, reactType, currentUserId, config) => {
   }
 };
 
-export const reactComment = async (commentId, reactType, currentUserId, config) => {
+export const reactComment = async (
+  commentId,
+  reactType,
+  currentUserId,
+  config
+) => {
   switch (reactType) {
     case "like":
       await axios.put(
@@ -237,6 +243,52 @@ export const reactedPost = (reactType) => {
   }
 };
 
+export const reactDetail = (reactType) => {
+  switch (reactType) {
+    case "like":
+      return (
+        <div className="reactIconShow likeIconBg">
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className="reactionIcon likeIcon"
+          />
+        </div>
+      );
+    case "heart":
+      return (
+        <div className="reactIconShow heartIconBg">
+          <FontAwesomeIcon icon={faHeart} className="reactionIcon heartIcon" />
+        </div>
+      );
+    case "haha":
+      return (
+        <div className="reactIconShow hahaIconBg">
+          <img src={Haha} alt="haha" />
+        </div>
+      );
+    case "wow":
+      return (
+        <div className="reactIconShow wowIconBg">
+          <img src={Wow} alt="wow" />
+        </div>
+      );
+    case "sad":
+      return (
+        <div className="reactIconShow sadIconBg">
+          <img src={Sad} alt="sad" />
+        </div>
+      );
+    case "angry":
+      return (
+        <div className="reactIconShow angryIconBg">
+          <img src={Angry} alt="angry" />
+        </div>
+      );
+    default:
+      return "";
+  }
+};
+
 export const reactedComment = (reactType) => {
   switch (reactType) {
     case "":
@@ -295,22 +347,30 @@ export const displayReact = (
   angry,
   currentUserId
 ) => {
-  if (like.map(item => item._id).includes(currentUserId)) {
+  if (like.map((item) => item._id).includes(currentUserId)) {
     return "like";
-  } else if (heart.map(item => item._id).includes(currentUserId)) {
+  } else if (heart.map((item) => item._id).includes(currentUserId)) {
     return "heart";
-  } else if (wow.map(item => item._id).includes(currentUserId)) {
+  } else if (wow.map((item) => item._id).includes(currentUserId)) {
     return "wow";
-  } else if (haha.map(item => item._id).includes(currentUserId)) {
+  } else if (haha.map((item) => item._id).includes(currentUserId)) {
     return "haha";
-  } else if (sad.map(item => item._id).includes(currentUserId)) {
+  } else if (sad.map((item) => item._id).includes(currentUserId)) {
     return "sad";
-  } else if (angry.map(item => item._id).includes(currentUserId)) {
+  } else if (angry.map((item) => item._id).includes(currentUserId)) {
     return "angry";
   } else return "";
 };
 
-export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
+export const displayReactCount = (
+  like,
+  heart,
+  wow,
+  haha,
+  sad,
+  angry,
+  handleSeeReact
+) => {
   const likeCount =
     like.length +
     heart.length +
@@ -319,6 +379,7 @@ export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
     haha.length +
     angry.length;
   const reactArray = [like, heart, wow, haha, sad, angry];
+  const reactString = ["like", "heart", "wow", "haha", "sad", "angry"];
   const reactImages = [Like, Heart, Wow, Haha, Sad, Angry];
   if (likeCount === 0) {
     return <></>;
@@ -350,17 +411,26 @@ export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
 
     if (index2 === -1 && index3 === -1) {
       return (
-        <div className="iconShow low">
+        <div
+          className="iconShow low"
+          onClick={() => handleSeeReact(reactString[index1])}
+        >
           <img src={reactImages[index1]} alt="" />
         </div>
       );
     } else if (index2 !== -1 && index3 === -1) {
       return (
         <>
-          <div className="iconShow low">
+          <div
+            className="iconShow low"
+            onClick={() => handleSeeReact(reactString[index1])}
+          >
             <img src={reactImages[index1]} alt="" />
           </div>
-          <div className="iconShow mid">
+          <div
+            className="iconShow mid"
+            onClick={() => handleSeeReact(reactString[index2])}
+          >
             <img src={reactImages[index2]} alt="" />
           </div>
         </>
@@ -368,13 +438,22 @@ export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
     } else {
       return (
         <>
-          <div className="iconShow low">
+          <div
+            className="iconShow low"
+            onClick={() => handleSeeReact(reactString[index1])}
+          >
             <img src={reactImages[index1]} alt="" />
           </div>
-          <div className="iconShow mid">
+          <div
+            className="iconShow mid"
+            onClick={() => handleSeeReact(reactString[index2])}
+          >
             <img src={reactImages[index2]} alt="" />
           </div>
-          <div className="iconShow top">
+          <div
+            className="iconShow top"
+            onClick={() => handleSeeReact(reactString[index3])}
+          >
             <img src={reactImages[index3]} alt="" />
           </div>
         </>
@@ -383,7 +462,14 @@ export const displayReactCount = (like, heart, wow, haha, sad, angry) => {
   }
 };
 
-export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => {
+export const displayReactCommentCount = (
+  like,
+  heart,
+  wow,
+  haha,
+  sad,
+  angry
+) => {
   const likeCount =
     like.length +
     heart.length +
@@ -438,7 +524,6 @@ export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => 
             <img src={reactImages[index2]} alt="" />
           </div>
           {likeCount > 1 && <span className="reactCount">{likeCount}</span>}
-
         </>
       );
     } else {
@@ -454,7 +539,6 @@ export const displayReactCommentCount = (like, heart, wow, haha, sad, angry) => 
             <img src={reactImages[index3]} alt="" />
           </div>
           {likeCount > 1 && <span className="reactCount">{likeCount}</span>}
-
         </>
       );
     }
@@ -472,15 +556,15 @@ export const sendFriendRequest = async (
   try {
     sentFriendRequest
       ? await axios.put(
-        `http://localhost:5000/api/users/unsendFriendRequest/${user._id}`,
-        { userId },
-        config
-      )
+          `http://localhost:5000/api/users/unsendFriendRequest/${user._id}`,
+          { userId },
+          config
+        )
       : await axios.put(
-        `http://localhost:5000/api/users/sendFriendRequest/${user._id}`,
-        { userId },
-        config
-      );
+          `http://localhost:5000/api/users/sendFriendRequest/${user._id}`,
+          { userId },
+          config
+        );
     setSentFriendRequest(!sentFriendRequest);
   } catch (error) {
     toast({
@@ -907,8 +991,9 @@ export const handleDisplayTag = (username, taggedPeople) => {
     );
   } else if (taggedPeople.length === 2) {
     return (
-      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()} and ${taggedPeople[1].fullName
-        }`}</span>
+      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()} and ${
+        taggedPeople[1].fullName
+      }`}</span>
     );
   } else if (taggedPeople.length === 3) {
     return (
@@ -916,8 +1001,9 @@ export const handleDisplayTag = (username, taggedPeople) => {
     );
   } else {
     return (
-      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()}, ${taggedPeople[1].fullName.trim()}, ${taggedPeople[2].fullName.trim()} and ${taggedPeople.length - 3
-        } other${taggedPeople.length - 3 === 1 ? "" : "s"}`}</span>
+      <span className="username">{`${username} is with ${taggedPeople[0].fullName.trim()}, ${taggedPeople[1].fullName.trim()}, ${taggedPeople[2].fullName.trim()} and ${
+        taggedPeople.length - 3
+      } other${taggedPeople.length - 3 === 1 ? "" : "s"}`}</span>
     );
   }
 };
@@ -1335,7 +1421,15 @@ export const handleDrop = (e, images, inputRef, setImages) => {
   }
 };
 
-export const handleReactPost = (userId, postId, reactType, setReacted, setIsOpenReactIcons, config, toast) => {
+export const handleReactPost = (
+  userId,
+  postId,
+  reactType,
+  setReacted,
+  setIsOpenReactIcons,
+  config,
+  toast
+) => {
   try {
     reactPost(postId, reactType, userId, config);
     setIsOpenReactIcons(false);
@@ -1353,7 +1447,15 @@ export const handleReactPost = (userId, postId, reactType, setReacted, setIsOpen
   }
 };
 
-export const handleReactComment = (userId, commentId, reactType, setReacted, setIsOpenReactIcons, config, toast) => {
+export const handleReactComment = (
+  userId,
+  commentId,
+  reactType,
+  setReacted,
+  setIsOpenReactIcons,
+  config,
+  toast
+) => {
   try {
     reactComment(commentId, reactType, userId, config);
     setIsOpenReactIcons(false);
@@ -1371,12 +1473,28 @@ export const handleReactComment = (userId, commentId, reactType, setReacted, set
   }
 };
 
-export const handleComment = async (e, post, currentUser, commentText, setCommentText, images, setImages, config, toast) => {
+export const handleComment = async (
+  e,
+  post,
+  currentUser,
+  commentText,
+  setCommentText,
+  images,
+  setImages,
+  setComments,
+  config,
+  toast
+) => {
   if (e.key === "Enter") {
     try {
+      const newComment = {
+        userId: currentUser._id,
+        content: commentText,
+        images: images,
+      };
       await axios.post(
         `http://localhost:5000/api/comments/${post._id}`,
-        { userId: currentUser._id, content: commentText, images: images },
+        newComment,
         config
       );
       toast({
@@ -1388,6 +1506,7 @@ export const handleComment = async (e, post, currentUser, commentText, setCommen
       });
       setCommentText("");
       setImages([]);
+      fetchComments(post._id, setComments, config, toast);
     } catch (error) {
       toast({
         title: "An error occurred",
@@ -1402,8 +1521,11 @@ export const handleComment = async (e, post, currentUser, commentText, setCommen
 
 export const fetchComments = async (postId, setComments, config, toast) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/comments/${postId}`, config)
-    setComments(response.data.comments)
+    const response = await axios.get(
+      `http://localhost:5000/api/comments/${postId}`,
+      config
+    );
+    setComments(response.data.comments);
   } catch (error) {
     toast({
       title: "An error occurred",
@@ -1413,4 +1535,73 @@ export const fetchComments = async (postId, setComments, config, toast) => {
       position: "bottom",
     });
   }
-}
+};
+
+export const displayUserAvaReact = (
+  user,
+  like,
+  heart,
+  haha,
+  wow,
+  sad,
+  angry
+) => {
+  if (like.map((like) => like._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow likeIconBg">
+          <FontAwesomeIcon
+            className="reactionIcon likeIcon"
+            icon={faThumbsUp}
+          />
+        </div>
+      </div>
+    );
+  } else if (heart.map((heart) => heart._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow heartIconBg">
+          <FontAwesomeIcon className="reactionIcon likeIcon" icon={faHeart} />
+        </div>
+      </div>
+    );
+  } else if (haha.map((haha) => haha._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow hahaIconBg">
+          <img src={Haha} alt="haha" />
+        </div>
+      </div>
+    );
+  } else if (wow.map((wow) => wow._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow wowIconBg">
+          <img src={Wow} alt="wow" />
+        </div>
+      </div>
+    );
+  } else if (sad.map((sad) => sad._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow sadIconBg">
+          <img src={Sad} alt="sad" />
+        </div>
+      </div>
+    );
+  } else if (angry.map((angry) => angry._id).includes(user._id)) {
+    return (
+      <div className="userAvatar">
+        <img src={user.avatar} alt="" />
+        <div className="reactIconShow angryIconBg">
+          <img src={Angry} alt="angry" />
+        </div>
+      </div>
+    );
+  }
+};
