@@ -1,9 +1,12 @@
 import React from 'react'
+import FeaturedProduct from '../../components/FeaturedProduct/FeaturedProduct'
 import "./homepage.css"
 
 const Homepage = () => {
   return (
-    <div>Homepage</div>
+    <div className='homepage'>
+      <FeaturedProduct/>
+    </div>
   )
 }
 
