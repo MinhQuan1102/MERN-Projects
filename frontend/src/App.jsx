@@ -4,7 +4,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Homepage from "./pages/Homepage/Homepage";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer"
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
       </div>
-      <Footer/>
     </div>
   );
 }
