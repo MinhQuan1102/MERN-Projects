@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <>
-      <navbar className="navbar">
+      <div className="navbar">
         <div className="navbarContainer">
           <div className="navbarLogo">
             <div className="logo">
@@ -53,17 +53,15 @@ const Navbar = () => {
               </span>
             </div>
           </div>
-          <div
-            className="navbarMenu"
-          >
-            <div className="navbarWishlist">
-              <Link to="/wishlist" className="">
+          <div className="navbarMenu">
+            <Link to="/wishlist" className="">
+              <div className="navbarWishlist">
                 <img src={wishlist} alt="wishlist" />
-                <p className="mb-0">
+                <p className="wishlistText">
                   Favourite <br /> wishlist
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
             {!currentUser && (
               <div>
                 <Link
@@ -75,18 +73,25 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-            <div>
-              <Link
-                to="/cart"
-                className="d-flex align-items-center gap-10 text-white"
-              >
+            {!currentUser && (
+              <div>
+                <Link
+                  to="/register"
+                  className="d-flex align-items-center gap-10 text-white"
+                >
+                  <img src={user} alt="user" />
+                  <p className="mb-0">Register</p>
+                </Link>
+              </div>
+            )}
+            <Link
+              to="/cart"
+              className="d-flex align-items-center gap-10 text-white"
+            >
+              <div>
                 <img src={cart} alt="cart" />
-                <div className="d-flex flex-column gap-10">
-                  <span className="badge bg-white text-dark">0</span>
-                  <p className="mb-0">$ 500</p>
-                </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
             {currentUser && (
               <div className="userSetting">
                 <img
@@ -107,61 +112,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </navbar>
-      <header className="header-bottom py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="menu-bottom d-flex align-items-center gap-30">
-                <div>
-                  <div className="dropdown">
-                    <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
-                      type="button"
-                      id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <img src={menu} alt="" />
-                      <span className="me-5 d-inline-block">
-                        Shop Categories
-                      </span>
-                    </button>
-                    <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton1"
-                    >
-                      <li>
-                        <Link className="dropdown-item text-white" to="/">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="/">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="/">
-                          Something else here
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="menu-links">
-                  <div className="d-flex align-items-center gap-15">
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/product">Our Store</NavLink>
-                    <NavLink to="/blogs">Blogs</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      </div>
     </>
   );
 };

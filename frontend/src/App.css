@@ -62,3 +62,9 @@ a {
 .app {
   overflow-x: hidden;
 }
+
+.app .appBody {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+}

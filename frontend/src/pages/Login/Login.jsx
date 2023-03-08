@@ -63,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login">
       <BreadCrumb title="Login" />
       <Container class1="login-wrapper py-5 home-wrapper-2">
         <div className="row">
@@ -104,7 +104,7 @@ const Login = () => {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

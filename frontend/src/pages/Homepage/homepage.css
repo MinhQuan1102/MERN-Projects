@@ -1,0 +1,21 @@
+.homepage {
+  width: 100%;
+}
+
+.homepageContainer {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.homepageBody {
+  width: 80%;
+  position: absolute;
+}
+
+@media screen and (min-width: 1200px) {
+  .homepageBody {
+    width: 65%;
+  }
+}

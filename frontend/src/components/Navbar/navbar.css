@@ -1,7 +1,10 @@
 .navbar {
-	position: sticky;
+	position: fixed;
 	top: 0;
 	left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 100;
 	display: flex;
 	align-items: center;
 	background-color: #0C1D26;
@@ -10,7 +13,7 @@
 .navbarContainer {
 	width: 100%;
 	display: flex;
-	padding: 15px 0px;
+	padding: 10px 0px;
 	gap: 15px;
 }
 
@@ -34,11 +37,19 @@
 	flex: 5;
 	display: flex;
 	align-items: center;
+  gap: 40px;
+  justify-content: flex-end;
+  padding-right: 100px;
 }
 
 .navbarMenu .navbarWishlist {
 	display: flex;
 	align-items: center;
+  gap: 20px;
+}
+
+.navbarMenu .navbarWishlist .wishlistText{
+	color: white;
 }
 .header-top-strip {
   border-bottom: 1px solid var(--color-3b4149);

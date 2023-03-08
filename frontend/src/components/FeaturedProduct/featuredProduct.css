@@ -24,7 +24,17 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 350px;
+  min-width: 18%;
+  max-width: 23%;
+  cursor: pointer;
+}
+
+.singleProduct {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -54,4 +64,10 @@
 
 .featuredProduct ul li .productPrice {
   color: red;
+}
+
+@media screen and (max-width: 1024px) {
+  .featuredProduct ul li {
+    max-width: 30%;
+  }
 }

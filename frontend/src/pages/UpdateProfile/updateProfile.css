@@ -1,0 +1,110 @@
+.updateProfile {
+  background-color: #f5f5f7;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.updateProfileContainer {
+  width: 80%;
+  margin: auto; 
+  background-color: #ffffff;
+}
+
+.updateProfileTitle {
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+}
+
+.updateProfileBody {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.updateProfileLeft {
+  flex: 7;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-right: 1px solid lightgray;
+  padding-left: 70px;
+}
+
+.updateProfileLeft .updateTitle {
+
+}
+
+.updateProfileLeft .updateTitle ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+}
+
+.updateProfileLeft .updateTitle ul li {
+  list-style: none;
+}
+
+.updateProfileLeft .updateDetail {
+
+}
+
+.updateProfileLeft .updateDetail ul {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.updateProfileLeft .updateDetail ul li {
+  list-style: none;
+}
+
+.updateProfileLeft .updateDetail input {
+  border: 1px solid lightgray;
+  padding: 10px 150px 10px 10px;
+}
+
+.updateProfileLeft .updateDetail .password, .phoneNumber {
+  display: flex;
+  gap: 30px;
+}
+
+.updateProfileLeft .updateDetail .changeText {
+  text-decoration: underline;
+  color: #0055AA;
+  cursor: pointer;
+}
+
+.updateProfileLeft .updateDetail button {
+  width: 130px;
+  background-color: #232f3e;
+  padding: 15px;
+  color: white;
+}
+
+.updateProfileRight {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.updateProfileRight img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.updateProfileRight button {
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+
+@media screen and (min-width: 1200px) {
+  .updateProfileContainer {
+    width: 65% !important;
+  }
+}
