@@ -8,6 +8,8 @@ import Footer from "./components/Footer/Footer";
 import Product from "./pages/Product/Product"
 import Cart from "./pages/Cart/Cart";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
+import UpdatePassword from "./pages/UpdatePassword/UpdatePassword";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   return (
@@ -19,7 +21,10 @@ function App() {
         <Route path="/register" exact component={Register} />
         <Route path="/product/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
-        <Route path="/profile" component={UpdateProfile} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/account/profile" component={UpdateProfile} />
+        <Route path="/account/password" component={UpdatePassword} />
+      
       </div>
     </div>
   );

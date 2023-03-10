@@ -9,24 +9,16 @@ import user from "../../images/user.svg";
 import cart from "../../images/cart.svg";
 import menu from "../../images/menu.svg";
 import { AuthContext } from "../../context/AuthContext";
+import Search from "../Search/Search";
+import CartPreview from "../CartPreview/CartPreview";
 
 const Navbar = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
+
   const [openSetting, setOpenSetting] = useState(false);
-
-  const userSetting = useRef();
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (userSetting.current && !userSetting.current.contains(event.target)) {
-        setOpenSetting(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [userSetting]);
+  const [openSearch, setOpenSearch] = useState(false);
+  const [openCartPreview, setOpenCartPreview] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
@@ -47,10 +39,14 @@ const Navbar = () => {
                 placeholder="Search Product Here..."
                 aria-label="Search Product Here..."
                 aria-describedby="basic-addon2"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onClick={() => setOpenSearch(true)}
               />
               <span className="input-group-text p-3" id="basic-addon2">
                 <BsSearch className="fs-6" />
               </span>
+              <Search open={openSearch} setOpen={setOpenSearch} />
             </div>
           </div>
           <div className="navbarMenu">
@@ -87,22 +83,36 @@ const Navbar = () => {
             <Link
               to="/cart"
               className="d-flex align-items-center gap-10 text-white"
+              style={{ position: "relative" }}
+              onMouseOver={() => setOpenCartPreview(true)}
             >
               <div>
                 <img src={cart} alt="cart" />
               </div>
+              <CartPreview
+                open={openCartPreview}
+                setOpen={setOpenCartPreview}
+              />
             </Link>
             {currentUser && (
               <div className="userSetting">
                 <img
-                  src="https://scontent.fhan3-1.fna.fbcdn.net/v/t39.30808-1/273210834_3086464761611742_3914305251108406206_n.jpg?stp=dst-jpg_p240x240&_nc_cat=104&ccb=1-7&_nc_sid=7206a8&_nc_ohc=I26m5w5wnrgAX-ix0Ix&_nc_ht=scontent.fhan3-1.fna&oh=00_AfAtb9eA1nrE-TUbLR388LSFFqzJnwfoJXS-15zq6icysA&oe=6401D8C1"
+                  src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/273210834_3086464761611742_3914305251108406206_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GpZUB-TOXNUAX9fnPSj&_nc_ht=scontent.fhan14-3.fna&oh=00_AfA92m10XiplbJb0QeM-d8Rw0HB1neXeo_mJdUsJfh3JqQ&oe=640D4AC3"
                   alt=""
                   className="userAvatar"
-                  onClick={() => setOpenSetting(!openSetting)}
+                  onMouseOver={() => setOpenSetting(true)}
                 />
                 {openSetting && (
-                  <ul className="userOptions" ref={userSetting}>
-                    <li className="option">My Account</li>
+                  <ul
+                    className="userOptions"
+                    onMouseLeave={() => setOpenSetting(false)}
+                  >
+                    <Link to="/account/profile">
+                      <li className="option">My Account</li>
+                    </Link>
+                    <Link to="/account/password">
+                      <li className="option">Change Password</li>
+                    </Link>
                     <li className="option" onClick={() => setCurrentUser(null)}>
                       Log out
                     </li>

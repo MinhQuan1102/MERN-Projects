@@ -13,7 +13,6 @@ const UpdateProfile = () => {
                 <li>Username</li>
                 <li style={{ padding: "10px 0" }}>Name</li>
                 <li>Phone number</li>
-                <li>Password</li>
                 <li>Address</li>
                 <li style={{ padding: "27px 0" }}></li>
               </ul>
@@ -26,10 +25,6 @@ const UpdateProfile = () => {
                 </li>
                 <li className="phoneNumber">
                   <span>0825134034</span>
-                  <span className="changeText">Change</span>
-                </li>
-                <li className="password">
-                  <span>************</span>
                   <span className="changeText">Change</span>
                 </li>
                 <li>445 Au Co</li>

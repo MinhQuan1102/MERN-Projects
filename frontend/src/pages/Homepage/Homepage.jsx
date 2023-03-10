@@ -1,4 +1,5 @@
 import React from "react";
+import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import FeaturedProduct from "../../components/FeaturedProduct/FeaturedProduct";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
@@ -9,6 +10,7 @@ const Homepage = () => {
     <div className="homepage">
       <div className="homepageContainer">
         <div className="homepageBody">
+          <CategoryFilter />
           <FeaturedProduct />
           <Footer />
         </div>

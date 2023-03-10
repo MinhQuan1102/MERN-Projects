@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import CartProduct from "../../components/CartProduct/CartProduct";
 import "./cart.css";
@@ -26,7 +27,9 @@ const Cart = () => {
           <div className="cartTotalPriceContainer">
             <h2 className="subtotal">Subtotal: $120</h2>
             <span>Taxes and shipping calculated at checkout</span>
-            <button className="checkoutBtn">Checkout</button>
+            <Link to="/checkout">
+              <button className="checkoutBtn">Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

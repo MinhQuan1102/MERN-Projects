@@ -43,6 +43,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
+  padding-top: 15px;
 }
 
 .cartTotalPrice .subtotal {
@@ -73,14 +74,14 @@
 }
 
 .cartBody .cartProductQuantity {
-  flex: 1;
+  flex: 1.5;
 }
 
 .cartBody .cartProductTotal {
   flex: 1;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1700px) {
   .cartContainer {
     width: 65% !important;
   }

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
 import "./cartProduct.css";
 
 const CartProduct = () => {
@@ -31,6 +34,9 @@ const CartProduct = () => {
           <div className="plus" onClick={() => handleQuantity(1)}>
             +
           </div>
+        </div>
+        <div className="trashCan">
+          <FontAwesomeIcon icon={faTrashCan} />
         </div>
       </div>
       <div className="cartProductTotal">$40</div>

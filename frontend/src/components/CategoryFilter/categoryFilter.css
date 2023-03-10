@@ -1,0 +1,36 @@
+.categoryFilter {
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.categoryFilter .categoryFilterContainer {
+}
+
+.categoryFilter .categoryFilterHeading {
+  font-size: 30px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.categoryFilter .categories {
+
+}
+
+.categoryFilter .categories ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.categoryFilter .categories ul li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  list-style: none;
+  border: 1px solid lightgray;
+  max-width: 10%;
+  padding: 5px;
+}
