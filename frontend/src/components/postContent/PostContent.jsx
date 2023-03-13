@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./postContent.css";
+import { handleDisplayPostStatusIcon } from "../longFunction";
+import { format } from "timeago.js";
 
 const PostContent = ({ post, user, postDetail }) => {
   const { content, images, isUpdatingProfilePicture, isUpdatingCoverPicture } =
@@ -11,6 +13,7 @@ const PostContent = ({ post, user, postDetail }) => {
   const [postHeight, setPostHeight] = useState(
     postBackground.current?.offsetHeight
   );
+  const [openSelectAudience, setOpenSelectAudience] = useState(false);
 
   useEffect(() => {
     if (postBackground.current) {
@@ -28,7 +31,10 @@ const PostContent = ({ post, user, postDetail }) => {
     if (isUpdatingProfilePicture) {
       return (
         <div className="postBackground" ref={postBackground}>
-          <div className="postCoverImg" style={{ backgroundColor: user.coverPicture && "#E4E6EB"}}>
+          <div
+            className="postCoverImg"
+            style={{ backgroundColor: user.coverPicture && "#E4E6EB" }}
+          >
             <img src={user.coverPicture} alt="" />
           </div>
           <div
@@ -136,6 +142,69 @@ const PostContent = ({ post, user, postDetail }) => {
       );
     }
   };
+
+  const sharedPostImages = (images) => {
+    if (images.length === 0) {
+      return <></>;
+    } else if (images.length === 1) {
+      return (
+        <div className="sharedPostImages">
+          <img src={images[0]} alt="" className="sharedPostImage" />
+        </div>
+      );
+    } else if (images.length === 2) {
+      return (
+        <div className="sharedPostImages" style={{ gap: "2px" }}>
+          {images.map((image, i) => (
+            <img
+              src={image}
+              alt=""
+              key={i}
+              className={`sharedPostImage2${i + 1}`}
+            />
+          ))}
+        </div>
+      );
+    } else if (images.length === 3) {
+      return (
+        <div className="sharedPostImages" style={{ gap: "2px" }}>
+          {images.map((image, i) => (
+            <img src={image} alt="" key={i} className={`sharedPostImage3`} />
+          ))}
+        </div>
+      );
+    } else if (images.length === 4) {
+      return (
+        <div
+          className="sharedPostImages"
+          style={{ gap: "2px", flexWrap: "wrap", justifyContent: "center" }}
+        >
+          {images.map((image, i) => (
+            <img src={image} alt="" key={i} className={`sharedPostImage4`} />
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className="sharedPostImages"
+          style={{ gap: "2px", flexWrap: "wrap", justifyContent: "center" }}
+        >
+          {images.slice(0, 4).map((image, i) => (
+            <div className={`imageContainer${i + 1}`}>
+              <img src={image} alt="" key={i} className={`sharedPostImage5`} />
+              {i === 3 && (
+                <span className="sharedPostOverFlowImages">{`+${
+                  images.length - 4
+                }`}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+  };
+
   return (
     <div className={images.length > 0 ? "postContent" : "noImage"}>
       {user && (
@@ -156,11 +225,34 @@ const PostContent = ({ post, user, postDetail }) => {
           {/* <video width="100%" controls>
         <source type="video/mp4"/>
       </video> */}
-          {/* <div className="postBackground">
-        <div className="postBgContainer">
-          <p>{post.content}</p>
-        </div>
-      </div> */}
+          {post.sharedPost && (
+            <div className="sharedPost">
+              <div className="sharedPostContainer">
+                {sharedPostImages(post.sharedPost.images)}
+                <div className="sharedPostUser">
+                  <div className="sharedPostUserAvatar">
+                    <img src={post.sharedPost.user.avatar} alt="" />
+                  </div>
+                  <div className="sharedPostUserInfo">
+                    <h2>{post.sharedPost.user.fullName}</h2>
+                    <div className="postStatus">
+                      <span>{format(post.sharedPost.createdAt)}</span>
+                      {"•"}
+                      <span>
+                        {handleDisplayPostStatusIcon(
+                          post.status,
+                          setOpenSelectAudience
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="sharedPostContent">
+                  <p>{post.sharedPost.content}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

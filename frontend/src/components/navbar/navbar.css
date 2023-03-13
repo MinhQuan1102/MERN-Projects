@@ -128,7 +128,7 @@
   background-color: white !important;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1700px) {
   .navbar .left {
     flex: 4;
   }

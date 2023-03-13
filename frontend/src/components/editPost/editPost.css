@@ -1,4 +1,14 @@
-.createPost {
+.editPost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.editPostContainer {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -10,14 +20,13 @@
   box-sizing: border-box;
   border-radius: 8px;
   box-shadow: 0px 0px 8px #3339;
-  z-index: 100;
   display: flex !important;
   flex-direction: column;
   overflow-x: hidden;
   opacity: 1 !important;
 }
 
-.createPost .header {
+.editPost .header {
   position: relative;
   width: 100%;
   height: 10%;
@@ -31,14 +40,14 @@
   align-items: center;
 }
 
-.createPost .header p {
+.editPost .header p {
   text-align: center;
   font-size: 21px !important;
   color: #333 !important;
   font-weight: bolder !important;
 }
 
-.createPost .header .closeBtn {
+.editPost .header .closeBtn {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -55,7 +64,7 @@
   padding: 5px;
 }
 
-.createPost .body {
+.editPost .body {
   width: 100%;
   height: auto;
   display: flex;
@@ -63,37 +72,37 @@
   gap: 2px;
 }
 
-.createPost .body .userInfo {
+.editPost .body .userInfo {
   display: flex;
   align-items: center;
   gap: 15px;
   padding: 5px 15px 10px 15px;
 }
 
-.createPost .body .userInfo .left {
+.editPost .body .userInfo .left {
   max-width: 45px;
   max-height: 45px;
 }
 
-.createPost .body .userInfo .left .userAvatar {
+.editPost .body .userInfo .left .userAvatar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.createPost .body .userInfo .right {
+.editPost .body .userInfo .right {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.createPost .body .userInfo .right .username {
+.editPost .body .userInfo .right .username {
   color: #050505;
   font-size: 16px;
 }
 
-.createPost .body .userInfo .right .postStatus {
+.editPost .body .userInfo .right .postStatus {
   display: flex;
   align-items: center;
   width: 105px;
@@ -104,25 +113,25 @@
   padding: 5px 8px;
 }
 
-.createPost .body .userInfo .right .postStatus .postStatusText {
+.editPost .body .userInfo .right .postStatus .postStatusText {
   font-size: 14px;
 }
 
-.createPost .body .userInfo .right .postStatus .postStatusIcon {
+.editPost .body .userInfo .right .postStatus .postStatusIcon {
   font-size: 14px !important;
 }
 
-.createPost .body .postContent {
+.editPost .body .postContent {
   margin-bottom: 15px;
   overflow-y: scroll;
 }
 
-.createPost .body .inputContentBox {
+.editPost .body .inputContentBox {
   width: 100%;
   padding: 0 15px;
 }
 
-.createPost .body .inputContentBox textarea {
+.editPost .body .inputContentBox textarea {
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -136,18 +145,18 @@
   vertical-align: middle;
 }
 
-.createPost .body .backgroundColor {
+.editPost .body .backgroundColor {
   margin-bottom: 5px;
 }
 
-.createPost .body .backgroundColor ul {
+.editPost .body .backgroundColor ul {
   display: flex;
   align-items: center;
   padding: 0 15px;
   gap: 5px;
 }
 
-.createPost .body .backgroundColor ul li {
+.editPost .body .backgroundColor ul li {
   width: 35px;
   height: 35px;
   list-style: none;
@@ -163,14 +172,14 @@
   border: 3px solid gray;
 }
 
-/* .createPost .body .postImage {
+/* .editPost .body .postImage {
   width: 96%;
   margin: 0 10px;
   border: 1px solid gray;
   border-radius: 10px;
   height: 150px;
 } */
-.createPost .body .postImageContainer {
+.editPost .body .postImageContainer {
   width: 96%;
   /* height: 210px; */
   padding: 10px;
@@ -181,7 +190,7 @@
   overflow-y: scroll;
 }
 
-.createPost .body .postImageContainer .imagesContainer {
+.editPost .body .postImageContainer .imagesContainer {
   width: 100%;
   height: 200px;
   display: grid;
@@ -189,18 +198,19 @@
   padding-bottom: 10px !important;
 }
 
-.createPost .body .postImageContainer:hover {
+.editPost .body .postImageContainer:hover {
   filter: brightness(0.9);
 }
 
-.createPost .body .postImageContainer img {
+.editPost .body .postImageContainer img {
   width: 100%;
   height: auto;
   margin: auto;
   border-radius: 10px;
 }
 
-.image21, .image22 {
+.image21,
+.image22 {
   min-height: 400px !important;
   max-height: 400px !important;
   object-fit: cover;
@@ -222,14 +232,20 @@
   object-fit: cover;
 }
 
-.image41, .image42, .image43, .image44 {
+.image41,
+.image42,
+.image43,
+.image44 {
   min-height: 200px !important;
   max-height: 200px !important;
   object-fit: cover;
   border-radius: 0px !important;
 }
 
-.image51, .image52, .image53, .image54 {
+.image51,
+.image52,
+.image53,
+.image54 {
   min-height: 200px !important;
   max-height: 200px !important;
   object-fit: cover;
@@ -249,12 +265,12 @@
   justify-content: center;
   font-size: 40px;
   font-weight: 500;
-  background-color: #CCCDCF;
+  background-color: #cccdcf;
   color: white;
   opacity: 0.8;
 }
 
-.createPost .body .postImageContainer .closeBtn {
+.editPost .body .postImageContainer .closeBtn {
   position: absolute;
   top: 20%;
   right: 20px;
@@ -277,16 +293,16 @@
   top: 20% !important;
 }
 
-.createPost .body .postImageContainer .closeBtn:hover {
+.editPost .body .postImageContainer .closeBtn:hover {
   background-color: #f2f2f2;
 }
 
-.createPost .body .postImageContainer {
+.editPost .body .postImageContainer {
   width: 96%;
   height: 150px;
 }
 
-.createPost .body .postImageContainer .addPhotoBtn {
+.editPost .body .postImageContainer .addPhotoBtn {
   width: 100%;
   padding: 50px 10px;
   background-color: #f3f3f4;
@@ -297,12 +313,12 @@
   flex-direction: column;
 }
 
-.createPost .body .postImageContainer .addPhotoBtn:hover {
+.editPost .body .postImageContainer .addPhotoBtn:hover {
   background-color: #eaebed;
   border-radius: 0;
 }
 
-.createPost .body .postImageContainer .addPhotoBtn .addPhotoIcon {
+.editPost .body .postImageContainer .addPhotoBtn .addPhotoIcon {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -316,17 +332,17 @@
   cursor: pointer;
 }
 
-.createPost .body .postImageContainer .addPhotoBtn .bigDesc {
+.editPost .body .postImageContainer .addPhotoBtn .bigDesc {
   font-size: 18px;
   font-weight: 500;
 }
 
-.createPost .body .postImageContainer .addPhotoBtn .smallDesc {
+.editPost .body .postImageContainer .addPhotoBtn .smallDesc {
   font-size: 12px;
   color: #c4c7cb;
 }
 
-.createPost .otherOptions {
+.editPost .otherOptions {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -336,18 +352,18 @@
   margin: 0 15px;
 }
 
-.createPost .otherOptions .left {
+.editPost .otherOptions .left {
   font-size: 17px;
   font-weight: 500;
 }
 
-.createPost .otherOptions ul {
+.editPost .otherOptions ul {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-.createPost .otherOptions ul li {
+.editPost .otherOptions ul li {
   list-style: none;
   width: 35px;
   height: 35px;
@@ -360,7 +376,7 @@
   border-radius: 50%;
 }
 
-.createPost .otherOptions ul li .uploadPhoto {
+.editPost .otherOptions ul li .uploadPhoto {
   color: #41b35d;
 }
 
@@ -368,25 +384,25 @@
   color: #e4e6eb !important;
 }
 
-.createPost .otherOptions ul li .tagPeople {
+.editPost .otherOptions ul li .tagPeople {
   color: #1877f2 !important;
   font-size: 18px;
 }
 
 .hasTaggedPeople {
   padding: 5px;
-  background-color: #C0E2EC;
+  background-color: #c0e2ec;
 }
 
-.createPost .otherOptions ul li .feeling {
+.editPost .otherOptions ul li .feeling {
   color: rgb(231, 196, 133) !important;
 }
 
-.createPost .otherOptions ul li .location {
+.editPost .otherOptions ul li .location {
   color: #e42645;
 }
 
-.createPost .otherOptions ul li .lifeEvents {
+.editPost .otherOptions ul li .lifeEvents {
   color: #3aa8cb;
 }
 
@@ -395,7 +411,7 @@
   background-color: #d8e4ca;
 }
 
-.createPost .postBtn {
+.editPost .postBtn {
   margin: 10px 15px 15px 15px;
   background-color: #e4e6eb;
   border-radius: 7px;
@@ -404,7 +420,7 @@
   cursor: not-allowed;
 }
 
-.createPost .postBtn.postable {
+.editPost .postBtn.postable {
   background-color: #1a6ed8 !important;
   color: white;
   font-weight: 500;

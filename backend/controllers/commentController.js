@@ -9,10 +9,42 @@ const getComments = async (req, res) => {
     const postId = req.params.postId;
     const comments = await Comment.find({ post: postId })
       .populate({
-        path: "user",
-        select: "fullName avatar"
+        path: "user like haha wow heart sad angry",
+        select: "fullName avatar",
       })
-      .populate("replies")
+      .populate({
+        path: "replies",
+        populate: {
+          path: "user like haha wow heart sad angry",
+          select: "fullName avatar",
+        },
+      })
+    res
+      .status(200)
+      .json({ message: "Get all comments successfully", comments });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+//@description    get all comments of a post
+//@route          GET /api/comments/:postId
+//@access         Protected
+const getReplyComments = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const comments = await Comment.find({ post: postId })
+      .populate({
+        path: "user",
+        select: "fullName avatar",
+      })
+      .populate({
+        path: "replies",
+        populate: {
+          path: "user",
+          select: "fullName avatar",
+        },
+      })
       .sort({ createdAt: -1 });
     res
       .status(200)
@@ -33,11 +65,11 @@ const comment = async (req, res) => {
       user: userId,
       content,
       images,
-      post: postId
+      post: postId,
     });
     await comment.save();
-    console.log(comment)
-    res.status(200).json({ message: "Commented", comment})
+    console.log(comment);
+    res.status(200).json({ message: "Commented", comment });
   } catch (error) {
     res.status(500).json(error);
   }

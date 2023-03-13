@@ -1,4 +1,15 @@
 .postDetail {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+
+}
+
+.postDetail .postDetailContainer{
   position: fixed;
   left: 50%;
   top: 50%;
@@ -10,7 +21,6 @@
   box-sizing: border-box;
   border-radius: 8px;
   box-shadow: 0px 0px 8px #3339;
-  z-index: 10000;
   display: flex !important;
   flex-direction: column;
   overflow-x: hidden;

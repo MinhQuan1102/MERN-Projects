@@ -1304,6 +1304,7 @@ export const editPost = async (
   toast
 ) => {
   let images = [];
+  console.log(pics);
   if (pics.length > 0) {
     const promises = pics.map(async (pic) => {
       const data = new FormData();
@@ -1519,6 +1520,53 @@ export const handleComment = async (
   }
 };
 
+export const handleReplyComment = async (
+  e,
+  post,
+  currentUser,
+  commentText,
+  images,
+  comment,
+  setComments,
+  setCommentText,
+  setImages,
+  config,
+  toast
+) => {
+  if (e.key === "Enter") {
+    try {
+      const replyComment = {
+        userId: currentUser._id,
+        content: commentText,
+        images: images,
+      };
+      await axios.post(
+        `http://localhost:5000/api/comments/reply/${comment._id}`,
+        replyComment,
+        config
+      );
+      toast({
+        title: "Reply comment successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setCommentText("");
+      setImages([]);
+      fetchComments(post._id, setComments, config, toast);
+    } catch (error) {
+      toast({
+        title: "An error occurred",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+};
+
 export const fetchComments = async (postId, setComments, config, toast) => {
   try {
     const response = await axios.get(
@@ -1528,7 +1576,7 @@ export const fetchComments = async (postId, setComments, config, toast) => {
     setComments(response.data.comments);
   } catch (error) {
     toast({
-      title: "An error occurred",
+      title: "An error occurred while fetching comments",
       status: "error",
       duration: 3000,
       isClosable: true,
@@ -1603,5 +1651,31 @@ export const displayUserAvaReact = (
         </div>
       </div>
     );
+  }
+};
+
+export const handleDeleteComment = async (
+  commentId,
+  setOpenCommentOptions,
+  post,
+  setComments,
+  config,
+  toast
+) => {
+  try {
+    await axios.delete(
+      `http://localhost:5000/api/comments/${commentId}`,
+      config
+    );
+    setOpenCommentOptions(false);
+    fetchComments(post._id, setComments, config, toast)
+  } catch (error) {
+    toast({
+      title: "An error occurred",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+      position: "bottom",
+    });
   }
 };

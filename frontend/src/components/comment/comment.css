@@ -1,7 +1,7 @@
 .commentSection {
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .commentSection .viewMoreComments {
@@ -9,7 +9,7 @@
 }
 
 .commentSection .viewMoreComments span {
-  color: #65676B;
+  color: #65676b;
   font-weight: 500;
   font-size: 15px;
 }
@@ -19,10 +19,10 @@
   cursor: pointer;
 }
 
-.commentSection .singleComment {
+.commentSection .singleComment .commentContent {
   display: flex;
   gap: 10px;
-  padding: 15px 15px 0 15px;
+  padding: 10px 15px 0 15px;
 }
 
 .commentSection .commentUserAva {
@@ -43,13 +43,18 @@
   position: relative;
 }
 
+.commentSection .commentDetail .commentInfoWrapper {
+  display: flex;
+  gap: 10px;
+}
+
 .commentSection .commentDetail .commentInfo {
   display: flex;
   flex-direction: column;
   gap: 3px;
   padding: 5px 16px;
   border-radius: 20px;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
   min-width: 120px;
   align-self: flex-start;
   position: relative;
@@ -61,7 +66,56 @@
   cursor: pointer;
 }
 
-.commentSection .commentDetail .reactComment {
+.commentSection .commentOptionsSection {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  position: relative
+}
+
+.commentSection .commentOptionsSection:hover {
+  background-color: #f0f2f5;
+}
+
+.commentOptions {
+  position: absolute;
+  left: -130px;
+  top: 30px;
+  width: 300px;
+  background-color: #ffffff;
+  z-index: 2000;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+}
+
+.commentOptions ul {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+}
+
+.commentOptions ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 5px 10px 10px 10px;
+}
+
+.commentOptions ul li:hover {
+  background-color: #F0F2F5;
+}
+
+.commentSection .reactComment {
   padding-top: 5px;
   display: flex;
   align-items: center;
@@ -70,20 +124,33 @@
   position: relative;
 }
 
-.commentSection .commentDetail .reactComment span {
+.commentSection .reactComment span {
   font-size: 13px;
-  color: #6E7074;
+  color: #6e7074;
   font-weight: bold;
   cursor: pointer;
 }
 
-.commentSection .commentDetail .reactComment span:hover {
+.commentSection .reactComment span:hover {
   text-decoration: underline;
 }
 
-.commentSection .commentDetail .reactComment .commentTimeAgo {
+.commentSection .reactComment .commentTimeAgo {
   font-weight: normal !important;
   font-size: 12px !important;
+}
+
+.comment .replyCommentSection {
+  position: relative;
+}
+
+.comment .replyComments {
+  width: 100%;
+  padding: 10px 10px 0 60px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .commentReactions {
@@ -119,7 +186,7 @@
   z-index: 10;
 }
 
-.commentLike:hover+.commentReactionsHide {
+.commentLike:hover + .commentReactionsHide {
   visibility: visible;
   opacity: 1;
 }
@@ -171,17 +238,17 @@
 }
 
 .hahaedText {
-  color: #FBDD66 !important;
+  color: #fbdd66 !important;
 }
 
 .wowedText {
-  color: #EAA823 !important;
+  color: #eaa823 !important;
 }
 
 .sadedText {
-  color: #EAA823 !important;
+  color: #eaa823 !important;
 }
 
 .angriedText {
-  color: #DD6B0E !important;
+  color: #dd6b0e !important;
 }

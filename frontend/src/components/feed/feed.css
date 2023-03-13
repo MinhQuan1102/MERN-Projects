@@ -11,9 +11,3 @@
 
   
 }
-
-@media screen and (min-width: 1400px) {
-  .feed {
-    flex: 4.5;
-  }
-}

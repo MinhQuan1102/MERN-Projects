@@ -73,6 +73,10 @@ const PostSchema = mongoose.Schema(
         default: [],
       },
     ],
+    sharedPost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
     status: {
       type: Number,
       enum: [1, 2, 3],

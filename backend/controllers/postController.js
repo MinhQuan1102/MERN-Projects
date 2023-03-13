@@ -39,16 +39,49 @@ const uploadPost = async (req, res) => {
   }
 };
 
+//@description    share a post
+//@route          POST /api/posts/share
+//@access         Protected
+const sharePost = async (req, res) => {
+  try {
+    const { user, content, sender, status, sharedPost } = req.body;
+    if (!user) {
+      return res.status(400).json("Please provide enough fields!");
+    }
+    const post = new Post({
+      user,
+      content,
+      sender,
+      status,
+      sharedPost,
+    });
+    const newPost = await post.save();
+    return res
+      .status(201)
+      .json({ message: "Share post successfully!", post: newPost });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 //@description    get all posts of a user
 //@route          GET /api/posts/:userId
 //@access         Protected
 const getUserPosts = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const posts = await Post.find({ user: userId }).populate(
-      "user sender taggedFriends react like heart haha wow sad angry",
-      "fullName avatar"
-    );
+    const posts = await Post.find({ user: userId })
+      .populate({
+        path: "user sender taggedFriends react like heart haha wow sad angry sharedPost",
+        select: "fullName avatar",
+      })
+      .populate({
+        path: "sharedPost",
+        populate: {
+          path: "user",
+          select: "fullName avatar",
+        },
+      });
 
     res.status(200).json({ message: "Get posts successfully", posts });
   } catch (error) {
@@ -209,17 +242,33 @@ const getTimelinePosts = async (req, res) => {
   try {
     const userId = req.params.userId;
     const currentUser = await User.findById(userId);
-    const userPosts = await Post.find({ user: userId }).populate(
-      "user sender taggedFriends react like heart haha wow sad angry",
-      "fullName avatar"
-    );
+    const userPosts = await Post.find({ user: userId })
+      .populate(
+        "user sender taggedFriends react like heart haha wow sad angry",
+        "fullName avatar"
+      )
+      .populate({
+        path: "sharedPost",
+        populate: {
+          path: "user",
+          select: "fullName avatar",
+        },
+      });
 
     const friendPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
-        return Post.find({ user: friendId }).populate(
-          "user sender taggedFriends react like heart haha wow sad angry",
-          "fullName avatar"
-        );
+        return Post.find({ user: friendId })
+          .populate(
+            "user sender taggedFriends react like heart haha wow sad angry",
+            "fullName avatar"
+          )
+          .populate({
+            path: "sharedPost",
+            populate: {
+              path: "user",
+              select: "fullName avatar",
+            },
+          });
       })
     );
     res.status(200).json({
@@ -235,6 +284,7 @@ const getTimelinePosts = async (req, res) => {
 
 module.exports = {
   uploadPost,
+  sharePost,
   getUserPosts,
   updatePost,
   unpinAllPosts,

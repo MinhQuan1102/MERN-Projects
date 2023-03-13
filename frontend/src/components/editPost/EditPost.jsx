@@ -23,7 +23,7 @@ import {
   editPost,
   handleConvertStatus,
   handleDragOver,
-  handleDrop
+  handleDrop,
 } from "../longFunction";
 import TagPeople from "../tagPeople/TagPeople";
 
@@ -51,12 +51,12 @@ const EditPost = ({
   const [images, setImages] = useState(post.images);
   const [newImages, setNewImages] = useState([]);
   const [taggedPeople, setTaggedPeople] = useState(post.taggedFriends);
-  const taggedPeopleIds = taggedPeople.map(friend => friend._id);
+  const taggedPeopleIds = taggedPeople.map((friend) => friend._id);
   const inputRef = useRef();
-  const createPost = useRef();
+  const editPost = useRef();
   const initialContent = post.content;
-  const initialTag = post.taggedFriends
-  const initialImages = post.images
+  const initialTag = post.taggedFriends;
+  const initialImages = post.images;
   const hasImages = post.images.length > 0;
   const toast = useToast();
   const config = {
@@ -65,6 +65,7 @@ const EditPost = ({
       Authorization: `Bearer ${token}`,
     },
   };
+  console.log(newImages);
   const handleChange = (e) => {
     setContent(e.target.value);
   };
@@ -73,8 +74,8 @@ const EditPost = ({
     setOpen(false);
     setContent(initialContent);
     setTaggedPeople(initialTag);
-    setEditImage(hasImages)
-    setImages(initialImages)
+    setEditImage(hasImages);
+    setImages(initialImages);
     setBlur(false);
   };
 
@@ -157,165 +158,193 @@ const EditPost = ({
   return (
     <>
       <div
-        className={openEditPost ? "createPost" : "createPost hide"}
-        ref={createPost}
+        className={openEditPost ? "editPost" : "editPost hide"}
+        ref={editPost}
       >
-        <div className="header">
-          <FontAwesomeIcon
-            icon={faTimes}
-            className="closeBtn"
-            onClick={handleClose}
-          />
-          <p>Edit post</p>
-        </div>
-
-        <div className="body">
-          <div className="userInfo">
-            <div className="left">
-              <img src={currentUser.avatar} alt="" className="userAvatar" />
-            </div>
-            <div className="right">
-              {handleDisplayTag(currentUser.fullName, taggedPeople)}
-              <div className="postStatus" onClick={handleSelectAudience}>
-                {handleStatusIcon(status)}
-                <span className="postStatusText">{status}</span>
-                <FontAwesomeIcon
-                  icon={faCaretDown}
-                  className="postStatusIcon"
-                />
-              </div>
-            </div>
+        <div className="editPostContainer">
+          <div className="header">
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="closeBtn"
+              onClick={handleClose}
+            />
+            <p>Edit post</p>
           </div>
-          <div
-            className="postContent"
-            style={{
-              backgroundColor: backgroundColor,
-              height: backgroundColor === "#FFFFFF" ? "auto" : "200px",
-            }}
-          >
-            <div
-              className="inputContentBox"
-              style={{ height: editImage ? "50px" : height }}
-            >
-              <textarea
-                type="text"
-                style={{
-                  backgroundColor: backgroundColor,
-                  color: textColor,
-                  fontSize: editImage ? "15px" : fontSize,
-                  fontWeight: fontWeight,
-                  textAlign: textAlign,
-                  "::WebkitInputPlaceholder": {
-                    color: "green",
-                    opacity: "1",
-                  },
-                }}
-                value={content}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            {!editImage && (
-              <div className="backgroundColor">
-                <ul className="backgroundItems">
-                  {backgroundData.map((bg, i) => handleBackgroundBorder(bg, i))}
-                </ul>
+
+          <div className="body">
+            <div className="userInfo">
+              <div className="left">
+                <img src={currentUser.avatar} alt="" className="userAvatar" />
               </div>
-            )}
-            {editImage && (
-              <div className="postImageSite">
-                <div
-                  className="postImageContainer"
-                  onDragOver={(e) => handleDragOver(e)}
-                  onDrop={(e) => handleDrop(e, newImages, inputRef, setNewImages)}
-                >
-                  {newImages.length === 0 && handleImages(images, images.length, handleCloseImage, true)}
-                  {newImages.length > 0 && handleImages(newImages, newImages.length, handleCloseImage, false)}
-                  {(images.length === 0 && newImages.length === 0) && (
-                    <div className="inputImage">
-                      <input
-                        type="file"
-                        multiple
-                        onChange={(event) => setNewImages(event.target.files)}
-                        hidden
-                        accept="image/png, image/jpeg"
-                        ref={inputRef}
-                      />
-                      <button
-                        onClick={() => inputRef.current.click()}
-                        className="addPhotoBtn"
-                      >
-                        <FontAwesomeIcon
-                          icon={faImage}
-                          className="addPhotoIcon"
-                        />
-                        <span className="bigDesc">Add photos/videos</span>
-                        <span className="smallDesc">or drag and drop</span>
-                      </button>
-                      <FontAwesomeIcon
-                        icon={faTimes}
-                        className="closeBtn dragAndDrop"
-                        onClick={handleCloseImage}
-                      />
-                    </div>
-                  )}
+              <div className="right">
+                {handleDisplayTag(currentUser.fullName, taggedPeople)}
+                <div className="postStatus" onClick={handleSelectAudience}>
+                  {handleStatusIcon(status)}
+                  <span className="postStatusText">{status}</span>
+                  <FontAwesomeIcon
+                    icon={faCaretDown}
+                    className="postStatusIcon"
+                  />
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-        <div className="otherOptions">
-          <div className="left">Add to your post</div>
-          <div className="right">
-            <ul>
-              <li
-                className={
-                  editImage ? "optionItems editingImage" : "optionItems"
-                }
-                id="Upload photo"
-                onClick={handleOpenEditImage}
+            </div>
+            <div
+              className="postContent"
+              style={{
+                backgroundColor: backgroundColor,
+                height: backgroundColor === "#FFFFFF" ? "auto" : "200px",
+              }}
+            >
+              <div
+                className="inputContentBox"
+                style={{ height: editImage ? "50px" : height }}
               >
-                <FontAwesomeIcon
-                  icon={faImages}
-                  className={
-                    backgroundColor === "#FFFFFF"
-                      ? "uploadPhoto"
-                      : "uploadPhoto disabled"
-                  }
+                <textarea
+                  type="text"
+                  style={{
+                    backgroundColor: backgroundColor,
+                    color: textColor,
+                    fontSize: editImage ? "15px" : fontSize,
+                    fontWeight: fontWeight,
+                    textAlign: textAlign,
+                    "::WebkitInputPlaceholder": {
+                      color: "green",
+                      opacity: "1",
+                    },
+                  }}
+                  value={content}
+                  onChange={(e) => handleChange(e)}
                 />
-              </li>
-              <li
-                className={
-                  taggedPeople.length > 0
-                    ? "optionItems hasTaggedPeople"
-                    : "optionItems"
-                }
-                onClick={handleOpenTagPeople}
-              >
-                <FontAwesomeIcon icon={faUserTag} className="tagPeople" />
-              </li>
-              <li className="optionItems">
-                <FontAwesomeIcon icon={faLaugh} className="feeling" />
-              </li>
-              <li className="optionItems">
-                <FontAwesomeIcon icon={faLocationDot} className="location" />
-              </li>
-              <li className="optionItems">
-                <FontAwesomeIcon icon={faFlag} className="lifeEvents" />
-              </li>
-            </ul>
+              </div>
+              {!editImage && (
+                <div className="backgroundColor">
+                  <ul className="backgroundItems">
+                    {backgroundData.map((bg, i) =>
+                      handleBackgroundBorder(bg, i)
+                    )}
+                  </ul>
+                </div>
+              )}
+              {editImage && (
+                <div className="postImageSite">
+                  <div
+                    className="postImageContainer"
+                    onDragOver={(e) => handleDragOver(e)}
+                    onDrop={(e) =>
+                      handleDrop(e, newImages, inputRef, setNewImages)
+                    }
+                  >
+                    {newImages.length === 0 &&
+                      handleImages(
+                        images,
+                        images.length,
+                        handleCloseImage,
+                        true
+                      )}
+                    {newImages.length > 0 &&
+                      handleImages(
+                        newImages,
+                        newImages.length,
+                        handleCloseImage,
+                        false
+                      )}
+                    {images.length === 0 && newImages.length === 0 && (
+                      <div className="inputImage">
+                        <input
+                          type="file"
+                          multiple
+                          onChange={(event) => setNewImages(event.target.files)}
+                          hidden
+                          accept="image/png, image/jpeg"
+                          ref={inputRef}
+                        />
+                        <button
+                          onClick={() => inputRef.current.click()}
+                          className="addPhotoBtn"
+                        >
+                          <FontAwesomeIcon
+                            icon={faImage}
+                            className="addPhotoIcon"
+                          />
+                          <span className="bigDesc">Add photos/videos</span>
+                          <span className="smallDesc">or drag and drop</span>
+                        </button>
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          className="closeBtn dragAndDrop"
+                          onClick={handleCloseImage}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
+          <div className="otherOptions">
+            <div className="left">Add to your post</div>
+            <div className="right">
+              <ul>
+                <li
+                  className={
+                    editImage ? "optionItems editingImage" : "optionItems"
+                  }
+                  id="Upload photo"
+                  onClick={handleOpenEditImage}
+                >
+                  <FontAwesomeIcon
+                    icon={faImages}
+                    className={
+                      backgroundColor === "#FFFFFF"
+                        ? "uploadPhoto"
+                        : "uploadPhoto disabled"
+                    }
+                  />
+                </li>
+                <li
+                  className={
+                    taggedPeople.length > 0
+                      ? "optionItems hasTaggedPeople"
+                      : "optionItems"
+                  }
+                  onClick={handleOpenTagPeople}
+                >
+                  <FontAwesomeIcon icon={faUserTag} className="tagPeople" />
+                </li>
+                <li className="optionItems">
+                  <FontAwesomeIcon icon={faLaugh} className="feeling" />
+                </li>
+                <li className="optionItems">
+                  <FontAwesomeIcon icon={faLocationDot} className="location" />
+                </li>
+                <li className="optionItems">
+                  <FontAwesomeIcon icon={faFlag} className="lifeEvents" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <button
+            className={
+              content || images.length > 0 || taggedPeople.length > 0
+                ? "postBtn postable"
+                : "postBtn"
+            }
+            disabled={!content}
+            onClick={() =>
+              editPost(
+                newImages,
+                post,
+                content,
+                taggedPeopleIds,
+                handleConvertStatus(status),
+                config,
+                toast
+              )
+            }
+          >
+            Edit
+          </button>
         </div>
-        <button
-          className={
-            content || images.length > 0 || taggedPeople.length > 0
-              ? "postBtn postable"
-              : "postBtn"
-          }
-          disabled={!content}
-          onClick={() => editPost(newImages, post, content, taggedPeopleIds, handleConvertStatus(status), config, toast)}
-        >
-          Edit
-        </button>
       </div>
       <SelectAudience
         open={isSeletingAudience}

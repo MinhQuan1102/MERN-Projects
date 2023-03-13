@@ -14,8 +14,6 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("searchHistory")) || []
   );
 
-  const [blur, setBlur] = useState(false);
-
   const history = useHistory();
   const handleNoAva = (user) => {
     return user.gender === 1
@@ -44,8 +42,6 @@ export const AuthContextProvider = ({ children }) => {
         handleNoAva,
         token,
         setToken,
-        blur,
-        setBlur,
         searchHistory,
         setSearchHistory,
       }}

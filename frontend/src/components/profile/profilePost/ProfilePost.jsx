@@ -41,6 +41,7 @@ import EditPost from "../../editPost/EditPost";
 import PostDetail from "../../postDetail/PostDetail";
 import Comment from "../../comment/Comment";
 import ReactDisplay from "../../reactDisplay/ReactDisplay";
+import ShareOptions from "../../shareOptions/ShareOptions";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
@@ -65,6 +66,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const [images, setImages] = useState([]);
   const postInitialStatus = post.status;
   const toast = useToast();
+
   const config = {
     headers: {
       "Content-type": "application/json",
@@ -89,7 +91,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
     fetchPosts();
     return () => {
       controller.abort();
-    }
+    };
   }, [reacted]);
 
   const handleUpdateAudience = async (status) => {
@@ -207,7 +209,10 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       {/* {postInfo ends} */}
       <div
         className="reactButtons"
-        style={{ borderBottom: comments.length > 0 && "1px solid #3333" }}
+        style={{
+          borderBottom: comments.length > 0 && "1px solid #3333",
+          borderTop: post.sharedPost && likeCount === 0 && "none",
+        }}
       >
         {!reacted ? (
           <div
@@ -359,11 +364,12 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             <span>Comment</span>
           </p>
         </div>
-        <div className="reactButton">
+        <div className="reactButton" style={{ position: "relative" }}>
           <p>
             <FontAwesomeIcon icon={faShare} className="reactButtonIcon" />
             <span>Share</span>
           </p>
+          {/* <ShareOptions /> */}
         </div>
       </div>
 
@@ -377,7 +383,9 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
               <span>View more comments</span>
             </div>
           )}
-          {comments.length > 0 && <Comment comment={comments[0]} fetchComments={fetchComments}/>}
+          {comments.length > 0 && (
+            <Comment post={post} comment={comments[0]} fetchComments={fetchComments} />
+          )}
         </div>
       )}
 
@@ -445,8 +453,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           setTagPeople={setTagPeople}
         />
       )}
-      {timeline &&
-        !post.isUpdatingProfilePicture &&
+      {!post.isUpdatingProfilePicture &&
         !post.isUpdatingCoverPicture &&
         isOpenPostDetail && (
           <PostDetail

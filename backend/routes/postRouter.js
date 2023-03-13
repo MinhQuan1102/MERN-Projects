@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   uploadPost,
+  sharePost,
   getUserPosts,
   updatePost,
   unpinAllPosts,
@@ -12,6 +13,7 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 
 router.post("/", protect, uploadPost);
+router.post('/share', protect, sharePost);
 router.get("/:userId", protect, getUserPosts);
 router.put("/update/:postId", protect, updatePost);
 router.put("/unpin/:userId", protect, unpinAllPosts);

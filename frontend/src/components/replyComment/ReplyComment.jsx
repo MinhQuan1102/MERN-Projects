@@ -1,55 +1,51 @@
-import "./comment.css";
-import React, { useState, useContext, useEffect, useRef } from "react";
-import {
-  faEllipsisH,
-  faHeart,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useToast } from "@chakra-ui/react";
-import { format } from "timeago.js";
-import Haha from "../../img/haha.png";
-import Wow from "../../img/wow.png";
-import Sad from "../../img/sad.png";
-import Angry from "../../img/angry.jpg";
+import React, { useContext, useState, useRef, useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import {
   reactedComment,
   displayReact,
   displayReactCommentCount,
   handleReactComment,
+  handleComment,
+  fetchComments,
   handleDeleteComment,
 } from "../longFunction";
-import { AuthContext } from "../../context/AuthContext";
+import { format } from "timeago.js";
+import {
+  faHeart,
+  faThumbsUp,
+  faEllipsisH,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Haha from "../../img/haha.png";
+import Wow from "../../img/wow.png";
+import Sad from "../../img/sad.png";
+import Angry from "../../img/angry.jpg";
+import "./replyComment.css";
+import { useToast } from "@chakra-ui/react";
 import ReplyCommentInput from "../replyCommentInput/ReplyCommentInput";
-import ReplyComment from "../replyComment/ReplyComment";
 
-const Comment = ({ comment, post, setComments }) => {
+const ReplyComment = ({ comment, post, setComments }) => {
   const { currentUser, token } = useContext(AuthContext);
-  const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const { like, haha, sad, wow, heart, angry } = comment;
+
   const [reacted, setReacted] = useState(
     displayReact(like, heart, wow, haha, sad, angry, currentUser._id)
   );
-  const [openReplyComment, setOpenReplyComment] = useState(false);
+  const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [openEditComment, setOpenEditComment] = useState(false);
   const [openCommentOptions, setOpenCommentOptions] = useState(false);
-  const [isEditingComment, setIsEditingComment] = useState(false);
-  const [isEditingReplyComment, setIsEditingReplyComment] = useState(false);
-  const commentTextRef = useRef();
+  const commentRef = useRef();
   const commentReactDisplay = useRef();
+  const [isEditingComment, setIsEditingComment] = useState(false);
+  const commentWidth = commentRef.current?.offsetWidth;
+  const toast = useToast();
   const commentOptionsRef = useRef();
-  const commentWidth = commentTextRef.current?.offsetWidth;
   const config = {
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   };
-  const toast = useToast();
-  // useEffect(() => {
-  //   fetchComments()
-  // }, [reacted])
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -66,28 +62,33 @@ const Comment = ({ comment, post, setComments }) => {
     };
   }, [commentOptionsRef]);
 
+  const handleEditComment = (e) => {
+    if (e.keyCode === 27) {
+      setIsEditingComment(false);
+    }
+  }
   return (
-    <div className="comment">
-      <div className="singleComment" key={comment._id}>
-        <div
-          className="commentContent"
-          onMouseOver={() => setOpenEditComment(true)}
-          onMouseLeave={() => setOpenEditComment(false)}
-        >
-          <div className="commentUserAva">
+    <div
+      className="replyComment"
+      onMouseOver={() => setOpenEditComment(true)}
+      onMouseLeave={() => setOpenEditComment(false)}
+    >
+      {!isEditingComment ? (
+        <>
+          <div className="replyCommentLeft">
             <img src={comment.user.avatar} alt="" />
           </div>
-          <div className="commentDetail" ref={commentTextRef}>
-            <div className="commentInfoWrapper">
-              <div className="commentInfo">
-                <h2 className="commentUsername">{comment.user.fullName}</h2>
+          <div className="replyCommentRight" ref={commentRef}>
+            <div className="replyCommentInfoWrapper">
+              <div className="replyCommentInfo">
+                <h2>{comment.user.fullName}</h2>
                 <span>{comment.content}</span>
                 <div
                   className="commentReactDisplay"
                   ref={commentReactDisplay}
                   style={{
-                    bottom: commentWidth < 220 && "0px",
-                    right: commentWidth < 220 && "-15px",
+                    bottom: commentWidth < 220 && "-15px",
+                    right: commentWidth < 220 && "0px",
                   }}
                 >
                   {displayReactCommentCount(like, heart, wow, haha, sad, angry)}
@@ -107,7 +108,12 @@ const Comment = ({ comment, post, setComments }) => {
                 {openCommentOptions && (
                   <div className="commentOptions" ref={commentOptionsRef}>
                     <ul>
-                      <li onClick={() => setIsEditingComment(true)}>Edit comment</li>
+                      <li
+                        onClick={() => setIsEditingComment(!isEditingComment)}
+                       
+                      >
+                        Edit comment
+                      </li>
                       <li
                         onClick={() =>
                           handleDeleteComment(
@@ -168,13 +174,6 @@ const Comment = ({ comment, post, setComments }) => {
                   {reactedComment(reacted)}
                 </span>
               )}
-
-              <span
-                className="commentReply"
-                onClick={() => setOpenReplyComment(!openReplyComment)}
-              >
-                Reply
-              </span>
               <span className="commentTimeAgo">
                 {format(comment.createdAt)}
               </span>
@@ -290,29 +289,19 @@ const Comment = ({ comment, post, setComments }) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="replyCommentSection">
-          <div className="replyComments">
-            {comment.replies.map((replyComment) => (
-              <ReplyComment
-                key={replyComment._id}
-                comment={replyComment}
-                post={post}
-                setComments={setComments}
-                isEditingComment={isEditingReplyComment}
-              />
-            ))}
-          </div>
+        </>
+      ) : (
+        <>
           <ReplyCommentInput
-            open={openReplyComment}
             comment={comment}
+            open={true}
             post={post}
             setComments={setComments}
           />
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
 
-export default Comment;
+export default ReplyComment;
