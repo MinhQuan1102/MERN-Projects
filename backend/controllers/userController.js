@@ -44,8 +44,19 @@ const getUserById = async (req, res) => {
       .populate("friends")
       .populate({
         path: "pinnedPost",
-        populate: { path: "taggedFriends" },
+        populate: {
+          path: "user sender taggedFriends react like heart haha wow sad angry sharedPost",
+          select: "fullName avatar",
+        },
+      })
+      .populate({
+        path: "pinnedPost",
+        populate: {
+          path: "sharedPost",
+          populate: { path: "user", select: "fullName avatar" },
+        },
       });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

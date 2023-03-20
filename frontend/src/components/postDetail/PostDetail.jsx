@@ -41,6 +41,7 @@ const PostDetail = ({
   user,
   open,
   own,
+  totalComments,
   setOpen,
   fetchPosts,
   openSelectAudience,
@@ -188,8 +189,8 @@ const PostDetail = ({
                 </div>
                 <div className="commentShareSite">
                   {comments.length > 0 && (
-                    <p>{`${comments.length} comment${
-                      comments.length > 1 ? "s" : ""
+                    <p>{`${totalComments} comment${
+                      totalComments > 1 ? "s" : ""
                     }`}</p>
                   )}
 
@@ -374,6 +375,7 @@ const PostDetail = ({
                   comment={comment}
                   key={comment._id}
                   setComments={setComments}
+                  detail={true}
                 />
               ))}
           </div>

@@ -3,7 +3,7 @@ import "./postContent.css";
 import { handleDisplayPostStatusIcon } from "../longFunction";
 import { format } from "timeago.js";
 
-const PostContent = ({ post, user, postDetail }) => {
+const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
   const { content, images, isUpdatingProfilePicture, isUpdatingCoverPicture } =
     post;
   const postBackground = useRef();
@@ -48,7 +48,7 @@ const PostContent = ({ post, user, postDetail }) => {
                 : `${postBackground.current?.offsetHeight}px`,
             }}
           >
-            <img src={images[0]} alt="" />
+            <img src={images[0]} alt="" onClick={() => setOpenImageDetail(true)} />
           </div>
         </div>
       );

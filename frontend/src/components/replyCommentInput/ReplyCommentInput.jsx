@@ -16,16 +16,6 @@ import { format } from "timeago.js";
 import Sticker from "../../img/sticker.jpg";
 import Gif from "../../img/gif.jpg";
 import {
-  reactedPost,
-  displayReact,
-  displayReactCount,
-  handleDisplayPostStatus,
-  handleDisplayPostStatusIcon,
-  handleUpdatePicture,
-  handleDisplayTagTitle,
-  handleReactPost,
-  handleComment,
-  fetchComments,
   handleReplyComment,
 } from "../longFunction";
 import { AuthContext } from "../../context/AuthContext";

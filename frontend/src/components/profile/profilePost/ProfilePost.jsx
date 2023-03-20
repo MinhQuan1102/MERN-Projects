@@ -42,6 +42,7 @@ import PostDetail from "../../postDetail/PostDetail";
 import Comment from "../../comment/Comment";
 import ReactDisplay from "../../reactDisplay/ReactDisplay";
 import ShareOptions from "../../shareOptions/ShareOptions";
+import ImageDetail from "../../imageDetail/ImageDetail";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
@@ -54,12 +55,14 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [isOpenPostStatus, setIsOpenPostStatus] = useState(false);
   const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(false);
+  const [openImageDetail, setOpenImageDetail] = useState(false);
   const isPinned = post.isPinned;
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [isEditingPost, setIsEditingPost] = useState(false);
   const [editImage, setEditImage] = useState(post.images.length > 0);
   const [tagPeople, setTagPeople] = useState(false);
   const [isOpenPostDetail, setIsOpenPostDetail] = useState(false);
+  const [openShareOptions, setOpenShareOptions] = useState(false);
   const [comments, setComments] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [commentText, setCommentText] = useState("");
@@ -67,13 +70,16 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const postInitialStatus = post.status;
   const toast = useToast();
 
+  const totalComments = comments
+    .map((comment) => comment.replies.length + 1)
+    .reduce((acc, val) => acc + val, 0);
+
   const config = {
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   };
-
   const handleSeeReact = (selectedType) => {
     setIsOpenReactDisplay(true);
     setSelectedType(selectedType);
@@ -114,7 +120,6 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       return;
     }
   };
-
   return (
     <div className={!timeline ? "profilePost" : "timeline"}>
       <div className="profilePostContainer">
@@ -162,7 +167,11 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         )}
       </div>
 
-      <PostContent post={post} user={user} />
+      <PostContent
+        post={post}
+        user={user}
+        setOpenImageDetail={setOpenImageDetail}
+      />
 
       {likeCount > 0 && (
         <div className="postInfo">
@@ -196,8 +205,8 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             </div>
             <div className="commentShareSite">
               {comments.length > 0 && (
-                <p>{`${comments.length} comment${
-                  comments.length > 1 ? "s" : ""
+                <p>{`${totalComments} comment${
+                  totalComments > 1 ? "s" : ""
                 }`}</p>
               )}
               {post.shares.length > 0 && <p>{post.shares.length} share</p>}
@@ -364,12 +373,16 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             <span>Comment</span>
           </p>
         </div>
-        <div className="reactButton" style={{ position: "relative" }}>
+        <div
+          className="reactButton"
+          style={{ position: "relative" }}
+          onClick={() => setOpenShareOptions(!openShareOptions)}
+        >
           <p>
             <FontAwesomeIcon icon={faShare} className="reactButtonIcon" />
             <span>Share</span>
           </p>
-          {/* <ShareOptions /> */}
+          {openShareOptions && <ShareOptions />}
         </div>
       </div>
 
@@ -384,7 +397,14 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             </div>
           )}
           {comments.length > 0 && (
-            <Comment post={post} comment={comments[0]} fetchComments={fetchComments} />
+            <>
+              <Comment
+                post={post}
+                comment={comments[0]}
+                fetchComments={fetchComments}
+                detail={false}
+              />
+            </>
           )}
         </div>
       )}
@@ -460,6 +480,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             post={post}
             user={user}
             own={own}
+            totalComments={totalComments}
             open={isOpenPostDetail}
             setOpen={setIsOpenPostDetail}
             fetchPost={fetchPosts}
@@ -476,6 +497,13 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         selectedType={selectedType}
         setSelectedType={setSelectedType}
       />
+      {openImageDetail && (
+        <ImageDetail
+          post={post}
+          open={openImageDetail}
+          setOpen={setOpenImageDetail}
+        />
+      )}
     </div>
   );
 };

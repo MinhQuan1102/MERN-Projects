@@ -1567,6 +1567,59 @@ export const handleReplyComment = async (
   }
 };
 
+export const handleEditComment = async (
+  e,
+  setIsEditingComment,
+  post,
+  currentUser,
+  commentText,
+  images,
+  comment,
+  setComments,
+  setCommentText,
+  setImages,
+  config,
+  toast
+) => {
+  if (e.keyCode === 27) {
+    setIsEditingComment(false); 
+  }
+  if (e.key === "Enter") {
+    try {
+      const replyComment = {
+        userId: currentUser._id,
+        content: commentText,
+        images: images,
+      };
+      await axios.put(
+        `http://localhost:5000/api/comments/${comment._id}`,
+        replyComment,
+        config
+      );
+      toast({
+        title: "Update comment successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setCommentText("");
+      setImages([]);
+      setIsEditingComment(false); 
+
+      fetchComments(post._id, setComments, config, toast);
+    } catch (error) {
+      toast({
+        title: "An error occurred",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+};
+
 export const fetchComments = async (postId, setComments, config, toast) => {
   try {
     const response = await axios.get(

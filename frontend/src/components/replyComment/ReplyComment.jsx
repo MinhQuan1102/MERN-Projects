@@ -23,6 +23,7 @@ import Angry from "../../img/angry.jpg";
 import "./replyComment.css";
 import { useToast } from "@chakra-ui/react";
 import ReplyCommentInput from "../replyCommentInput/ReplyCommentInput";
+import EditComment from "../editComment/EditComment";
 
 const ReplyComment = ({ comment, post, setComments }) => {
   const { currentUser, token } = useContext(AuthContext);
@@ -46,6 +47,11 @@ const ReplyComment = ({ comment, post, setComments }) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  const handleOpenEditComment = () => {
+    setIsEditingComment(true);
+    setOpenCommentOptions(false);
+  };
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -62,11 +68,6 @@ const ReplyComment = ({ comment, post, setComments }) => {
     };
   }, [commentOptionsRef]);
 
-  const handleEditComment = (e) => {
-    if (e.keyCode === 27) {
-      setIsEditingComment(false);
-    }
-  }
   return (
     <div
       className="replyComment"
@@ -108,12 +109,9 @@ const ReplyComment = ({ comment, post, setComments }) => {
                 {openCommentOptions && (
                   <div className="commentOptions" ref={commentOptionsRef}>
                     <ul>
-                      <li
-                        onClick={() => setIsEditingComment(!isEditingComment)}
-                       
-                      >
-                        Edit comment
-                      </li>
+                      {currentUser._id === comment.user._id && (
+                        <li onClick={handleOpenEditComment}>Edit comment</li>
+                      )}
                       <li
                         onClick={() =>
                           handleDeleteComment(
@@ -292,11 +290,13 @@ const ReplyComment = ({ comment, post, setComments }) => {
         </>
       ) : (
         <>
-          <ReplyCommentInput
+          <EditComment
             comment={comment}
             open={true}
             post={post}
             setComments={setComments}
+            setIsEditingComment={setIsEditingComment}
+            replyComment={true}
           />
         </>
       )}

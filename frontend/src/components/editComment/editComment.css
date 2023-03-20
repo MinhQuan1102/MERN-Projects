@@ -1,0 +1,89 @@
+.editComment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px 0px 0px;
+  gap: 10px;
+  width: 100%;
+}
+
+.editComment .commentProfilePicture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  align-self: flex-start;
+}
+
+.editComment .commentProfilePicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.editComment .editCommentRight {
+  width: 90%;
+}
+
+.editComment .editCommentRight .commentText{
+  width: 100%;
+}
+
+.editComment .commentText input {
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #F0F2F5;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 9px 10px;
+  padding-right: 120px;
+  text-indent: 5px;
+}
+
+.editComment .commentIcons {
+  position: absolute;
+  top: 30%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 3px;
+  width: 110px;
+  padding: 8px 0px;
+}
+
+.editComment .commentItem {
+  width: 22px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 22px;
+  cursor: pointer;
+}
+
+.editComment .commentItem .commentIcon {
+  font-size: 15px;
+  color: #707070;
+  padding: 4px 3px;
+}
+
+.editComment .escText span {
+  font-size: 13px;
+}
+
+.editComment .escText span .cancelText {
+  color: #1877f2;
+  cursor: pointer;
+}
+
+.editComment .escText span .cancelText:hover {
+  text-decoration: underline;
+}
+
+.hide {
+  display: none;
+}
