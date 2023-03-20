@@ -27,7 +27,7 @@ export const handleRegister = async (e, credentials, role, config, toast, histor
   }
   try {
     await axios.post(
-      "https://e-commerce-production-c466.up.railway.app/api/auth/register",
+      "https://e-commerce-production-43d5.up.railway.app/api/auth/register",
       {
         name: credentials.name,
         email: credentials.email,

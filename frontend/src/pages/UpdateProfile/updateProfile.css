@@ -13,6 +13,8 @@
 .updateProfileTitle {
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .updateProfileBody {
@@ -25,61 +27,47 @@
   flex: 7;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 20px;
   border-right: 1px solid lightgray;
-  padding-left: 70px;
+  padding-right: 30px;
 }
 
-.updateProfileLeft .updateTitle {
-
-}
-
-.updateProfileLeft .updateTitle ul {
+.updateProfileLeft tbody {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  gap: 10px;
+}
+
+.updateProfileLeft tr {
+  display: flex;
   gap: 25px;
 }
 
-.updateProfileLeft .updateTitle ul li {
-  list-style: none;
-}
-
-.updateProfileLeft .updateDetail {
-
-}
-
-.updateProfileLeft .updateDetail ul {
+.updateProfileLeft tr .updateHeading {
+  width: 70px;
   display: flex;
-  flex-direction: column;
-  gap: 25px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.updateProfileLeft .updateDetail ul li {
-  list-style: none;
-}
-
-.updateProfileLeft .updateDetail input {
+.updateProfileLeft tr td input {
   border: 1px solid lightgray;
   padding: 10px 150px 10px 10px;
+  border-radius: 8px;
 }
 
-.updateProfileLeft .updateDetail .password, .phoneNumber {
-  display: flex;
-  gap: 30px;
+.updateProfileLeft tr td input:focus {
+  outline: none;
 }
 
-.updateProfileLeft .updateDetail .changeText {
-  text-decoration: underline;
-  color: #0055AA;
-  cursor: pointer;
-}
-
-.updateProfileLeft .updateDetail button {
+.updateProfileLeft .saveBtn {
   width: 130px;
   background-color: #232f3e;
-  padding: 15px;
+  padding: 10px 15px;
   color: white;
+  border-radius: 6px;
+  font-weight: 400;
 }
 
 .updateProfileRight {
@@ -97,9 +85,10 @@
   object-fit: cover;
 }
 
-.updateProfileRight button {
+.updateProfileRight .choosePictureBtn {
   border: 1px solid lightgray;
   padding: 5px;
+  cursor: pointer;
 }
 
 

@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://e-commerce-production-c466.up.railway.app/api/auth/login",
+        "https://e-commerce-production-43d5.up.railway.app/api/auth/login",
         { email: credentials.email, password: credentials.password },
         config
       );
@@ -43,7 +43,7 @@ const Login = () => {
       });
       const token = response.data.data.token;
       setToken(token);
-      const { data } = await axios.get(`https://e-commerce-production-c466.up.railway.app/api/customer/account`, {
+      const { data } = await axios.get(`https://e-commerce-production-43d5.up.railway.app/api/customer/account`, {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

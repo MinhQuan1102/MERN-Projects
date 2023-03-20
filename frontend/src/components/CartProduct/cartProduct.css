@@ -43,8 +43,11 @@
   cursor: pointer;
 }
 
-.cartBody .cartItems .productQuantity .minus,
-.plus {
+.cartBody .cartItems .productQuantity .minus {
+  padding: 3px 11px;
+}
+
+.cartBody .cartItems .productQuantity .plus {
   padding: 3px 10px;
 }
 

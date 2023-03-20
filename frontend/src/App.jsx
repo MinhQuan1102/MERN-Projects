@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Product from "./pages/Product/Product"
 import Cart from "./pages/Cart/Cart";
-import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
+import UpdateProfile from "./pages/UpdateProfile/UpdateProfile.jsx";
 import UpdatePassword from "./pages/UpdatePassword/UpdatePassword";
 import Checkout from "./pages/Checkout/Checkout";
 

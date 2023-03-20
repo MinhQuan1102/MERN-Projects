@@ -43,7 +43,7 @@ const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={() => setOpenSearch(true)}
               />
-              <span className="input-group-text p-3" id="basic-addon2">
+              <span className="input-group-text p-3" id="basic-addon2" style={{ borderRadius: "0 5px 5px 0"}}>
                 <BsSearch className="fs-6" />
               </span>
               <Search open={openSearch} setOpen={setOpenSearch} />
