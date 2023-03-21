@@ -6,10 +6,11 @@ import Register from "./components/register/Register";
 import Homepage from "./pages/homepage/Homepage";
 import Profile from "./pages/profile/Profile";
 import { AuthContext } from "./context/AuthContext";
+import ImageDetail from "./pages/imageDetail/ImageDetail";
 
 function App() {
   const history = useHistory();
-  const { currentUser } = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
   if (!currentUser) {
     history.push("/login");
   }
@@ -20,6 +21,7 @@ function App() {
       <Route path="/profile" component={Profile} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/post/:postId" component={ImageDetail} />
     </div>
   );
 }

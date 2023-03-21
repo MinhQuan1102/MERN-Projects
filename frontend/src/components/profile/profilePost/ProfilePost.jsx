@@ -42,7 +42,6 @@ import PostDetail from "../../postDetail/PostDetail";
 import Comment from "../../comment/Comment";
 import ReactDisplay from "../../reactDisplay/ReactDisplay";
 import ShareOptions from "../../shareOptions/ShareOptions";
-import ImageDetail from "../../imageDetail/ImageDetail";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
@@ -161,7 +160,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
             <FontAwesomeIcon
               icon={faEllipsisH}
               className="editPostStatusIcon"
-              onClick={() => setIsOpenPostStatus(true)}
+              onClick={() => setIsOpenPostStatus(!isOpenPostStatus)}
             />
           </div>
         )}
@@ -170,7 +169,6 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
       <PostContent
         post={post}
         user={user}
-        setOpenImageDetail={setOpenImageDetail}
       />
 
       {likeCount > 0 && (
@@ -455,14 +453,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           </div>
         </div>
       </div>
-      <EditPostStatus
-        open={isOpenPostStatus}
-        setOpen={setIsOpenPostStatus}
-        isPinned={isPinned}
-        post={post}
-        setOpenSelectAudience={setOpenSelectAudience}
-        setIsEditingPost={setIsEditingPost}
-      />
+
       {isEditingPost && (
         <EditPost
           setOpen={setIsEditingPost}
@@ -473,6 +464,14 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
           setTagPeople={setTagPeople}
         />
       )}
+      <EditPostStatus
+        open={isOpenPostStatus}
+        setOpen={setIsOpenPostStatus}
+        isPinned={isPinned}
+        post={post}
+        setOpenSelectAudience={setOpenSelectAudience}
+        setIsEditingPost={setIsEditingPost}
+      />
       {!post.isUpdatingProfilePicture &&
         !post.isUpdatingCoverPicture &&
         isOpenPostDetail && (
@@ -497,13 +496,6 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         selectedType={selectedType}
         setSelectedType={setSelectedType}
       />
-      {openImageDetail && (
-        <ImageDetail
-          post={post}
-          open={openImageDetail}
-          setOpen={setOpenImageDetail}
-        />
-      )}
     </div>
   );
 };

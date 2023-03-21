@@ -6,10 +6,9 @@
   left: 0;
   top: 0;
   z-index: 10000;
-
 }
 
-.postDetail .postDetailContainer{
+.postDetail .postDetailContainer {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -90,17 +89,38 @@
 }
 
 .postDetail .username {
-  display: block;
 }
 
 .hide {
   display: none;
 }
 
+@media screen and (min-width: 1400px) {
+  .postDetail {
+    width: 100%;
+    height: 100%;
+  }
+  .postDetailContainer {
+    width: 720px !important;
+    min-height: 800px !important;
+  }
+
+  .postDetail .body {
+    display: block;
+    min-height: 680px;
+    max-height: 680px;
+  }
+
+}
+
 @media screen and (min-width: 1700px) {
   .postDetail {
-    width: 720px;
-    min-height: 800px;
+    width: 100%;
+    height: 100%;
+  }
+  .postDetailContainer {
+    width: 720px !important;
+    min-height: 800px !important;
   }
 
   .postDetail .profilePostContainer {

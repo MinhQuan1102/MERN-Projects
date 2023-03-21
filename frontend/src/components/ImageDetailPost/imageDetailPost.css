@@ -1,0 +1,19 @@
+.imageDetailRight {
+  flex: 3;
+  background-color: #ffffff;
+}
+
+.imageDetailRight .imagePostInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  padding-bottom: 10px;
+}
+
+.imageDetailRight .postContent {
+  padding: 0 25px;
+}
+
+.hide {
+  display: none;
+}

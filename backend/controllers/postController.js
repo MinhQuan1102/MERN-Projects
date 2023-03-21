@@ -89,6 +89,31 @@ const getUserPosts = async (req, res) => {
   }
 };
 
+//@description    get post by id
+//@route          GET /api/posts/singlePost/:postId
+//@access         Protected
+const getPost = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const post = await Post.findById(postId)
+      .populate({
+        path: "user sender taggedFriends react like heart haha wow sad angry sharedPost",
+        select: "fullName avatar",
+      })
+      .populate({
+        path: "sharedPost",
+        populate: {
+          path: "user",
+          select: "fullName avatar",
+        },
+      });
+
+    res.status(200).json({ message: "Get posts successfully", post });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 //@description    update a post
 //@route          PUT /api/posts/update/:postId
 //@access         Protected
@@ -286,6 +311,7 @@ module.exports = {
   uploadPost,
   sharePost,
   getUserPosts,
+  getPost,
   updatePost,
   unpinAllPosts,
   deletePost,

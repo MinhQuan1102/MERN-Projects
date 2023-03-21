@@ -13,7 +13,7 @@ import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 
 const Profile = () => {
-  const { currentUser, blur, token } = useContext(AuthContext);
+  const { currentUser, token } = useContext(AuthContext);
   const history = useHistory();
   const toast = useToast();
   const userId = history.location.pathname.toString().split("/")[2];
@@ -64,7 +64,7 @@ const Profile = () => {
 
   return (
     user && (
-      <div className={blur ? "profile" : "profile"}>
+      <div className="profile">
         <Navbar />
         <ProfileImage
           own={isOwnProfile}

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "./postContent.css";
 import { handleDisplayPostStatusIcon } from "../longFunction";
 import { format } from "timeago.js";
+import { useHistory } from "react-router-dom";
 
 const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
   const { content, images, isUpdatingProfilePicture, isUpdatingCoverPicture } =
@@ -13,6 +14,7 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
   const [postHeight, setPostHeight] = useState(
     postBackground.current?.offsetHeight
   );
+  const history = useHistory();
   const [openSelectAudience, setOpenSelectAudience] = useState(false);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
                 : `${postBackground.current?.offsetHeight}px`,
             }}
           >
-            <img src={images[0]} alt="" onClick={() => setOpenImageDetail(true)} />
+            <img src={images[0]} alt="" onClick={() => history.push(`/post/${post._id}`)} />
           </div>
         </div>
       );
@@ -94,6 +96,7 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
                 key={i}
                 alt=""
                 className={`postImage2${i + 1}`}
+                onClick={() => history.push(`/post/${post._id}`)}
               />
             ))}
           </div>
@@ -121,7 +124,7 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
             style={{ height: "auto", flexWrap: "wrap" }}
           >
             {images.map((image, i) => (
-              <img src={image} key={i} alt="" className={`postImage4`} />
+              <img src={image} key={i} alt="" className={`postImage4`} onClick={() => history.push(`/post/${post._id}`)}/>
             ))}
           </div>
         </div>
