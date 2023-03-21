@@ -3,8 +3,8 @@ import "./login.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
-import Container from "../../components/Container/Container";
+import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
+import Container from "../../components/Customer/Container/Container";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {

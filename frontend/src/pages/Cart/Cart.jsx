@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
-import CartProduct from "../../components/CartProduct/CartProduct";
+import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
+import CartProduct from "../../components/Customer/CartProduct/CartProduct";
 import "./cart.css";
 
 const Cart = () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartPlus,

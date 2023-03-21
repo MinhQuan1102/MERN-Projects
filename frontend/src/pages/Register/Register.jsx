@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./register.css";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
 import { Link, useHistory } from "react-router-dom";
-import Container from "../../components/Container/Container";
+import Container from "../../components/Customer/Container/Container";
 import CustomerIcon from "../../images/customerIcon.png";
 import StoreIcon from "../../images/storeIcon.jpg";
 import axios from "axios";

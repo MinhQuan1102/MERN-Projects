@@ -1,7 +1,7 @@
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
 import "./checkout.css";
 
 const Checkout = () => {
