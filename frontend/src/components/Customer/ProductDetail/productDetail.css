@@ -35,7 +35,7 @@
 }
 
 .productRight .productName {
-  text-align: center;
+  text-align: left;
   border-bottom: 1px solid #dee2e6;
 }
 
@@ -54,10 +54,16 @@
 }
 
 .productRight .productPrice .price {
-  font-size: 16px;
+  font-size: 24px;
   line-height: 20px;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.price-symbol {
+  font-size: 15px;
+  float: left;
+  margin-right: 5px;
 }
 
 .productRight .productDescription {
@@ -202,6 +208,10 @@
   align-items: center;
 }
 
+.storeName{
+  font-weight: bold !important;;
+}
+
 .product .productDesc {
   padding: 20px 0;
 }
@@ -252,3 +262,18 @@
     transform: translateX(50px);
   }
 }
+
+.plus:active {
+  background-color: rgb(90, 148, 233);
+  color: black;
+}
+
+.minus:active {
+  background-color: rgb(90, 148, 233);
+  color: black;
+}
+
+
+
+
+

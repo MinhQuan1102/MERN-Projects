@@ -23,10 +23,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .storeLeftbarContainer > div .heading:hover span {
-  color: #00587C;
+  color: #6581f1;
   font-weight: 600;
 }
 
@@ -76,7 +77,7 @@
 }
 
 .chosenOption {
-  color: red !important;
+  color: #3a9cc5 !important;
   font-weight: bold !important;
 }
 

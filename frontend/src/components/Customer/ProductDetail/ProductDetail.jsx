@@ -36,7 +36,9 @@ const ProductDetail = () => {
               <h2>Sục siêu vip</h2>
             </div>
             <div className="productPrice">
-              <span className="price">20k</span>
+              <div class="price">
+                <span class="price-symbol">₫</span>163.200
+                </div>
               <span className="writeReviewText">Write a review</span>
             </div>
             <div className="productDescription">

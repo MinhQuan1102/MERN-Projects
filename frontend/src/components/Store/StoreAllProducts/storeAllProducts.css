@@ -27,8 +27,8 @@
 }
 
 .active {
-  border-bottom: 3px solid red;
-  color: red;
+  border-bottom: 3px solid #3a9cc5;
+  color: #3a9cc5;
   font-weight: 500;
 }
 
