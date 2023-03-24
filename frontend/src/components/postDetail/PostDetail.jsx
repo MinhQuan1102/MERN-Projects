@@ -133,7 +133,7 @@ const PostDetail = ({
                   handleUpdatePicture(post, user)}
                 {!post.isUpdatingProfilePicture &&
                   !post.isUpdatingCoverPicture &&
-                  handleDisplayTagTitle(user.fullName, post.taggedFriends)}
+                  handleDisplayTagTitle(user, post.taggedFriends, true)}
                 <div className="postStatus">
                   <span className="dayAgo">{format(post.createdAt)}</span>
                   {"•"}

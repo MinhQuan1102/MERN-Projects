@@ -76,6 +76,13 @@ const getUserPosts = async (req, res) => {
         select: "fullName avatar",
       })
       .populate({
+        path: "taggedFriends",
+        populate: {
+          path: "friends",
+          select: "fullName avatar friends livesIn from",
+        },
+      })
+      .populate({
         path: "sharedPost",
         populate: {
           path: "user",
@@ -98,13 +105,21 @@ const getPost = async (req, res) => {
     const post = await Post.findById(postId)
       .populate({
         path: "user sender taggedFriends react like heart haha wow sad angry sharedPost",
-        select: "fullName avatar",
+        select: "fullName avatar friends livesIn from",
+      })
+      
+      .populate({
+        path: "taggedFriends",
+        populate: {
+          path: "friends",
+          select: "fullName avatar friends livesIn from",
+        },
       })
       .populate({
         path: "sharedPost",
         populate: {
           path: "user",
-          select: "fullName avatar",
+          select: "fullName avatar friends livesIn from",
         },
       });
 
@@ -268,10 +283,17 @@ const getTimelinePosts = async (req, res) => {
     const userId = req.params.userId;
     const currentUser = await User.findById(userId);
     const userPosts = await Post.find({ user: userId })
-      .populate(
-        "user sender taggedFriends react like heart haha wow sad angry",
-        "fullName avatar"
-      )
+      .populate({
+        path: "user sender taggedFriends react like heart haha wow sad angry",
+        select: "fullName avatar friends livesIn from ",
+      })
+      .populate({
+        path: "taggedFriends",
+        populate: {
+          path: "friends",
+          select: "fullName avatar friends livesIn from",
+        },
+      })
       .populate({
         path: "sharedPost",
         populate: {
@@ -285,13 +307,20 @@ const getTimelinePosts = async (req, res) => {
         return Post.find({ user: friendId })
           .populate(
             "user sender taggedFriends react like heart haha wow sad angry",
-            "fullName avatar"
+            "fullName avatar friends livesIn from"
           )
+          .populate({
+            path: "taggedFriends",
+            populate: {
+              path: "friends",
+              select: "fullName avatar friends livesIn from",
+            },
+          })
           .populate({
             path: "sharedPost",
             populate: {
               path: "user",
-              select: "fullName avatar",
+              select: "fullName avatar friends livesIn from",
             },
           });
       })

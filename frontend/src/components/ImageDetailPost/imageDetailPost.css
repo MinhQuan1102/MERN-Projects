@@ -1,6 +1,7 @@
 .imageDetailRight {
   flex: 3;
   background-color: #ffffff;
+  position: relative;
 }
 
 .imageDetailRight .imagePostInfo {
@@ -12,6 +13,34 @@
 
 .imageDetailRight .postContent {
   padding: 0 25px;
+}
+
+.imageDetailRight .commentSite {
+  position: absolute;
+  left: 0;
+  bottom: 60px;
+  width: 100%;
+  border-top: 1px solid #3333;
+  padding-top: 12px;
+  margin: 0px 20px;
+  gap: 10px;
+}
+
+.imageDetailRight .commentSiteContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.imageDetailRight .commentText {
+  padding-right: 30px;
+}
+
+.imageDetailRight .commentIcons {
+  top: 50%;
+  right: 35px;
 }
 
 .hide {

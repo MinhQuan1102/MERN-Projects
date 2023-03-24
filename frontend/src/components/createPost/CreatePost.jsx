@@ -61,7 +61,7 @@ const CreatePost = ({
       Authorization: `Bearer ${token}`,
     },
   };
-
+console.log(tagPeople)
   const handleChange = (e) => {
     setContent(e.target.value);
   };

@@ -25,6 +25,7 @@ import { AuthContext } from "../../context/AuthContext";
 import ReplyCommentInput from "../replyCommentInput/ReplyCommentInput";
 import ReplyComment from "../replyComment/ReplyComment";
 import EditComment from "../editComment/EditComment";
+import Username from "../username/Username";
 
 const Comment = ({ comment, post, setComments, detail }) => {
   const { currentUser, token } = useContext(AuthContext);
@@ -90,7 +91,8 @@ const Comment = ({ comment, post, setComments, detail }) => {
             <div className="commentDetail" ref={commentTextRef}>
               <div className="commentInfoWrapper">
                 <div className="commentInfo">
-                  <h2 className="commentUsername">{comment.user.fullName}</h2>
+                  <Username user={comment.user} postDetail={true}/>
+                  {/* <h2 className="commentUsername">{comment.user.fullName}</h2> */}
                   <span>{comment.content}</span>
                   <div
                     className="commentReactDisplay"
@@ -342,10 +344,17 @@ const Comment = ({ comment, post, setComments, detail }) => {
               ))}
             </div>
           ) : (
-            <div className="viewAllReplies" onClick={() => setOpenReplyComments(true)}>
-              <FontAwesomeIcon icon={faArrowRight} />
-              <span>{`${comment.replies.length} replies`}</span>
-            </div>
+            <>
+              {comment.replies.length > 0 && (
+                <div
+                  className="viewAllReplies"
+                  onClick={() => setOpenReplyComments(true)}
+                >
+                  <FontAwesomeIcon icon={faArrowRight} />
+                  <span>{`${comment.replies.length} repl${comment.replies.length > 1 ? "ies" : "y"}`}</span>
+                </div>
+              )}
+            </>
           )}
 
           <ReplyCommentInput

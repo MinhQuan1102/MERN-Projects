@@ -20,6 +20,7 @@ const Share = ({ user, own }) => {
   const [blur, setBlur] = useState(false)
   const [editImage, setEditImage] = useState(false);
   const [content, setContent] = useState("");
+  const [tagPeople, setTagPeople] = useState(false);
   const toast = useToast();
 
   const config = {
@@ -83,7 +84,8 @@ const Share = ({ user, own }) => {
               setIsCreatingPost={setIsCreatingPost}
               own={own}
               user={user}
-              setBlur={setBlur}
+              tagPeople={tagPeople}
+              setTagPeople={setTagPeople}
               editImage={editImage}
               setEditImage={setEditImage}
             />

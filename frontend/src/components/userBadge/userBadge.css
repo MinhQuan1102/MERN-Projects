@@ -1,0 +1,116 @@
+.userBadge {
+  width: 360px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 25px;
+  left: -150px;
+  z-index: 2000;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 8px;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.userBadgeContainer {
+  padding: 20px;
+}
+
+.userBadge .userInfo {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.userBadge .userInfoLeft {
+  flex: 3;
+  padding-left: 10px;
+  display: flex;
+  align-self: flex-start;
+}
+
+.userBadge .userInfoLeft img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userBadge .userInfoRight {
+  flex: 7;
+}
+
+.userBadge .userInfoRight h2 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.userBadge .userInfoRight ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+.userBadge .userInfoRight ul li {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.userBadge .userInfoRight ul li .userInfoIcon {
+  font-size: 18px;
+  color: #616771;
+}
+
+.userBadge .userInfoRight ul li span {
+  font-size: 15px;
+  color: gray;
+}
+
+.userBadge .userButtons {
+  display: flex;
+  align-items: center;
+  padding-top: 25px;
+  gap: 10px;
+}
+
+.userBadge .userButtons button {
+  flex: 3;
+  padding: 7px 15px;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 600;
+
+}
+
+.userBadge .userButtons .addToStoryBtn {
+  background-color: #1A6ED8;
+  color: #ffffff;
+}
+
+.userBadge .userButtons .addToStoryBtn span {
+}
+
+.userBadgeHide {
+  width: 360px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 25px;
+  left: -150px;
+  z-index: 2000;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 8px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}

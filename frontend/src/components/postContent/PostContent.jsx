@@ -50,7 +50,11 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
                 : `${postBackground.current?.offsetHeight}px`,
             }}
           >
-            <img src={images[0]} alt="" onClick={() => history.push(`/post/${post._id}`)} />
+            <img
+              src={images[0]}
+              alt=""
+              onClick={() => history.push(`/post/${post._id}`)}
+            />
           </div>
         </div>
       );
@@ -71,7 +75,11 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
                 : `${postBackground.current?.offsetHeight}px`,
             }}
           >
-            <img src={user.avatar} alt="" />
+            <img
+              src={user.avatar}
+              alt=""
+              onClick={() => history.push(`/post/${post._id}`)}
+            />
           </div>
         </div>
       );
@@ -80,7 +88,12 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
     } else if (images.length === 1) {
       return (
         <div className="postBackground">
-          <img src={images} alt="" className="postImage" />
+          <img
+            src={images}
+            alt=""
+            className="postImage"
+            onClick={() => history.push(`/post/${post._id}`)}
+          />
         </div>
       );
     } else if (images.length === 2) {
@@ -107,11 +120,26 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
         <div className="postBackground" style={{ height: "auto" }}>
           <div className="imagesContainer" style={{ height: "auto" }}>
             <div className="leftImage">
-              <img src={images[0]} alt="" className="postImage31" />
+              <img
+                src={images[0]}
+                alt=""
+                className="postImage31"
+                onClick={() => history.push(`/post/${post._id}`)}
+              />
             </div>
             <div className="rightImages">
-              <img src={images[1]} alt="" className="postImage32" />
-              <img src={images[2]} alt="" className="postImage33" />
+              <img
+                src={images[1]}
+                alt=""
+                className="postImage32"
+                onClick={() => history.push(`/post/${post._id}`)}
+              />
+              <img
+                src={images[2]}
+                alt=""
+                className="postImage33"
+                onClick={() => history.push(`/post/${post._id}`)}
+              />
             </div>
           </div>
         </div>
@@ -124,7 +152,13 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
             style={{ height: "auto", flexWrap: "wrap" }}
           >
             {images.map((image, i) => (
-              <img src={image} key={i} alt="" className={`postImage4`} onClick={() => history.push(`/post/${post._id}`)}/>
+              <img
+                src={image}
+                key={i}
+                alt=""
+                className={`postImage4`}
+                onClick={() => history.push(`/post/${post._id}`)}
+              />
             ))}
           </div>
         </div>
@@ -137,9 +171,20 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
             style={{ height: "auto", flexWrap: "wrap", position: "relative" }}
           >
             {images.slice(0, 4).map((image, i) => (
-              <img src={image} key={i} alt="" className={`postImage4`} />
+              <img
+                src={image}
+                key={i}
+                alt=""
+                className={`postImage4`}
+                onClick={() => history.push(`/post/${post._id}`)}
+              />
             ))}
-            <div className="overflowText">{`+${images.length - 4}`}</div>
+            <div
+              className="overflowText"
+              onClick={() => history.push(`/post/${post._id}`)}
+            >
+              {`+${images.length - 4}`}
+            </div>
           </div>
         </div>
       );
@@ -152,7 +197,12 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
     } else if (images.length === 1) {
       return (
         <div className="sharedPostImages">
-          <img src={images[0]} alt="" className="sharedPostImage" />
+          <img
+            src={images[0]}
+            alt=""
+            className="sharedPostImage"
+            onClick={() => history.push(`/post/${post.sharedPost._id}`)}
+          />
         </div>
       );
     } else if (images.length === 2) {
@@ -164,6 +214,7 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
               alt=""
               key={i}
               className={`sharedPostImage2${i + 1}`}
+              onClick={() => history.push(`/post/${post.sharedPost._id}`)}
             />
           ))}
         </div>
@@ -172,7 +223,13 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
       return (
         <div className="sharedPostImages" style={{ gap: "2px" }}>
           {images.map((image, i) => (
-            <img src={image} alt="" key={i} className={`sharedPostImage3`} />
+            <img
+              src={image}
+              alt=""
+              key={i}
+              className={`sharedPostImage3`}
+              onClick={() => history.push(`/post/${post.sharedPost._id}`)}
+            />
           ))}
         </div>
       );
@@ -183,7 +240,13 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
           style={{ gap: "2px", flexWrap: "wrap", justifyContent: "center" }}
         >
           {images.map((image, i) => (
-            <img src={image} alt="" key={i} className={`sharedPostImage4`} />
+            <img
+              src={image}
+              alt=""
+              key={i}
+              className={`sharedPostImage4`}
+              onClick={() => history.push(`/post/${post.sharedPost._id}`)}
+            />
           ))}
         </div>
       );
@@ -195,11 +258,18 @@ const PostContent = ({ post, user, postDetail, setOpenImageDetail }) => {
         >
           {images.slice(0, 4).map((image, i) => (
             <div className={`imageContainer${i + 1}`}>
-              <img src={image} alt="" key={i} className={`sharedPostImage5`} />
+              <img
+                src={image}
+                alt=""
+                key={i}
+                className={`sharedPostImage5`}
+                onClick={() => history.push(`/post/${post.sharedPost._id}`)}
+              />
               {i === 3 && (
-                <span className="sharedPostOverFlowImages">{`+${
-                  images.length - 4
-                }`}</span>
+                <span
+                  className="sharedPostOverFlowImages"
+                  onClick={() => history.push(`/post/${post.sharedPost._id}`)}
+                >{`+${images.length - 4}`}</span>
               )}
             </div>
           ))}

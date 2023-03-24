@@ -16,7 +16,15 @@ const getComments = async (req, res) => {
         path: "replies",
         populate: {
           path: "user like haha wow heart sad angry",
-          select: "fullName avatar",
+          select: "fullName avatar friends livesIn from",
+        },
+      })
+      .populate({
+        path: "user",
+        select: "fullName avatar friends livesIn from",
+        populate: {
+          path: "friends",
+          select: "fullName avatar friends livesIn from",
         },
       })
     res

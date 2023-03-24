@@ -17,6 +17,8 @@ import Heart from "../img/heart.png";
 import Wow from "../img/wow.png";
 import Sad from "../img/sad.png";
 import Angry from "../img/angry.jpg";
+import UserBadge from "./userBadge/UserBadge";
+import Username from "./username/Username";
 
 export const reactPost = async (postId, reactType, currentUserId, config) => {
   switch (reactType) {
@@ -1169,23 +1171,25 @@ export const handleUpdatePicture = (post, user) => {
   }
 };
 
-export const handleDisplayTagTitle = (username, taggedPeople) => {
+export const handleDisplayTagTitle = (user, taggedPeople, postDetail) => {
   if (taggedPeople.length === 0) {
     return (
       <span className="username">
-        <h2>{username}</h2>
+        <Username user={user} postDetail={postDetail}/>
       </span>
     );
   } else if (taggedPeople.length === 1) {
     return (
       <span className="username">
-        <h2>{username}</h2> is with <h2>{taggedPeople[0].fullName}</h2>
+        <Username user={user} postDetail={postDetail}/>
+        is with <Username user={taggedPeople[0]} />
       </span>
     );
   } else {
     return (
       <span className="username">
-        <h2>{username}</h2> is with <h2>{taggedPeople[0].fullName}</h2>
+        <Username user={user} postDetail={postDetail}/> is with{" "}
+        <Username user={taggedPeople[0]} />
         and
         <h2>
           {taggedPeople.length - 1} other
@@ -1582,7 +1586,7 @@ export const handleEditComment = async (
   toast
 ) => {
   if (e.keyCode === 27) {
-    setIsEditingComment(false); 
+    setIsEditingComment(false);
   }
   if (e.key === "Enter") {
     try {
@@ -1605,7 +1609,7 @@ export const handleEditComment = async (
       });
       setCommentText("");
       setImages([]);
-      setIsEditingComment(false); 
+      setIsEditingComment(false);
 
       fetchComments(post._id, setComments, config, toast);
     } catch (error) {
@@ -1721,7 +1725,7 @@ export const handleDeleteComment = async (
       config
     );
     setOpenCommentOptions(false);
-    fetchComments(post._id, setComments, config, toast)
+    fetchComments(post._id, setComments, config, toast);
   } catch (error) {
     toast({
       title: "An error occurred",

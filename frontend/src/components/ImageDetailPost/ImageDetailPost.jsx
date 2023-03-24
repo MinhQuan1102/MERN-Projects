@@ -7,7 +7,16 @@ import {
   handleDisplayTagTitle,
   displayReact,
   displayReactCount,
+  handleReactPost,
+  reactedPost,
+  handleComment,
 } from "../../components/longFunction";
+import Sticker from "../../img/sticker.jpg";
+import Gif from "../../img/gif.jpg";
+import Haha from "../../img/haha.png";
+import Wow from "../../img/wow.png";
+import Sad from "../../img/sad.png";
+import Angry from "../../img/angry.jpg";
 import {
   faCamera,
   faCommentAlt,
@@ -20,11 +29,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../../context/AuthContext";
 import PostContent from "../postContent/PostContent";
-
-const ImageDetailPost = ({ post, comments }) => {
-  const { currentUser } = useContext(AuthContext);
+import ShareOptions from "../shareOptions/ShareOptions";
+import Comment from "../comment/Comment";
+import ReactDisplay from "../reactDisplay/ReactDisplay";
+import { useToast } from "@chakra-ui/react";
+const ImageDetailPost = ({ post, comments, setComments }) => {
+  const { currentUser, token, handleNoAva } = useContext(AuthContext);
   const [selectedType, setSelectedType] = useState("all");
+  const [openShareOptions, setOpenShareOptions] = useState(false);
+  const [isOpenReactIcons, setIsOpenReactIcons] = useState(false);
   const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [images, setImages] = useState([]);
   const { react, like, haha, sad, wow, heart, angry } = post;
   const likeCount = react.length;
   const [reacted, setReacted] = useState(
@@ -34,7 +50,17 @@ const ImageDetailPost = ({ post, comments }) => {
     .map((comment) => comment.replies.length + 1)
     .reduce((acc, val) => acc + val, 0);
 
-    console.log(comments)
+  const toast = useToast();
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const handleChange = (e) => {
+    setCommentText(e.target.value);
+  };
 
   const handleSeeReact = (selectedType) => {
     setIsOpenReactDisplay(true);
@@ -56,7 +82,7 @@ const ImageDetailPost = ({ post, comments }) => {
               handleUpdatePicture(post, post.user)}
             {!post.isUpdatingProfilePicture &&
               !post.isUpdatingCoverPicture &&
-              handleDisplayTagTitle(post.user.fullName, post.taggedFriends)}
+              handleDisplayTagTitle(post.user, post.taggedFriends)}
             <div className="postStatus">
               <span className="dayAgo">{format(post.createdAt)}</span>
               {"•"}
@@ -114,6 +140,243 @@ const ImageDetailPost = ({ post, comments }) => {
           </div>
         </div>
       )}
+      <div
+        className="reactButtons"
+        style={{
+          borderBottom: comments.length > 0 && "1px solid #3333",
+          borderTop: post.sharedPost && likeCount === 0 && "none",
+        }}
+      >
+        {!reacted ? (
+          <div
+            className="reactButton"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "like",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+            onMouseOver={() => setIsOpenReactIcons(true)}
+            onMouseLeave={() => setIsOpenReactIcons(false)}
+          >
+            {reactedPost(reacted)}
+          </div>
+        ) : (
+          <div
+            className="reactButton"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+            onMouseOver={() => setIsOpenReactIcons(true)}
+            onMouseOut={() => setIsOpenReactIcons(false)}
+          >
+            {reactedPost(reacted)}
+          </div>
+        )}
+        <div
+          className={isOpenReactIcons ? "reactions" : "reactionsHide"}
+          onMouseOver={() => setIsOpenReactIcons(true)}
+          onMouseOut={() => setIsOpenReactIcons(false)}
+        >
+          <div
+            className="reactIconShow likeIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "like",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <FontAwesomeIcon
+              className="reactionIcon likeIcon"
+              icon={faThumbsUp}
+            />
+          </div>
+          <div
+            className="reactIconShow heartIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "heart",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <FontAwesomeIcon className="reactionIcon likeIcon" icon={faHeart} />
+          </div>
+          <div
+            className="reactIconShow hahaIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "haha",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <img src={Haha} alt="haha" />
+          </div>
+          <div
+            className="reactIconShow wowIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "wow",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <img src={Wow} alt="wow" />
+          </div>
+          <div
+            className="reactIconShow sadIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "sad",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <img src={Sad} alt="wow" />
+          </div>
+          <div
+            className="reactIconShow angryIconBg"
+            onClick={() =>
+              handleReactPost(
+                currentUser._id,
+                post._id,
+                "angry",
+                setReacted,
+                setIsOpenReactIcons,
+                config,
+                toast
+              )
+            }
+          >
+            <img src={Angry} alt="wow" />
+          </div>
+        </div>
+        <div className="reactButton">
+          <p>
+            <FontAwesomeIcon icon={faCommentAlt} className="reactButtonIcon" />
+            <span>Comment</span>
+          </p>
+        </div>
+        <div
+          className="reactButton"
+          style={{ position: "relative" }}
+          onClick={() => setOpenShareOptions(!openShareOptions)}
+        >
+          <p>
+            <FontAwesomeIcon icon={faShare} className="reactButtonIcon" />
+            <span>Share</span>
+          </p>
+          {openShareOptions && <ShareOptions />}
+        </div>
+      </div>
+      <div className="commentSection">
+        {comments.length > 0 &&
+          comments.map((comment) => (
+            <Comment
+              comment={comment}
+              key={comment._id}
+              setComments={setComments}
+              detail={true}
+            />
+          ))}
+      </div>
+      <div className="commentSite">
+        <div className="commentSiteContainer">
+          <div className="commentProfilePicture">
+            <img
+              src={
+                currentUser.avatar
+                  ? currentUser.avatar
+                  : handleNoAva(currentUser)
+              }
+              alt=""
+            />
+          </div>
+          <div className="commentText">
+            <input
+              type="text"
+              placeholder="Write a comment..."
+              onChange={(e) => handleChange(e)}
+              value={commentText}
+              onKeyDown={(e) =>
+                handleComment(
+                  e,
+                  post,
+                  currentUser,
+                  commentText,
+                  setCommentText,
+                  images,
+                  setImages,
+                  setComments,
+                  config,
+                  toast
+                )
+              }
+            />
+            <div className="commentIcons">
+              <div className="commentItem">
+                <FontAwesomeIcon icon={faGrinAlt} className="commentIcon" />
+              </div>
+              <div className="commentItem">
+                <FontAwesomeIcon icon={faCamera} className="commentIcon" />
+              </div>
+              <div className="commentItem">
+                <img src={Sticker} className="commentIcon" />
+              </div>
+              <div className="commentItem">
+                <img src={Gif} className="commentIcon" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ReactDisplay
+        post={post}
+        open={isOpenReactDisplay}
+        setOpen={setIsOpenReactDisplay}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      />
     </div>
   );
 };

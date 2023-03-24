@@ -42,6 +42,7 @@ import PostDetail from "../../postDetail/PostDetail";
 import Comment from "../../comment/Comment";
 import ReactDisplay from "../../reactDisplay/ReactDisplay";
 import ShareOptions from "../../shareOptions/ShareOptions";
+import UserBadge from "../../userBadge/UserBadge";
 
 const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const { currentUser, handleNoAva, token } = useContext(AuthContext);
@@ -56,6 +57,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
   const [isOpenReactDisplay, setIsOpenReactDisplay] = useState(false);
   const [openImageDetail, setOpenImageDetail] = useState(false);
   const isPinned = post.isPinned;
+  const [openUserBadge, setOpenUserBadge] = useState(false)
   const [status, setStatus] = useState(handleDisplayPostStatus(post.status));
   const [isEditingPost, setIsEditingPost] = useState(false);
   const [editImage, setEditImage] = useState(post.images.length > 0);
@@ -131,7 +133,9 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
               handleUpdatePicture(post, user)}
             {!post.isUpdatingProfilePicture &&
               !post.isUpdatingCoverPicture &&
-              handleDisplayTagTitle(user.fullName, post.taggedFriends)}
+              handleDisplayTagTitle(user, post.taggedFriends, openUserBadge, setOpenUserBadge)}
+            {/* {openUserBadge && <UserBadge user={user} />} */}
+
             <div className="postStatus">
               <span className="dayAgo">{format(post.createdAt)}</span>
               {"•"}
@@ -166,10 +170,7 @@ const ProfilePost = ({ post, user, own, fetchPosts, timeline }) => {
         )}
       </div>
 
-      <PostContent
-        post={post}
-        user={user}
-      />
+      <PostContent post={post} user={user} />
 
       {likeCount > 0 && (
         <div className="postInfo">
