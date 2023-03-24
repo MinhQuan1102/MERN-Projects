@@ -10,9 +10,11 @@ const StoreLeftbar = () => {
   const [openOrderManagement, setOpenOrderManagement] = useState(false);
   const [openProductManagement, setOpenProductManagement] = useState(false);
   const [openPromotionManagement, setOpenPromotionManagement] = useState(false);
+  const [openMyStore, setOpenMyStore] = useState(false);
   const { option, setOption } = useContext(StoreContext);
   const history = useHistory();
 
+  console.log(openOrderManagement);
   return (
     <div className="storeLeftbar">
       <div className="storeLeftbarContainer">
@@ -29,26 +31,25 @@ const StoreLeftbar = () => {
               }
             />
           </div>
-          {openOrderManagement && (
-            <ul>
-              <li
-                className={option === "All Orders" ? "chosenOption" : ""}
-                onClick={() =>
-                  handleChooseOption("All Orders", setOption, history)
-                }
-              >
-                All orders
-              </li>
-              <li
-                className={option === "Canceled Orders" ? "chosenOption" : ""}
-                onClick={() =>
-                  handleChooseOption("Canceled Orders", setOption, history)
-                }
-              >
-                Canceled orders
-              </li>
-            </ul>
-          )}
+
+          <ul className={openOrderManagement ? "options selected" : "options"}>
+            <li
+              className={option === "All Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("All Orders", setOption, history)
+              }
+            >
+              All orders
+            </li>
+            <li
+              className={option === "Canceled Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Canceled Orders", setOption, history)
+              }
+            >
+              Canceled orders
+            </li>
+          </ul>
         </div>
         <div className="productSite">
           <div
@@ -63,26 +64,26 @@ const StoreLeftbar = () => {
               }
             />
           </div>
-          {openProductManagement && (
-            <ul>
-              <li
-                className={option === "All Products" ? "chosenOption" : ""}
-                onClick={() =>
-                  handleChooseOption("All Products", setOption, history)
-                }
-              >
-                All Products
-              </li>
-              <li
-                className={option === "Add a Product" ? "chosenOption" : ""}
-                onClick={() =>
-                  handleChooseOption("Add a Product", setOption, history)
-                }
-              >
-                Add a Product
-              </li>
-            </ul>
-          )}
+          <ul
+            className={openProductManagement ? "options selected" : "options"}
+          >
+            <li
+              className={option === "All Products" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("All Products", setOption, history)
+              }
+            >
+              All Products
+            </li>
+            <li
+              className={option === "Add a Product" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Add a Product", setOption, history)
+              }
+            >
+              Add a Product
+            </li>
+          </ul>
         </div>
         <div className="promotionSite">
           <div
@@ -97,7 +98,55 @@ const StoreLeftbar = () => {
               }
             />
           </div>
-          {openProductManagement && <ul></ul>}
+          <ul
+            className={openPromotionManagement ? "options selected" : "options"}
+          >
+            <li
+              className={option === "All Products" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("All Products", setOption, history)
+              }
+            >
+              All Products
+            </li>
+            <li
+              className={option === "Add a Product" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Add a Product", setOption, history)
+              }
+            >
+              Add a Product
+            </li>
+          </ul>
+        </div>
+        <div className="myStoreSite">
+          <div className="heading" onClick={() => setOpenMyStore(!openMyStore)}>
+            <span>My Store</span>
+            <FontAwesomeIcon
+              icon={faChevronUp}
+              className={openMyStore ? "openOption" : "openOption rotate"}
+            />
+          </div>
+          <ul
+            className={openMyStore? "options selected" : "options"}
+          >
+            <li
+              className={option === "All Products" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("All Products", setOption, history)
+              }
+            >
+              All Products
+            </li>
+            <li
+              className={option === "Add a Product" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Add a Product", setOption, history)
+              }
+            >
+              Add a Product
+            </li>
+          </ul>
         </div>
       </div>
     </div>

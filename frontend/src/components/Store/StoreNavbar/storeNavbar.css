@@ -4,6 +4,7 @@
   top: 0;
   left: 0;
   height: 70px;
+  z-index: 999;
 }
 
 .storeNavbarContainer {
@@ -24,6 +25,7 @@
 
 .storeNavbarLeft img {
   width: 200px;
+  cursor: pointer;
 }
 
 .storeNavbarRight {
@@ -49,7 +51,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-
+  cursor: pointer;
 }
 
 .storeNavbarRight .storeInfo span {

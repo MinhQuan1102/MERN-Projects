@@ -27,7 +27,7 @@ const UpdateProfile = () => {
     currentUser.email === userInfo.email &&
     userInfo.avatar === (currentUser.avatar || null);
 
-    console.log(userInfo.avatar)
+    console.log(userInfo.name)
 
   return (
     <div className="updateProfile">
@@ -46,7 +46,7 @@ const UpdateProfile = () => {
                   <td>
                     <input
                       type="text"
-                      value={userInfo.name && currentUser.name}
+                      value={userInfo.name}
                       placeholder="Your full name"
                       id="name"
                       onChange={(e) => handleChange(e, setUserInfo)}

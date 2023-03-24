@@ -9,7 +9,7 @@ export const handleChooseOption = (option, setOption, history) => {
       setOption("Canceled Orders");
       break;
     case "All Products":
-      history.push("/store/product/all");
+      history.push("/store/product/all?pages=1");
       setOption("All Products");
       break;
     case "Add a Product":

@@ -44,6 +44,9 @@ function App() {
             <StoreLeftbar />
             <div className="storeAppContent">
               <Route path="/store/product/all" exact component={StoreAllProduct} />
+              <Route path="/store/product/active" exact component={StoreAllProduct} />
+              <Route path="/store/product/soldout" exact component={StoreAllProduct} />
+
               <Route path="/store/product/new" component={AddProduct} />
               <Route path="/cart" component={Cart} />
               <Route path="/checkout" component={Checkout} />

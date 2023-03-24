@@ -1,0 +1,139 @@
+.storeAllProducts {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f2f5;
+  padding: 15px;
+}
+
+.storeAllProductsContainer {
+  background-color: #fff;
+}
+
+.storeProductsFilter {
+  border-bottom: 1px solid #ccc;
+  padding: 0 30px;
+}
+
+.storeProductsFilter ul {
+  display: flex;
+  gap: 5px;
+}
+
+.storeProductsFilter ul li {
+  list-style: none;
+  cursor: pointer;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.active {
+  border-bottom: 3px solid red;
+  color: red;
+  font-weight: 500;
+}
+
+.storeAllProducts .storeProducts {
+  width: 100%;
+}
+
+.storeAllProducts table {
+  width: 100%;
+}
+
+.storeAllProducts table thead,
+.tbody {
+  width: 100%;
+}
+
+.storeAllProducts table thead tr {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  background-color: #F6F6F6;
+}
+
+.storeAllProducts table thead tr th {
+  flex: 1;
+  font-size: 17px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.storeAllProducts table tbody tr {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  
+}
+
+.storeAllProducts table tbody tr th {
+  flex: 1;
+  font-weight: normal;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.storeAllProducts table tbody tr th .productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.storeAllProducts table tbody tr .productButtons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.storeAllProducts .productNav {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.storeAllProducts .productNav .productNavBtn{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.storeAllProducts .productNav .productPerPage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.storeAllProducts .productNav .productPerPageContainer {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.storeAllProducts .productNav .prevBtn,.nextBtn {
+  padding: 10px;
+}
+
+.storeAllProducts .productNav span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.storeAllProducts .productNav input {
+  width: 20px;
+  height: 100%;
+}
+
+.storeAllProducts .productNav input:focus {
+  outline: none;
+}
+

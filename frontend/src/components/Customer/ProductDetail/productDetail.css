@@ -1,0 +1,254 @@
+.productBody {
+  margin: auto;
+  display: flex;
+  padding: 30px 0;
+  gap: 20px;
+}
+
+.productBody .productLeft {
+  flex: 4;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.productLeft .productLeftContainer {
+  padding: 20px;
+}
+
+.productLeft .productLeftContainer .productImage {
+  width: 100%;
+}
+
+.productLeft .productLeftContainer .productImage img {
+  width: 100% !important;
+  height: 400px !important;
+}
+
+.productBody .productRight {
+  flex: 6;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.productBody .productRight .productRightContainer {
+  padding: 20px;
+}
+
+.productRight .productName {
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.productRight .productName h2 {
+  font-size: 23px;
+  font-weight: bolder;
+  color: #1c1c1b;
+  margin-bottom: 10px;
+}
+
+.productRight .productPrice {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.productRight .productPrice .price {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.productRight .productDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.productRight .productDescription tbody {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.productRight .productDescription tbody tr {
+  display: flex;
+}
+
+.productRight .productDescription tbody tr .productHeading {
+  flex: 1;
+  font-size: 18px;
+}
+
+.productRight .productDescription tbody tr .productContent{
+  flex: 2.5;
+  font-weight: normal;
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+}
+
+.productRight .productDescription ul li {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+}
+
+.productRight .productDescription ul li h4 {
+  font-size: 15px;
+  color: #1c1c1b;
+  font-weight: bold;
+}
+
+.productRight .productDescription ul li .quantityText {
+  display: flex;
+  align-items: flex-start !important;
+}
+
+.productRight .productDescription ul li span {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.productRight .productDescription .productQuantity {
+  display: flex;
+  border: 1px solid #ccc;
+  width: 115px;
+}
+
+.productRight .productDescription .productQuantity:hover {
+  cursor: pointer;
+}
+
+.productRight .productDescription .productQuantity .minus,
+.plus {
+  padding: 5px 10px;
+}
+
+.productRight .productDescription .productQuantity .quantity {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 5px 25px;
+}
+
+.productRight .productDescription .productButtons {
+  display: flex;
+  gap: 20px;
+  padding-top: 30px;
+  justify-content: flex-end;
+}
+
+.productRight .productDescription .productButtons button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid black;
+  background-color: #003140;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.productRight .productDescription .productButtons button:hover {
+  background-color: #00587C;
+}
+
+.productRight .productDescription .productButtons button span {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.product .storeInfo {
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.storeInfo .storeInfoContainer {
+  display: flex;
+  margin: auto;
+  padding: 20px;
+  gap: 15px;
+  background-color: #fff;
+}
+
+.storeInfo .storeInfoContainer .storeLeft {
+}
+
+.storeInfo .storeInfoContainer .storeLeft img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.storeInfo .storeInfoContainer .storeRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.storeInfo .storeInfoContainer .storeRight .storeButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.storeInfo .storeInfoContainer .storeRight .storeButtons button {
+  border: 1px solid black;
+  padding: 5px 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.product .productDesc {
+  padding: 20px 0;
+}
+
+.product .productDesc .descText {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.productDesc .productDescContainer {
+  background-color: #ffffff;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.productRight .buyNowBtn {
+  position: relative;
+}
+
+.productRight .buyNowBtn .alternativeBuyNowIcon {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translateY(-50%);
+  opacity: 0;
+
+}
+
+.productRight .buyNowBtn:hover .buyNowIcon {
+  animation-name: moveRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.productRight .buyNowBtn:hover .alternativeBuyNowIcon {
+  opacity: 1;
+  left: 75%;
+  transition: left 0.75s ease;
+  transition: opacity 1s;
+
+}
+
+@keyframes moveRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50px);
+  }
+}

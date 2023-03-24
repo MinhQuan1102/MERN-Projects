@@ -7,10 +7,11 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
-  const [role, setRole] = useState("STORE"); 
+  const [role, setRole] = useState("CUSTOMER"); 
   const [token, setToken] = useState(
     JSON.parse(localStorage.getItem("token")) || ""
   );
+  const BACKEND_URL = "https://e-commerce-production-43d5.up.railway.app"
 
   const history = useHistory();
 
@@ -32,6 +33,7 @@ export const AuthContextProvider = ({ children }) => {
         setRole,
         token,
         setToken,
+        BACKEND_URL,
       }}
     >
       {children}

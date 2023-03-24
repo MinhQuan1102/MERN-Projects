@@ -1,21 +1,93 @@
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
 import AddProductImage from "../AddProductImage/AddProductImage";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 import "./addProduct.css";
 
 const AddProduct = () => {
+  const { token } = useContext(AuthContext);
   const [product, setProduct] = useState({
     name: "",
-    price: "",
+    price: 0,
     category: "",
-    quantity: "",
+    quantity: 0,
     desc: "",
     images: [],
   });
+  const toast = useToast();
 
   const handleChange = (e) => {
     setProduct((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+
+    let images = [];
+    if (product.images.length > 0) {
+      const promises = product.images.map(async (pic) => {
+        const data = new FormData();
+        data.append(`file`, pic);
+        data.append("upload_preset", "BazaarBay");
+        data.append("cloud_name", "dvvyj75uf");
+        try {
+          const response = await fetch(
+            "https://api.cloudinary.com/v1_1/dvvyj75uf/image/upload",
+            {
+              method: "post",
+              body: data,
+            }
+          );
+          const json = await response.json();
+          console.log(json.url.toString());
+          return json.url.toString();
+        } catch (error) {
+          toast({
+            title: "Error uploading images!",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+          return;
+        }
+      });
+      images = await Promise.all(promises);
+      try {
+        await axios.post(
+          `https://e-commerce-production-43d5.up.railway.app/api/store/products`,
+          {
+            ...product,
+            images: images,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast({
+          title: "Create post successfully!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom",
+        });
+        window.location.reload();
+      } catch (error) {}
+    } else {
+      toast({
+        title: "Please choose at least 1 images",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
   };
   return (
     <div className="addProduct">
@@ -38,6 +110,7 @@ const AddProduct = () => {
                       placeholder="Your product name"
                       maxLength="100"
                       id="name"
+                      value={product.name}
                       onChange={handleChange}
                     />
                     <span className="inputCharacter">{`${product.name.length}/100`}</span>
@@ -58,6 +131,7 @@ const AddProduct = () => {
                       type="number"
                       placeholder="Your product price"
                       id="price"
+                      value={product.price}
                       onChange={handleChange}
                       style={{ paddingLeft: "5px" }}
                     />
@@ -72,6 +146,7 @@ const AddProduct = () => {
                       type="text"
                       placeholder="Choose product category"
                       id="category"
+                      value={product.category}
                       onChange={handleChange}
                     />
                   </div>
@@ -90,6 +165,7 @@ const AddProduct = () => {
                       type="number"
                       placeholder="Your product quantity in stock"
                       id="quantity"
+                      value={product.quantity}
                       onChange={handleChange}
                     />
                   </div>
@@ -164,6 +240,9 @@ const AddProduct = () => {
               </tr>
             </tbody>
           </table>
+        </div>
+        <div className="productButtons">
+          <button onClick={(e) => handleAddProduct(e)}>Save</button>
         </div>
       </div>
     </div>

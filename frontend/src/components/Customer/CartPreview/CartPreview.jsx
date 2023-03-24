@@ -3,22 +3,12 @@ import "./cartPreview.css";
 
 const CartPreview = ({ open, setOpen }) => {
   const cartPreview = useRef();
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (cartPreview.current && !cartPreview.current.contains(event.target)) {
-        setOpen(false);
-      }
-    }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [cartPreview]);
   return (
     <div
       className={open ? "cartPreview" : "cartPreview hide"}
       useRef={cartPreview}
+      onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
       <div className="cartPreviewContainer">

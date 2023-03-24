@@ -1,14 +1,18 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
 import "./featuredProduct.css";
 
 const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
+  const history = useHistory();
+  const { BACKEND_URL } = useContext(AuthContext);
+  console.log(BACKEND_URL)
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `https://e-commerce-production-43d5.up.railway.app/api/store/products`
+        `${BACKEND_URL}/api/products`
       );
       setProducts(response.data.data);
     } catch (error) {}
@@ -23,7 +27,7 @@ const FeaturedProduct = () => {
         <div className="featuredTitle">Featured products</div>
         <ul>
           {products.map((product) => (
-            <li key={product.id}>
+            <li key={product.id} onClick={() => history.push(`/product/${product.id}`)}>
               <div className="singleProduct">
                 <img
                   src={product.image}

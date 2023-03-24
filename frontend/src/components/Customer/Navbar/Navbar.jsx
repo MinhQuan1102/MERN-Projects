@@ -43,7 +43,11 @@ const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={() => setOpenSearch(true)}
               />
-              <span className="input-group-text p-3" id="basic-addon2" style={{ borderRadius: "0 5px 5px 0"}}>
+              <span
+                className="input-group-text p-3"
+                id="basic-addon2"
+                style={{ borderRadius: "0 5px 5px 0" }}
+              >
                 <BsSearch className="fs-6" />
               </span>
               <Search open={openSearch} setOpen={setOpenSearch} />
@@ -85,6 +89,8 @@ const Navbar = () => {
               className="d-flex align-items-center gap-10 text-white"
               style={{ position: "relative" }}
               onMouseOver={() => setOpenCartPreview(true)}
+              onMouseLeave={() => setOpenCartPreview(false)}
+
             >
               <div>
                 <img src={cart} alt="cart" />
@@ -101,10 +107,12 @@ const Navbar = () => {
                   alt=""
                   className="userAvatar"
                   onMouseOver={() => setOpenSetting(true)}
+                  onMouseLeave={() => setOpenSetting(false)}
                 />
                 {openSetting && (
                   <ul
                     className="userOptions"
+                    onMouseOver={() => setOpenSetting(true)}
                     onMouseLeave={() => setOpenSetting(false)}
                   >
                     <Link to="/account/profile">
