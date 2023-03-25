@@ -12,10 +12,11 @@ import UpdatePassword from "./pages/UpdatePassword/UpdatePassword";
 import Checkout from "./pages/Checkout/Checkout";
 import { useContext, useState } from "react";
 import StoreAllProduct from "./components/Store/StoreAllProducts/StoreAllProducts";
-import AddProduct from "./components/Store/AddProduct/AddProduct"
+import AddProduct from "./components/Store/AddProduct/AddProduct";
 import StoreLeftbar from "./components/Store/StoreLeftbar/StoreLeftbar";
 import StoreNavbar from "./components/Store/StoreNavbar/StoreNavbar";
 import { AuthContext } from "./context/AuthContext";
+import UpdateAddress from "./pages/UpdateAddress/UpdateAddress";
 
 function App() {
   const { role } = useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/product/:productId" component={Product} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/account/address" component={UpdateAddress} />
             <Route path="/account/profile" component={UpdateProfile} />
             <Route path="/account/password" component={UpdatePassword} />
           </div>
@@ -43,9 +45,21 @@ function App() {
           <div className="storeAppBody">
             <StoreLeftbar />
             <div className="storeAppContent">
-              <Route path="/store/product/all" exact component={StoreAllProduct} />
-              <Route path="/store/product/active" exact component={StoreAllProduct} />
-              <Route path="/store/product/soldout" exact component={StoreAllProduct} />
+              <Route
+                path="/store/product/all"
+                exact
+                component={StoreAllProduct}
+              />
+              <Route
+                path="/store/product/active"
+                exact
+                component={StoreAllProduct}
+              />
+              <Route
+                path="/store/product/soldout"
+                exact
+                component={StoreAllProduct}
+              />
 
               <Route path="/store/product/new" component={AddProduct} />
               <Route path="/cart" component={Cart} />

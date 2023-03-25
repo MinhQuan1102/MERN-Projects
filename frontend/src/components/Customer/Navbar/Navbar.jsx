@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "./navbar.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../../../images/compare.svg";
 import logo from "../../../images/image-removebg-preview.png";
@@ -19,7 +19,7 @@ const Navbar = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openCartPreview, setOpenCartPreview] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const history = useHistory();
   return (
     <>
       <div className="navbar">
@@ -90,7 +90,6 @@ const Navbar = () => {
               style={{ position: "relative" }}
               onMouseOver={() => setOpenCartPreview(true)}
               onMouseLeave={() => setOpenCartPreview(false)}
-
             >
               <div>
                 <img src={cart} alt="cart" />
@@ -103,7 +102,7 @@ const Navbar = () => {
             {currentUser && (
               <div className="userSetting">
                 <img
-                  src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/273210834_3086464761611742_3914305251108406206_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GpZUB-TOXNUAX9fnPSj&_nc_ht=scontent.fhan14-3.fna&oh=00_AfA92m10XiplbJb0QeM-d8Rw0HB1neXeo_mJdUsJfh3JqQ&oe=640D4AC3"
+                  src={currentUser.avatar}
                   alt=""
                   className="userAvatar"
                   onMouseOver={() => setOpenSetting(true)}
@@ -115,12 +114,24 @@ const Navbar = () => {
                     onMouseOver={() => setOpenSetting(true)}
                     onMouseLeave={() => setOpenSetting(false)}
                   >
-                    <Link to="/account/profile">
-                      <li className="option">My Account</li>
-                    </Link>
-                    <Link to="/account/password">
-                      <li className="option">Change Password</li>
-                    </Link>
+                    <li
+                      className="option"
+                      onClick={() => history.push("/account/profile")}
+                    >
+                      My Account
+                    </li>
+                    <li
+                      className="option"
+                      onClick={() => history.push("/account/address")}
+                    >
+                      My Address
+                    </li>
+                    <li
+                      className="option"
+                      onClick={() => history.push("/account/password")}
+                    >
+                      Change Password
+                    </li>
                     <li className="option" onClick={() => setCurrentUser(null)}>
                       Log out
                     </li>

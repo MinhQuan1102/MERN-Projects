@@ -7,7 +7,7 @@ import "./featuredProduct.css";
 const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
   const history = useHistory();
-  const { BACKEND_URL } = useContext(AuthContext);
+  const { BACKEND_URL, currentUser } = useContext(AuthContext);
   console.log(BACKEND_URL)
   const fetchProducts = async () => {
     try {
@@ -20,7 +20,7 @@ const FeaturedProduct = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  console.log(products);
+  console.log(currentUser);
   return (
     <div className="featuredProduct">
       <div className="featuredProductContainer">

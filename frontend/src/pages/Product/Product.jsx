@@ -37,7 +37,6 @@ const Product = () => {
         {
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -52,18 +51,18 @@ const Product = () => {
       })
     }
   };
-  console.log(product);
 
   useEffect(() => {
+    console.log(1)
     fetchProduct();
-  }, []);
+  }, [productId]);
 
   return (
     <div className="product">
       <BreadCrumb title="Product" />
 
       <div className="productContainer">
-        <ProductDetail />
+        {product && <ProductDetail product={product}/>}
 
         {/* store Infomation */}
 

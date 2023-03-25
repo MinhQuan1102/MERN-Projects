@@ -12,7 +12,12 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("token")) || ""
   );
   const BACKEND_URL = "https://e-commerce-production-43d5.up.railway.app"
-
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
   const history = useHistory();
 
   useEffect(() => {
@@ -32,6 +37,7 @@ export const AuthContextProvider = ({ children }) => {
         role,
         setRole,
         token,
+        config,
         setToken,
         BACKEND_URL,
       }}

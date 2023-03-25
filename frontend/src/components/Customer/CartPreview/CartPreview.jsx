@@ -2,12 +2,10 @@ import { useEffect, useRef } from "react";
 import "./cartPreview.css";
 
 const CartPreview = ({ open, setOpen }) => {
-  const cartPreview = useRef();
 
   return (
     <div
       className={open ? "cartPreview" : "cartPreview hide"}
-      useRef={cartPreview}
       onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >

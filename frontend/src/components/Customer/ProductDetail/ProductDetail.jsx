@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./productDetail.css";
 
-const ProductDetail = () => {
+const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantity = (amount) => {
@@ -25,7 +25,7 @@ const ProductDetail = () => {
                 <ReactImageZoom {...props}/>
               </div> */}
             <img
-              src="https://cf.shopee.vn/file/sg-11134201-22110-5co0i2evafkve8"
+              src={""}
               alt=""
             />
           </div>
@@ -33,11 +33,11 @@ const ProductDetail = () => {
         <div className="productRight">
           <div className="productRightContainer">
             <div className="productName">
-              <h2>Sục siêu vip</h2>
+              <h2>{product.name}</h2>
             </div>
             <div className="productPrice">
-              <div class="price">
-                <span class="price-symbol">₫</span>163.200
+              <div className="price">
+                <span className="price-symbol">₫</span>{product.price}
                 </div>
               <span className="writeReviewText">Write a review</span>
             </div>
@@ -46,7 +46,7 @@ const ProductDetail = () => {
                 <tbody>
                   <tr>
                     <th className="productHeading">Category</th>
-                    <th className="productContent">Desp</th>
+                    <th className="productContent">{product.category}</th>
                   </tr>
                   <tr>
                     <th className="productHeading">In stock </th>

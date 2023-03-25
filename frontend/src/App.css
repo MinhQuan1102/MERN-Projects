@@ -48,15 +48,14 @@ a {
 }
 
 .button {
-  background-color: var(--color-232f3e);
-  color: white;
-  font-size: 14px;
-  padding: 13px 33px;
-  border-radius: 25px;
+  border-radius: 8px;
+  background-color: #003140;
+  color: #fff;
+  padding: 8px 12px;
+  font-weight: 500;
 }
 .button:hover {
-  background-color: var(--color-febd69);
-  color: #131921;
+  background-color: #00587C;
 }
 
 .app {

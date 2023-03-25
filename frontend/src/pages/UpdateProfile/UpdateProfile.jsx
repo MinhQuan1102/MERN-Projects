@@ -11,12 +11,13 @@ import {
 
 const UpdateProfile = () => {
   const { currentUser, setCurrentUser, token } = useContext(AuthContext);
+  const [newAvatar, setNewAvatar] = useState(null);
+
   const [userInfo, setUserInfo] = useState({
     name: currentUser.name || "",
     email: currentUser.email || "",
-    phone: currentUser.phone || "",
-    address: currentUser.address || "",
-    avatar: currentUser.avatar || null,
+    phoneNumber: currentUser.phoneNumber || "",
+    avatar: newAvatar || null,
   });
   const toast = useToast();
   const nothingChanged =
@@ -25,9 +26,7 @@ const UpdateProfile = () => {
     currentUser.address === userInfo.address &&
     currentUser.image === userInfo.image &&
     currentUser.email === userInfo.email &&
-    userInfo.avatar === (currentUser.avatar || null);
-
-    console.log(userInfo.name)
+    userInfo.avatar === (newAvatar ? newAvatar : currentUser.avatar);
 
   return (
     <div className="updateProfile">
@@ -58,19 +57,9 @@ const UpdateProfile = () => {
                   <td>
                     <input
                       type="text"
-                      id="phone"
+                      id="phoneNumber"
+                      value={userInfo.phoneNumber}
                       placeholder="Your phone number"
-                      onChange={(e) => handleChange(e, setUserInfo)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="updateHeading">Address</td>
-                  <td>
-                    <input
-                      type="text"
-                      id="address"
-                      placeholder="Your address"
                       onChange={(e) => handleChange(e, setUserInfo)}
                     />
                   </td>
@@ -84,6 +73,7 @@ const UpdateProfile = () => {
                         handleUpdateProfile(
                           e,
                           userInfo,
+                          newAvatar,
                           setCurrentUser,
                           token,
                           toast
@@ -100,9 +90,9 @@ const UpdateProfile = () => {
           <div className="updateProfileRight">
             <img
               src={
-                userInfo.avatar
-                  ? URL.createObjectURL(userInfo.avatar)
-                  : "https://hcth.hcmiu.edu.vn/wp-content/uploads/2022/12/no-avatar-male-2.jpg"
+                !newAvatar
+                  ? currentUser.avatar
+                  : URL.createObjectURL(newAvatar)
               }
               alt=""
             />
@@ -113,7 +103,7 @@ const UpdateProfile = () => {
                 style={{ display: "none" }}
                 id="file"
                 accept=".png,.jpeg,.jpg,.gif"
-                onChange={(e) => handleChooseImage(e, setUserInfo)}
+                onChange={(e) => handleChooseImage(e, setNewAvatar)}
               />
             </label>
           </div>
