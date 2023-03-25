@@ -8,19 +8,19 @@ import Footer from "./components/Customer/Footer/Footer";
 import Product from "./pages/Product/Product";
 import Cart from "./pages/Cart/Cart";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile.jsx";
+import UpdateAddress from "./pages/UpdateAddress/UpdateAddress";
 import UpdatePassword from "./pages/UpdatePassword/UpdatePassword";
 import Checkout from "./pages/Checkout/Checkout";
 import { useContext, useState } from "react";
 import StoreAllProduct from "./components/Store/StoreAllProducts/StoreAllProducts";
 import AddProduct from "./components/Store/AddProduct/AddProduct";
+import UpdateProduct from "./components/Store/UpdateProduct/UpdateProduct"
 import StoreLeftbar from "./components/Store/StoreLeftbar/StoreLeftbar";
 import StoreNavbar from "./components/Store/StoreNavbar/StoreNavbar";
 import { AuthContext } from "./context/AuthContext";
-import UpdateAddress from "./pages/UpdateAddress/UpdateAddress";
 
 function App() {
   const { role } = useContext(AuthContext);
-
   return (
     <div className="app">
       {role === "CUSTOMER" && (
@@ -62,6 +62,8 @@ function App() {
               />
 
               <Route path="/store/product/new" component={AddProduct} />
+              <Route path="/store/product/:productId" component={UpdateProduct} />
+
               <Route path="/cart" component={Cart} />
               <Route path="/checkout" component={Checkout} />
               <Route path="/account/profile" component={UpdateProfile} />

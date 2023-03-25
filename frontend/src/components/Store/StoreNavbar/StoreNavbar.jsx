@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./storeNavbar.css";
 import logo from "../../../images/image-removebg-preview.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const StoreNavbar = () => {
+  const { currentUser, setRole, setCurrentUser } = useContext(AuthContext);
+  const [openSetting, setOpenSetting] = useState(false);
+  const history = useHistory();
   return (
     <div className="storeNavbar">
       <div className="storeNavbarContainer">
@@ -15,15 +20,41 @@ const StoreNavbar = () => {
           <div className="storeInfo">
             <div className="storeImg">
               <img
-                src="https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-6/273210834_3086464761611742_3914305251108406206_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=8rqDy8TmoFoAX_xX4nd&_nc_ht=scontent.fhan2-5.fna&oh=00_AfDIEtbxRv7UCXG6nZqA037yGmPhJh43l71WEVdTfGgNkg&oe=641D1CC3"
+                src={currentUser.avatar}
                 alt=""
+                onMouseOver={() => setOpenSetting(true)}
+                onMouseLeave={() => setOpenSetting(false)}
               />
-              <div className="storeImgOptions">
-                
-              </div>
+              <ul
+                className={openSetting ? "userOptions" : "userOptions hide"}
+                onMouseOver={() => setOpenSetting(true)}
+                onMouseLeave={() => setOpenSetting(false)}
+              >
+                <li
+                  className="option"
+                  onClick={() => history.push("/account/profile")}
+                >
+                  My Store
+                </li>
+                <li
+                  className="option"
+                  onClick={() => history.push("/account/password")}
+                >
+                  Change Password
+                </li>
+                <li
+                  className="option"
+                  onClick={() => {
+                    setCurrentUser(null);
+                    setRole("CUSTOMER");
+                  }}
+                >
+                  Log out
+                </li>
+              </ul>
             </div>
 
-            <span>Store name</span>
+            <span>{currentUser.name}</span>
           </div>
           <div className="notification">
             <FontAwesomeIcon icon={faBell} />

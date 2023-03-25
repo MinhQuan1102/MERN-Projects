@@ -30,7 +30,7 @@ const FeaturedProduct = () => {
             <li key={product.id} onClick={() => history.push(`/product/${product.id}`)}>
               <div className="singleProduct">
                 <img
-                  src={product.image}
+                  src={product.images[0]}
                   alt="product"
                   className="productImage"
                 />

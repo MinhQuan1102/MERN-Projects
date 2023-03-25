@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./storeAllProducts.css";
 import DeadOfWinter from "../../../images/dowln.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +9,15 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, useLocation } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 const Storepage = () => {
   const history = useHistory();
   const location = useLocation();
-  const [products, setProducts] = useState(["", "", "", "", "", "", "", ""]);
+  const { BACKEND_URL, config } = useContext(AuthContext);
+  const [products, setProducts] = useState([]);
   const [stockType, setStockType] = useState(useHistory().location.pathname.split("/")[3]);
 
   const pageIndex = Math.floor(useHistory().location.search.split("=")[1]);
@@ -25,6 +29,8 @@ const Storepage = () => {
   const handleChangeProductPerPage = (e) => {
     setProductPerPage(Math.floor(e.target.value));
   };
+
+  const toast = useToast();
 
   const handleChangeStockType = (e) => {
     setStockType(e.currentTarget.id);
@@ -41,6 +47,26 @@ const Storepage = () => {
     history.push(`/store/product/${stockType}?pages=${currentPage}`);
 
   }, [currentPage])
+
+  const fetchProducts = async () => {
+    try {
+      const { data } = await axios.get(`${BACKEND_URL}/api/store/products`, config)
+      setProducts(data.data);
+    } catch (error) {
+      toast({
+        title: "An error occurred while trying to login",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, [])
+
   return (
     <div className="storeAllProducts">
       <div className="storeAllProductsContainer">
@@ -96,17 +122,17 @@ const Storepage = () => {
                         alignItems: "flex-start",
                       }}
                     >
-                      <img src={DeadOfWinter} alt="" className="productImage" />
-                      <span className="productName">
-                        Dead of winter: The long night
+                      <img src={product.images[0]} alt="" className="productImage" />
+                      <span className="productName" onClick={() => history.push(`/store/product/${product.id}`)}>
+                        {product.name}
                       </span>
                     </th>
-                    <th>Toys</th>
-                    <th>1500000</th>
-                    <th>3</th>
+                    <th>{product.category}</th>
+                    <th><span className="price-symbol">₫</span>{product.price}</th>
+                    <th>{product.quantity}</th>
                     <th>2</th>
                     <th className="productButtons">
-                      <FontAwesomeIcon icon={faPen} />
+                      <FontAwesomeIcon icon={faPen} onClick={() => history.push(`/store/product/${product.id}`)}/>
                       <FontAwesomeIcon icon={faTrash} />
                     </th>
                   </tr>

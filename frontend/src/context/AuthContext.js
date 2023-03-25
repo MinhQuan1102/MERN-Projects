@@ -7,17 +7,19 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
-  const [role, setRole] = useState("CUSTOMER"); 
+  const [role, setRole] = useState(
+    JSON.parse(localStorage.getItem("role")) || "CUSTOMER"
+  );
   const [token, setToken] = useState(
     JSON.parse(localStorage.getItem("token")) || ""
   );
-  const BACKEND_URL = "https://e-commerce-production-43d5.up.railway.app"
+  const BACKEND_URL = "https://e-commerce-production-43d5.up.railway.app";
   const config = {
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }
+  };
   const history = useHistory();
 
   useEffect(() => {
@@ -28,6 +30,10 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("token", JSON.stringify(token));
   }, [token]);
+
+  useEffect(() => {
+    localStorage.setItem("role", JSON.stringify(role));
+  }, [role]);
 
   return (
     <AuthContext.Provider

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -12,10 +12,25 @@ import "./productDetail.css";
 
 const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-
+  const [mainImageWidth, setMainImageWidth] = useState(0);
   const handleQuantity = (amount) => {
     setQuantity((prev) => prev + amount);
   };
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const mainImage = useRef();
+  console.log(product)
+  useEffect(() => {
+    const handleResize = () => {
+      setMainImageWidth(mainImage?.current.offsetWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="productDetail">
       <div className="productBody">
@@ -24,10 +39,14 @@ const ProductDetail = ({ product }) => {
             {/* <div className="productImage">
                 <ReactImageZoom {...props}/>
               </div> */}
-            <img
-              src={""}
-              alt=""
-            />
+            <div className="productCurrentImage" ref={mainImage}>
+              <img src={product.images[imageIndex]} alt="" />
+            </div>
+            <div className="productOtherImages">
+              {product.images.map((image, i) => (
+                <img src={image} alt="" key={i} onMouseOver={() => setImageIndex(i)}/>
+              ))}
+            </div>
           </div>
         </div>
         <div className="productRight">
@@ -37,8 +56,9 @@ const ProductDetail = ({ product }) => {
             </div>
             <div className="productPrice">
               <div className="price">
-                <span className="price-symbol">₫</span>{product.price}
-                </div>
+                <span className="price-symbol">₫</span>
+                {product.price}
+              </div>
               <span className="writeReviewText">Write a review</span>
             </div>
             <div className="productDescription">
@@ -50,7 +70,7 @@ const ProductDetail = ({ product }) => {
                   </tr>
                   <tr>
                     <th className="productHeading">In stock </th>
-                    <th className="productContent">124</th>
+                    <th className="productContent">{product.quantity}</th>
                   </tr>
                   <tr>
                     <th className="productHeading">Size </th>
@@ -84,8 +104,14 @@ const ProductDetail = ({ product }) => {
                       </button>
                       <button className="buyNowBtn">
                         <span>Buy Now</span>
-                        <FontAwesomeIcon icon={faArrowRight} className="alternativeBuyNowIcon" />
-                        <FontAwesomeIcon icon={faArrowRight} className="buyNowIcon" />
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          className="alternativeBuyNowIcon"
+                        />
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          className="buyNowIcon"
+                        />
                       </button>
                     </th>
                   </tr>
@@ -99,12 +125,12 @@ const ProductDetail = ({ product }) => {
         <div className="storeInfoContainer">
           <div className="storeLeft">
             <img
-              src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/273210834_3086464761611742_3914305251108406206_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GpZUB-TOXNUAX9fnPSj&_nc_ht=scontent.fhan14-3.fna&oh=00_AfA92m10XiplbJb0QeM-d8Rw0HB1neXeo_mJdUsJfh3JqQ&oe=640D4AC3"
+              src={product.store.avatar}
               alt=""
             />
           </div>
           <div className="storeRight">
-            <h3 className="storeName">MQShop</h3>
+            <h3 className="storeName">{product.store.name}</h3>
             <div className="storeButtons">
               <button className="visitStore">
                 <FontAwesomeIcon icon={faShop} />

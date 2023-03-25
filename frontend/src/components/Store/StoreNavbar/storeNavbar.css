@@ -38,12 +38,13 @@
 .storeNavbarRight .storeInfo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .storeNavbarRight .storeInfo .storeImg {
   width: 45px;
   height: 45px;
+  position: relative;
 }
 
 .storeNavbarRight .storeInfo .storeImg img {
@@ -52,6 +53,10 @@
   object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.storeNavbarRight .storeInfo .storeImg ul {
+  left: 0;
 }
 
 .storeNavbarRight .storeInfo span {

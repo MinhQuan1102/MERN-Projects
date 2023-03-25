@@ -1,11 +1,11 @@
-.addProduct {
+.updateProduct {
   width: 100%;
   height: 100%;
   padding-top: 20px;
 
 }
 
-.addProductContainer {
+.updateProductContainer {
   width: 80%;
   margin: auto;
   background-color: #ffffff;

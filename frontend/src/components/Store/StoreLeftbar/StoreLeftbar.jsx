@@ -14,7 +14,6 @@ const StoreLeftbar = () => {
   const { option, setOption } = useContext(StoreContext);
   const history = useHistory();
 
-  console.log(openOrderManagement);
   return (
     <div className="storeLeftbar">
       <div className="storeLeftbarContainer">

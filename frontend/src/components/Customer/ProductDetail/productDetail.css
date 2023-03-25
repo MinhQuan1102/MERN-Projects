@@ -13,15 +13,34 @@
 
 .productLeft .productLeftContainer {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.productLeft .productLeftContainer .productImage {
+.productLeft .productLeftContainer .productCurrentImage {
   width: 100%;
 }
 
-.productLeft .productLeftContainer .productImage img {
+.productLeft .productLeftContainer .productCurrentImage img {
   width: 100% !important;
   height: 400px !important;
+  object-fit: cover;
+}
+
+.productLeft .productOtherImages {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.productLeft .productOtherImages img {
+  width: 20%;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 .productBody .productRight {

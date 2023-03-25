@@ -13,7 +13,7 @@ import Search from "../Search/Search";
 import CartPreview from "../CartPreview/CartPreview";
 
 const Navbar = () => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, setRole } = useContext(AuthContext);
 
   const [openSetting, setOpenSetting] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -132,7 +132,7 @@ const Navbar = () => {
                     >
                       Change Password
                     </li>
-                    <li className="option" onClick={() => setCurrentUser(null)}>
+                    <li className="option" onClick={() => {setCurrentUser(null); setRole("CUSTOMER")}}>
                       Log out
                     </li>
                   </ul>

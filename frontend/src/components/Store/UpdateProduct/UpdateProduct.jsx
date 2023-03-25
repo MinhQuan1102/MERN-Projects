@@ -1,12 +1,13 @@
 import { useToast } from "@chakra-ui/react";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import AddProductImage from "../AddProductImage/AddProductImage";
-import "./addProduct.css";
-import { handleAddProduct } from "./addProductLogic";
+import "./updateProduct.css";
+import { handleAddProduct } from "./updateProductLogic";
 
 const AddProduct = () => {
   const { BACKEND_URL, config } = useContext(AuthContext);
@@ -20,14 +21,41 @@ const AddProduct = () => {
   });
   const toast = useToast();
   const history = useHistory();
+  const location = useLocation();
+  const productId = location.pathname.split("/")[3];
+  console.log(productId)
+
+  const fetchProduct = async () => {
+    try {
+      const { data } = await axios.get(`${BACKEND_URL}/api/product/${productId}`);
+      const product = data.data;
+      console.log(data)
+      setProduct({
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        quantity: product.quantity,
+        description: product.description,
+        images: product.images
+      })
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    fetchProduct()
+  }, [productId])
+
+  console.log(product)
 
   const handleChange = (e) => {
     setProduct((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   return (
-    <div className="addProduct">
-      <div className="addProductContainer">
+    <div className="updateProduct">
+      <div className="updateProductContainer">
         <div className="productInfo">
           <h2>Product Infomation</h2>
           <table>
@@ -45,6 +73,7 @@ const AddProduct = () => {
                       type="text"
                       placeholder="Your product name"
                       maxLength="100"
+                      value={product.name}
                       id="name"
                       onChange={handleChange}
                     />
@@ -66,6 +95,7 @@ const AddProduct = () => {
                       type="number"
                       placeholder="Your product price"
                       id="price"
+                      value={product.price}
                       onChange={handleChange}
                       style={{ paddingLeft: "5px" }}
                     />
@@ -80,6 +110,7 @@ const AddProduct = () => {
                       type="text"
                       placeholder="Choose product category"
                       id="category"
+                      value={product.category}
                       onChange={handleChange}
                     />
                   </div>
@@ -98,6 +129,7 @@ const AddProduct = () => {
                       type="number"
                       placeholder="Your product quantity in stock"
                       id="quantity"
+                      value={product.quantity}
                       onChange={handleChange}
                     />
                   </div>
@@ -126,6 +158,7 @@ const AddProduct = () => {
                       id="description"
                       maxLength={1000}
                       onChange={handleChange}
+                      value={product.description}
                     />
                     <span className="textareaCharacter">{`${product.description.length}/1000`}</span>
                   </div>
@@ -190,7 +223,7 @@ const AddProduct = () => {
                       )
                     }
                   >
-                    Add Product
+                    Update Product
                   </button>
                 </td>
               </tr>
