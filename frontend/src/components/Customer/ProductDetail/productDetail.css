@@ -35,58 +35,7 @@
   object-fit: cover;
 }
 
-.productLeft .productOtherImages {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  overflow: hidden;
-  width: 350px;
-  position: relative;
-}
 
-.productLeft .productOtherImage {
-  min-width: 66px;
-  min-height: 66px;
-  max-width: 66px;
-  max-height: 66px;
-  position: relative;
-}
-
-.productLeft .productOtherImage img {
-  min-width: 66px;
-  min-height: 66px;
-  max-width: 66px;
-  max-height: 66px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.prevBtn {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.nextBtn {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-  padding: 5px !important;
-}
-
-.selectedBorder {
-  border: 3px solid #00587c;
-}
 
 .productBody .productRight {
   flex: 6;
@@ -334,4 +283,24 @@
 .minus:active {
   background-color: rgb(90, 148, 233);
   color: black;
+}
+
+@media screen and (min-width: 1700px) {
+  .productLeft .productLeftContainer .productCurrentImage {
+    min-width: 450px !important;
+    max-width: 450px !important;
+  
+    min-height: 450px !important;
+    max-height: 450px !important;
+  }
+  
+  .productLeft .productLeftContainer .productCurrentImage img {
+    min-width: 450px !important;
+    max-width: 450px !important;
+  
+    min-height: 450px !important;
+    max-height: 450px !important;
+  
+    object-fit: cover;
+  }
 }

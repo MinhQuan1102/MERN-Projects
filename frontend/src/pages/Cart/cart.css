@@ -16,7 +16,16 @@
   padding: 20px;
 }
 
+.cartBody table {
+  width: 100%;
+}
+
+.cartBody table thead, tbody {
+  width: 100%;
+}
+
 .cartBody .cartProductTitle {
+  width: 100%;
   display: flex;
   padding: 20px 0;
   border-bottom: 1px solid lightgray;
@@ -66,7 +75,7 @@
   max-width: 120px;
 }
 .cartBody .cartProductName {
-  flex: 2.5;
+  flex: 3;
 }
 
 .cartBody .cartProductPrice {
@@ -79,6 +88,10 @@
 
 .cartBody .cartProductTotal {
   flex: 1;
+}
+
+.cartBody .cartProductDelete {
+  flex: 0.5;
 }
 
 @media screen and (min-width: 1700px) {

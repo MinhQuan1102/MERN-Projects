@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./productImage.css";
 
 const ProductImage = ({ image, setCurrentImage, index }) => {
   const [selectedImage, setSelectedImage] = useState(false);
@@ -13,12 +14,12 @@ const ProductImage = ({ image, setCurrentImage, index }) => {
         src={image}
         alt=""
         key={index}
-        style={{
-          maxWidth: `${imageSize}px`,
-          maxHeight: `${imageSize}px`,
-          minWidth: `${imageSize}px`,
-          minHeight: `${imageSize}px`,
-        }}
+        // style={{
+        //   maxWidth: `${imageSize}px`,
+        //   maxHeight: `${imageSize}px`,
+        //   minWidth: `${imageSize}px`,
+        //   minHeight: `${imageSize}px`,
+        // }}
         onMouseOver={() => {
           setCurrentImage(image);
           setSelectedImage(true);

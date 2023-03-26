@@ -1,32 +1,30 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 import "./cartProduct.css";
 
-const CartProduct = () => {
-  const [quantity, setQuantity] = useState(1);
+const CartProduct = ({ product, productQuantity, setTotalPrice }) => {
+  const [quantity, setQuantity] = useState(productQuantity);
 
   const handleQuantity = (amount) => {
     setQuantity((prev) => prev + amount);
+    
   };
+
+ 
   return (
-    <li className="cartProduct">
-      <div className="cartProductName">
-        <div className="productImage">
-          <img
-            src="https://cf.shopee.vn/file/sg-11134201-22110-5co0i2evafkve8"
-            alt=""
-          />
-        </div>
-        <div className="productInfo">
-          <h2>Sục siêu vip</h2>
-          <span>Brand: Gucci</span>
-        </div>
-      </div>
-      <div className="cartProductPrice">$20</div>
-      <div className="cartProductQuantity">
-        <div className="productQuantity">
+    <tr>
+      <td className="cartProductName">
+        <img src={product.images[0]} alt="" />
+        <h2>{product.name}</h2>
+      </td>
+      <td className="cartProductPrice">
+        <span className="price-symbol">₫</span>
+        {product.price}
+      </td>
+      <td className="cartProductQuantity">
+        <div className="productQuantityContainer">
           <div className="minus" onClick={() => handleQuantity(-1)}>
             -
           </div>
@@ -35,12 +33,15 @@ const CartProduct = () => {
             +
           </div>
         </div>
-        <div className="trashCan">
-          <FontAwesomeIcon icon={faTrashCan} />
-        </div>
-      </div>
-      <div className="cartProductTotal">$40</div>
-    </li>
+      </td>
+      <td className="cartProductTotal">
+        <span className="price-symbol">₫</span>
+        {product.price * quantity}
+      </td>
+      <td className="cartProductDelete">
+        <FontAwesomeIcon icon={faTrash} />
+      </td>
+    </tr>
   );
 };
 
