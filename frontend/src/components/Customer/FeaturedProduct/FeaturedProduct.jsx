@@ -8,12 +8,10 @@ const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
   const history = useHistory();
   const { BACKEND_URL, currentUser } = useContext(AuthContext);
-  console.log(BACKEND_URL)
+  console.log(BACKEND_URL);
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        `${BACKEND_URL}/api/products`
-      );
+      const response = await axios.get(`${BACKEND_URL}/api/products`);
       setProducts(response.data.data);
     } catch (error) {}
   };
@@ -27,7 +25,10 @@ const FeaturedProduct = () => {
         <div className="featuredTitle">Featured products</div>
         <ul>
           {products.map((product) => (
-            <li key={product.id} onClick={() => history.push(`/product/${product.id}`)}>
+            <li
+              key={product.id}
+              onClick={() => history.push(`/product/${product.id}`)}
+            >
               <div className="singleProduct">
                 <img
                   src={product.images[0]}
@@ -36,15 +37,19 @@ const FeaturedProduct = () => {
                 />
                 <div className="productInfo">
                   <div className="productTitle">
-                    <h2 className="productName">{product.name}</h2>
-                    <span className="productCategory">{product.category}</span>
+                    <h2 className="productName">{`${product.name.substring(
+                      0,
+                      35
+                    )} ${product.name.length > 35 ? "..." : ""}`}</h2>
                   </div>
+                  <span className="productPrice">{`đ${product.price}`}</span>
 
                   <span className="productDesc">
-                    {product.description}
+                    {`${product.description.substring(0, 100)} ${
+                      product.description.length > 100 ? "..." : ""
+                    }`}
                   </span>
                 </div>
-                <span className="productPrice">{`đ${product.price}`}</span>
               </div>
             </li>
           ))}

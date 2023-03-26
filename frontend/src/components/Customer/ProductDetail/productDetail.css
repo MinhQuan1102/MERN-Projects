@@ -6,7 +6,6 @@
 }
 
 .productBody .productLeft {
-  flex: 4;
   background-color: #ffffff;
   border-radius: 10px;
 }
@@ -19,12 +18,20 @@
 }
 
 .productLeft .productLeftContainer .productCurrentImage {
-  width: 100%;
+  min-width: 350px !important;
+  max-width: 350px !important;
+
+  min-height: 350px !important;
+  max-height: 350px !important;
 }
 
 .productLeft .productLeftContainer .productCurrentImage img {
-  width: 100% !important;
-  height: 400px !important;
+  min-width: 350px !important;
+  max-width: 350px !important;
+
+  min-height: 350px !important;
+  max-height: 350px !important;
+
   object-fit: cover;
 }
 
@@ -32,15 +39,53 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   overflow: hidden;
+  width: 350px;
+  position: relative;
 }
 
-.productLeft .productOtherImages img {
-  width: 20%;
-  height: 100px;
+.productLeft .productOtherImage {
+  min-width: 66px;
+  min-height: 66px;
+  max-width: 66px;
+  max-height: 66px;
+  position: relative;
+}
+
+.productLeft .productOtherImage img {
+  min-width: 66px;
+  min-height: 66px;
+  max-width: 66px;
+  max-height: 66px;
   object-fit: cover;
   cursor: pointer;
+}
+
+.prevBtn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.nextBtn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px !important;
+}
+
+.selectedBorder {
+  border: 3px solid #00587c;
 }
 
 .productBody .productRight {
@@ -105,9 +150,10 @@
 .productRight .productDescription tbody tr .productHeading {
   flex: 1;
   font-size: 18px;
+  min-width: 90px;
 }
 
-.productRight .productDescription tbody tr .productContent{
+.productRight .productDescription tbody tr .productContent {
   flex: 2.5;
   font-weight: normal;
   display: flex;
@@ -177,7 +223,7 @@
 }
 
 .productRight .productDescription .productButtons button:hover {
-  background-color: #00587C;
+  background-color: #00587c;
 }
 
 .productRight .productDescription .productButtons button span {
@@ -227,8 +273,8 @@
   align-items: center;
 }
 
-.storeName{
-  font-weight: bold !important;;
+.storeName {
+  font-weight: bold !important;
 }
 
 .product .productDesc {
@@ -256,7 +302,6 @@
   left: 70%;
   transform: translateY(-50%);
   opacity: 0;
-
 }
 
 .productRight .buyNowBtn:hover .buyNowIcon {
@@ -270,7 +315,6 @@
   left: 75%;
   transition: left 0.75s ease;
   transition: opacity 1s;
-
 }
 
 @keyframes moveRight {
@@ -291,8 +335,3 @@
   background-color: rgb(90, 148, 233);
   color: black;
 }
-
-
-
-
-

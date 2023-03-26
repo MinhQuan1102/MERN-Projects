@@ -3,23 +3,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCartPlus,
+  faChevronLeft,
+  faChevronRight,
   faMessage,
   faShop,
   faStar,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import "./productDetail.css";
+import ProductImage from "../ProductImage/ProductImage";
 
 const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [mainImageWidth, setMainImageWidth] = useState(0);
+
+  const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [otherImageIndex, setOtherImageIndex] = useState(0);
+  const mainImage = useRef();
+  console.log(product);
+
   const handleQuantity = (amount) => {
     setQuantity((prev) => prev + amount);
   };
-  const [imageIndex, setImageIndex] = useState(0);
+  const handleClickPrev = () => {
+    setOtherImageIndex((prev) => (prev === 0 ? prev : prev - 1));
+  };
 
-  const mainImage = useRef();
-  console.log(product)
+  const handleClickNext = () => {
+    setOtherImageIndex((prev) =>
+      prev === product.images.length - 5 ? product.images.length - 5 : prev + 1
+    );
+  };
   useEffect(() => {
     const handleResize = () => {
       setMainImageWidth(mainImage?.current.offsetWidth);
@@ -40,12 +54,28 @@ const ProductDetail = ({ product }) => {
                 <ReactImageZoom {...props}/>
               </div> */}
             <div className="productCurrentImage" ref={mainImage}>
-              <img src={product.images[imageIndex]} alt="" />
+              <img src={currentImage} alt="" />
             </div>
             <div className="productOtherImages">
-              {product.images.map((image, i) => (
-                <img src={image} alt="" key={i} onMouseOver={() => setImageIndex(i)}/>
-              ))}
+              {product.images
+                .slice(otherImageIndex, otherImageIndex + 5)
+                .map((image, i) => (
+                  <ProductImage
+                    image={image}
+                    setCurrentImage={setCurrentImage}
+                    index={i}
+                  />
+                ))}
+              {product.images.length > 5 && (
+                <div className="prevBtn" onClick={handleClickPrev}>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </div>
+              )}
+              {product.images.length > 5 && (
+                <div className="nextBtn" onClick={handleClickNext}>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -124,10 +154,7 @@ const ProductDetail = ({ product }) => {
       <div className="storeInfo">
         <div className="storeInfoContainer">
           <div className="storeLeft">
-            <img
-              src={product.store.avatar}
-              alt=""
-            />
+            <img src={product.store.avatar} alt="" />
           </div>
           <div className="storeRight">
             <h3 className="storeName">{product.store.name}</h3>
@@ -146,10 +173,7 @@ const ProductDetail = ({ product }) => {
       </div>
       <div className="productDesc">
         <span className="descText">Description</span>
-        <div className="productDescContainer">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam aut
-          tempora, quam dicta a odio quas amet illum ab odit!
-        </div>
+        <div className="productDescContainer">{product.description}</div>
       </div>
     </div>
   );

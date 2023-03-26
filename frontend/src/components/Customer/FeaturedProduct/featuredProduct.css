@@ -54,12 +54,14 @@
 
 .featuredProduct ul li .productInfo {
   padding: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 .featuredProduct ul li .productTitle {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
+  height: 40px;
 }
 
 .featuredProduct ul li .productName {
@@ -71,6 +73,7 @@
 .featuredProduct ul li .productCategory {
   font-size: 16px;
   font-weight: 600;
+  text-align: right;
 }
 
 .featuredProduct ul li .productDesc {
@@ -78,13 +81,11 @@
 }
 
 .featuredProduct ul li .productPrice {
-  position: absolute;
   color: red;
   font-weight: 500;
   display: flex;
   padding-top: 20px;
-  bottom: 10px;
-  left: 10px;
+
 }
 
 @media screen and (max-width: 1024px) {
