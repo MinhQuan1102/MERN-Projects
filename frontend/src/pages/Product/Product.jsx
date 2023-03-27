@@ -11,7 +11,7 @@ import {
 import ReactImageZoom from "react-image-zoom";
 import ReactStars from "react-rating-stars-component";
 import { AuthContext } from "../../context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react"
 import "./product.css";
@@ -21,7 +21,8 @@ import ProductReview from "../../components/Customer/ProductReview/ProductReview
 const Product = () => {
   const { token, BACKEND_URL } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
-  const productId = useHistory().location.pathname.split("/")[2];
+  const location = useLocation();
+  const productId = location.pathname.split("/")[2];
   const props = {
     width: 600,
     height: 660,
@@ -51,11 +52,11 @@ const Product = () => {
       })
     }
   };
+  console.log(product)
 
   useEffect(() => {
-    console.log(1)
     fetchProduct();
-  }, [productId]);
+  }, [location]);
 
   return (
     <div className="product">

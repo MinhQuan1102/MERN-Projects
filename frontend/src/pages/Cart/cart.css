@@ -76,6 +76,7 @@
 }
 .cartBody .cartProductName {
   flex: 3;
+  padding-right: 20px;
 }
 
 .cartBody .cartProductPrice {

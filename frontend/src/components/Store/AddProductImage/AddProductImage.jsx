@@ -15,7 +15,7 @@ const AddProductImage = ({ image, product, setProduct, index }) => {
       onMouseLeave={() => setOpenDeleteImg(false)}
       key={index}
     >
-      <img src={image} alt="" className="productImg" />
+      <img src={URL.createObjectURL(image)} alt="" className="productImg" />
       {openDeleteImg && (
         <div className="deleteImgContainer" onClick={() => setProduct((prev) => ({...prev, images: product.images.filter(img => img !== image)}))}>
           <FontAwesomeIcon icon={faTrash} className="deleteIcon" />

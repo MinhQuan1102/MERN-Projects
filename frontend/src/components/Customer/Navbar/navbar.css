@@ -110,6 +110,10 @@
   cursor: pointer;
 }
 
+.userSetting:hover .userOptions {
+  display: block;
+}
+
 .userOptions {
   position: absolute;
   top: 40px;
@@ -120,6 +124,10 @@
   background-color: var(--color-131921);
   color: white;
   border-radius: 5px;
+  transform: scale(0);
+  transform-origin: center;
+  animation: scale-up 0.1s ease-in-out forwards;
+  display: none;
 }
 
 .userOptions li {
@@ -139,6 +147,20 @@
   right: 20px;
 }
 
+.navbar .cartBtn {
+  position: relative;
+}
 
+.navbar .cartBtn:hover .cartPreview {
+  display: block;
+}
 
+@keyframes scale-up {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 

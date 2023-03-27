@@ -41,7 +41,7 @@ export const handleAddProduct = async (product, BACKEND_URL, config, toast, hist
         config
       );
       toast({
-        title: "Upload post with images successfully!",
+        title: "Upload product with images successfully!",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -50,7 +50,7 @@ export const handleAddProduct = async (product, BACKEND_URL, config, toast, hist
       history.push(`/store/product/all?page=1`);
     } catch (error) {
       toast({
-        title: "Error uploading post!",
+        title: "Error uploading product!",
         status: "warning",
         duration: 5000,
         isClosable: true,

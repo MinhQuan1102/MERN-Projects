@@ -26,7 +26,7 @@ const StoreNavbar = () => {
                 onMouseLeave={() => setOpenSetting(false)}
               />
               <ul
-                className={openSetting ? "userOptions" : "userOptions hide"}
+                className={openSetting ? "userOptions" : "userOptions"}
                 onMouseOver={() => setOpenSetting(true)}
                 onMouseLeave={() => setOpenSetting(false)}
               >

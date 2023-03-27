@@ -1,29 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import "./cartPreview.css";
-import { useHistory } from "react-router-dom";
+import { formatNumber } from "../../longFunctions";
+import { Link, useHistory } from "react-router-dom";
 
-const CartPreview = ({ open, setOpen }) => {
-  const [products, setProducts] = useState([]);
-  const { BACKEND_URL, config } = useContext(AuthContext);
+const CartPreview = ({ open, setOpen, products }) => {
   const history = useHistory();
-  const fetchCart = async () => {
-    try {
-      const { data } = await axios.get(
-        `${BACKEND_URL}/api/customer/cart`,
-        config
-      );
-      setProducts(data.data);
-    } catch (error) {}
-  };
-  useEffect(() => {
-    fetchCart();
-  }, []);
-  console.log(products)
+
+
   return (
     <div
-      className={open ? "cartPreview" : "cartPreview hide"}
+      className={open ? "cartPreview" : "cartPreview"}
       onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
@@ -32,18 +19,37 @@ const CartPreview = ({ open, setOpen }) => {
         <div className="cartPreviewProducts">
           <ul>
             {products.slice(0, 10).map((item) => (
-              <li key={item.id} onClick={() => history.push(`/checkout`)}>
+              <li
+                key={item.id}
+                onClick={() => {
+                  history.push(`/product/${item.product.id}`);
+                  setOpen(false);
+                }}
+              >
+                {/* <Link to={`/product/${item.product.id}`}> */}
                 <div className="cartProductLeft">
                   <img src={item.product.images[0]} alt="" />
                   <span>{item.product.name}</span>
                 </div>
                 <div className="cartProductRight">
                   <span className="price-symbol">₫</span>
-                  {item.product.price}
+                  {formatNumber(item.product.price)}
                 </div>
+                {/* </Link> */}
               </li>
             ))}
           </ul>
+        </div>
+        <div className="seeCartBtn">
+          <button
+            className="button"
+            onClick={() => {
+              history.push("/cart");
+              setOpen(false);
+            }}
+          >
+            View your cart
+          </button>
         </div>
       </div>
     </div>

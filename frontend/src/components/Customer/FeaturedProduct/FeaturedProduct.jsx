@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import "./featuredProduct.css";
+import { formatNumber } from "../../longFunctions";
 
 const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
@@ -42,7 +43,7 @@ const FeaturedProduct = () => {
                       35
                     )} ${product.name.length > 35 ? "..." : ""}`}</h2>
                   </div>
-                  <span className="productPrice">{`đ${product.price}`}</span>
+                  <span className="productPrice">{`đ${formatNumber(product.price)}`}</span>
 
                   <span className="productDesc">
                     {`${product.description.substring(0, 100)} ${

@@ -12,16 +12,17 @@
   display: flex;
   gap: 15px;
   flex: 3;
+  padding-right: 20px;
 }
 
 .cartBody tbody .cartProductName img {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
 }
 
 .cartBody tbody .cartProductName h2 {
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .cartBody tbody .cartProductPrice {

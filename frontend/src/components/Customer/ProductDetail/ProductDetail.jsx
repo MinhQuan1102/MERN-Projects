@@ -12,15 +12,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./productDetail.css";
 import ProductImage from "../ProductImage/ProductImage";
+import { useHistory } from "react-router-dom";
+import { formatNumber } from "../../longFunctions";
 
 const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [mainImageWidth, setMainImageWidth] = useState(0);
 
   const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [currentDisplayImage, setCurrentDisplayImage] = useState(currentImage)
   const [otherImageIndex, setOtherImageIndex] = useState(0);
+  const [openImage, setOpenImage] = useState(false);
   const mainImage = useRef();
-  console.log(product);
+  const imageDisplay = useRef();
+  const history = useHistory();
 
   const handleQuantity = (amount) => {
     setQuantity((prev) => prev + amount);
@@ -45,6 +50,27 @@ const ProductDetail = ({ product }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    setCurrentDisplayImage(currentImage)
+    setCurrentImage(product.images[0]);
+  }, [product]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        imageDisplay.current &&
+        !imageDisplay.current.contains(event.target)
+      ) {
+        setOpenImage(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [imageDisplay]);
   return (
     <div className="productDetail">
       <div className="productBody">
@@ -53,7 +79,7 @@ const ProductDetail = ({ product }) => {
             {/* <div className="productImage">
                 <ReactImageZoom {...props}/>
               </div> */}
-            <div className="productCurrentImage" ref={mainImage}>
+            <div className="productCurrentImage" ref={mainImage} onClick={() => setOpenImage(true)}>
               <img src={currentImage} alt="" />
             </div>
             <div className="productOtherImages">
@@ -64,6 +90,7 @@ const ProductDetail = ({ product }) => {
                     image={image}
                     setCurrentImage={setCurrentImage}
                     index={i}
+                    selected={currentImage === image}
                   />
                 ))}
               {product.images.length > 5 && (
@@ -87,7 +114,7 @@ const ProductDetail = ({ product }) => {
             <div className="productPrice">
               <div className="price">
                 <span className="price-symbol">₫</span>
-                {product.price}
+                {formatNumber(product.price)}
               </div>
               <span className="writeReviewText">Write a review</span>
             </div>
@@ -148,6 +175,35 @@ const ProductDetail = ({ product }) => {
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className={openImage ? "imageDisplay" : "imageDisplay hide"}>
+        <div className="imageDisplayContainer" ref={imageDisplay}>
+          <div className="imageDisplayLeft">
+            <img src={currentDisplayImage} alt="" />
+          </div>
+          <div className="imageDisplayRight">
+            <h2>{product.name}</h2>
+            <ul>
+              {product.images.map((image, i) => (
+                <li
+                  key={i}
+                  className={currentDisplayImage === image ? "selectedBorder" : ""}
+                  onClick={() => setCurrentDisplayImage(image)}
+                >
+                  <img
+                    src={image}
+                    alt=""
+                    // className={
+                    //   currentImage === image
+                    //     ? "selectedImage"
+                    //     : "unSelectedImage"
+                    // }
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

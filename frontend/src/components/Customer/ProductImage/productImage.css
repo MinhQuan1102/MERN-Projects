@@ -16,7 +16,7 @@
   position: relative;
 }
 
-.productLeft .productOtherImage img {
+.productLeft .productOtherImage .unSelectedImage {
   min-width: 66px;
   min-height: 66px;
   max-width: 66px;
@@ -25,14 +25,16 @@
   cursor: pointer;
 }
 
-.productLeft .productOtherImage img:hover {
+.productLeft .productOtherImage .selectedImage {
   min-width: 60px;
   min-height: 60px;
   max-width: 60px;
   max-height: 60px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
-.prevBtn {
+.productLeft .prevBtn {
   position: absolute;
   left: 0;
   top: 50%;
@@ -43,7 +45,7 @@
   padding: 5px;
 }
 
-.nextBtn {
+.productLeft .nextBtn {
   position: absolute;
   right: 0;
   top: 50%;

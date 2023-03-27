@@ -1,6 +1,6 @@
 .cartPreview {
   position: absolute;
-  top: 35px;
+  top: 30px;
   right: 0;
   width: 450px;
   background-color: #fff;
@@ -8,6 +8,10 @@
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 8px;
+  transform: scale(0);
+  transform-origin: center;
+  animation: scale-up 0.1s ease-in-out forwards;
+  display: none;
 }
 
 .cartPreviewContainer {
@@ -33,6 +37,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 }
 
 .cartPreview .cartPreviewProducts ul li:hover {
@@ -63,6 +68,25 @@
   padding-right: 10px;
 }
 
+.seeCartBtn {
+  text-align: right;
+  padding: 0 10px 15px 0;
+}
+
+.seeCartBtn button {
+  border-radius: 0px !important;
+  padding: 8px 15px !important;
+}
+
 .hide {
   display: none;
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

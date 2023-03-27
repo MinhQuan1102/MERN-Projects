@@ -11,15 +11,31 @@ import menu from "../../../images/menu.svg";
 import { AuthContext } from "../../../context/AuthContext";
 import Search from "../Search/Search";
 import CartPreview from "../CartPreview/CartPreview";
+import axios from "axios";
 
 const Navbar = () => {
-  const { currentUser, setCurrentUser, setRole } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, setRole, BACKEND_URL, config } =
+    useContext(AuthContext);
 
   const [openSetting, setOpenSetting] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [openCartPreview, setOpenCartPreview] = useState(false);
+  const [cartProducts, setCartProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
+
+  const fetchCart = async () => {
+    try {
+      const { data } = await axios.get(
+        `${BACKEND_URL}/api/customer/cart`,
+        config
+      );
+      setCartProducts(data.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchCart();
+  }, []);
   return (
     <>
       <div className="navbar">
@@ -84,21 +100,24 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-            <Link
-              to="/cart"
-              className="d-flex align-items-center gap-10 text-white"
-              style={{ position: "relative" }}
-              onMouseOver={() => setOpenCartPreview(true)}
-              onMouseLeave={() => setOpenCartPreview(false)}
-            >
-              <div>
-                <img src={cart} alt="cart" />
+            <div className="navbarCart">
+              <div
+                className="cartBtn"
+                onMouseOver={() => setOpenCartPreview(true)}
+                onMouseLeave={() => setOpenCartPreview(false)}
+              >
+                <img
+                  src={cart}
+                  alt="cart"
+                  onClick={() => history.push("/cart")}
+                />
+                <CartPreview
+                  open={openCartPreview}
+                  setOpen={setOpenCartPreview}
+                  products={cartProducts}
+                />
               </div>
-              <CartPreview
-                open={openCartPreview}
-                setOpen={setOpenCartPreview}
-              />
-            </Link>
+            </div>
             {currentUser && (
               <div className="userSetting">
                 <img
@@ -132,7 +151,13 @@ const Navbar = () => {
                     >
                       Change Password
                     </li>
-                    <li className="option" onClick={() => {setCurrentUser(null); setRole("CUSTOMER")}}>
+                    <li
+                      className="option"
+                      onClick={() => {
+                        setCurrentUser(null);
+                        setRole("CUSTOMER");
+                      }}
+                    >
                       Log out
                     </li>
                   </ul>

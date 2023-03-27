@@ -134,7 +134,7 @@ const AddProduct = () => {
               <tr>
                 <td className="productHeading">Product Image</td>
                 <td style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                  {product.images.slice(0, 6).map((image, i) => (
+                  {product.images.slice(0, 10).map((image, i) => (
                     <AddProductImage
                       image={image}
                       product={product}
@@ -149,8 +149,8 @@ const AddProduct = () => {
                         className="addImageIcon"
                       />
                       <span>{`Add image (${
-                        product.images.length > 6 ? 6 : product.images.length
-                      }/6)`}</span>
+                        product.images.length > 10 ? 10 : product.images.length
+                      }/10)`}</span>
                     </div>
                     <input
                       type="file"
@@ -159,7 +159,7 @@ const AddProduct = () => {
                       multiple
                       accept="image/png, image/jpeg, image/webp"
                       style={{ display: "none" }}
-                      disabled={product.images.length >= 6}
+                      disabled={product.images.length >= 10}
                       onChange={(event) =>
                         setProduct((prev) => ({
                           ...prev,

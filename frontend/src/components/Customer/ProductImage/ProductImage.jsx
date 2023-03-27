@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./productImage.css";
 
-const ProductImage = ({ image, setCurrentImage, index }) => {
+const ProductImage = ({ image, setCurrentImage, index, selected }) => {
   const [selectedImage, setSelectedImage] = useState(false);
-  const imageSize = !selectedImage ? 66 : 61;
   return (
     <div
       className={
-        selectedImage ? "productOtherImage selectedBorder" : "productOtherImage"
+        (selected) ? "productOtherImage selectedBorder" : "productOtherImage"
       }
+      key={index}
     >
       <img
         src={image}
@@ -22,11 +22,8 @@ const ProductImage = ({ image, setCurrentImage, index }) => {
         // }}
         onMouseOver={() => {
           setCurrentImage(image);
-          setSelectedImage(true);
         }}
-        onMouseLeave={() => {
-          setSelectedImage(false);
-        }}
+        className={selected ? "selectedImage" : "unSelectedImage"}
       />
     </div>
   );

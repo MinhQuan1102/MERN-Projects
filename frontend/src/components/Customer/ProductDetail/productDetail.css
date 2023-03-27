@@ -23,6 +23,7 @@
 
   min-height: 350px !important;
   max-height: 350px !important;
+  cursor: pointer;
 }
 
 .productLeft .productLeftContainer .productCurrentImage img {
@@ -285,6 +286,77 @@
   color: black;
 }
 
+.imageDisplay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageDisplayContainer {
+  width: 65%;
+  height: 500px;  
+  background-color: white;
+  display: flex;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+}
+
+.imageDisplayLeft {
+  flex: 6;
+  padding: 20px;
+}
+
+.imageDisplayLeft img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageDisplayRight {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 10px 20px 0;
+}
+
+.imageDisplayRight h2 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.imageDisplayRight ul {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.imageDisplayRight ul li {
+  list-style: none;
+  width: 80px;
+  height: 80px;
+}
+
+.imageDisplayRight ul li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selectedBorder {
+  border: 4px solid #00587c;
+}
+
+.hide {
+  display: none;
+}
 @media screen and (min-width: 1700px) {
   .productLeft .productLeftContainer .productCurrentImage {
     min-width: 450px !important;
