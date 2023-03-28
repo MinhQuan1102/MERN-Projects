@@ -9,7 +9,6 @@ const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
   const history = useHistory();
   const { BACKEND_URL, currentUser } = useContext(AuthContext);
-  console.log(BACKEND_URL);
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`${BACKEND_URL}/api/products`);
@@ -19,7 +18,6 @@ const FeaturedProduct = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  console.log(currentUser);
   return (
     <div className="featuredProduct">
       <div className="featuredProductContainer">

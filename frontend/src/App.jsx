@@ -14,25 +14,45 @@ import Checkout from "./pages/Checkout/Checkout";
 import { useContext, useState } from "react";
 import StoreAllProduct from "./components/Store/StoreAllProducts/StoreAllProducts";
 import AddProduct from "./components/Store/AddProduct/AddProduct";
-import UpdateProduct from "./components/Store/UpdateProduct/UpdateProduct"
+import UpdateProduct from "./components/Store/UpdateProduct/UpdateProduct";
 import StoreLeftbar from "./components/Store/StoreLeftbar/StoreLeftbar";
 import StoreNavbar from "./components/Store/StoreNavbar/StoreNavbar";
+import axios from "axios";
 import { AuthContext } from "./context/AuthContext";
+import SearchResult from "./components/Customer/SearchResult/SearchResult";
 
 function App() {
-  const { role } = useContext(AuthContext);
+  const { role, BACKEND_URL, config } = useContext(AuthContext);
+  const [cartProducts, setCartProducts] = useState([]);
+
+  const fetchPreviewCart = async () => {
+    try {
+      const { data } = await axios.get(
+        `${BACKEND_URL}/api/customer/preview-cart`,
+        config
+      );
+      setCartProducts(data.data);
+    } catch (error) {}
+  };
   return (
     <div className="app">
       {role === "CUSTOMER" && (
         <>
-          <Navbar />
+          <Navbar
+            fetchPreviewCart={fetchPreviewCart}
+            cartProducts={cartProducts}
+          />
           <div className="appBody">
             <Route path="/" exact component={Homepage} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
-            <Route path="/product/:productId" component={Product} />
+            <Route
+              path="/product/:productId"
+              render={(props) => <Product {...props} fetchPreviewCart={fetchPreviewCart} />}
+            />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/search" component={SearchResult} />
             <Route path="/account/address" component={UpdateAddress} />
             <Route path="/account/profile" component={UpdateProfile} />
             <Route path="/account/password" component={UpdatePassword} />
@@ -61,8 +81,12 @@ function App() {
                 component={StoreAllProduct}
               />
 
-              <Route path="/store/product/new" component={AddProduct} />
-              <Route path="/store/product/:productId" component={UpdateProduct} />
+              <Route path="/store/product/new" exact component={AddProduct} />
+              <Route
+                path="/store/product/update/:productId"
+                exact
+                component={UpdateProduct}
+              />
 
               <Route path="/cart" component={Cart} />
               <Route path="/checkout" component={Checkout} />

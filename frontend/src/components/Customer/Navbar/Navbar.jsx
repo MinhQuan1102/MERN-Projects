@@ -13,28 +13,24 @@ import Search from "../Search/Search";
 import CartPreview from "../CartPreview/CartPreview";
 import axios from "axios";
 
-const Navbar = () => {
-  const { currentUser, setCurrentUser, setRole, BACKEND_URL, config } =
-    useContext(AuthContext);
+const Navbar = ({ fetchPreviewCart, cartProducts }) => {
+  const { currentUser, setCurrentUser, setRole } = useContext(AuthContext);
 
   const [openSetting, setOpenSetting] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [openCartPreview, setOpenCartPreview] = useState(false);
-  const [cartProducts, setCartProducts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [keyword, setKeyword] = useState("");
   const history = useHistory();
 
-  const fetchCart = async () => {
-    try {
-      const { data } = await axios.get(
-        `${BACKEND_URL}/api/customer/cart`,
-        config
-      );
-      setCartProducts(data.data);
-    } catch (error) {}
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      history.push(`/search?keyword=${keyword}`);
+      setOpenSearch(false);
+    }
   };
+
   useEffect(() => {
-    fetchCart();
+    fetchPreviewCart();
   }, []);
   return (
     <>
@@ -55,9 +51,10 @@ const Navbar = () => {
                 placeholder="Search Product Here..."
                 aria-label="Search Product Here..."
                 aria-describedby="basic-addon2"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
                 onClick={() => setOpenSearch(true)}
+                onKeyDown={(e) => handleKeyDown(e)}
               />
               <span
                 className="input-group-text p-3"
@@ -66,18 +63,15 @@ const Navbar = () => {
               >
                 <BsSearch className="fs-6" />
               </span>
-              <Search open={openSearch} setOpen={setOpenSearch} />
+              <Search
+                open={openSearch}
+                setOpen={setOpenSearch}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />
             </div>
           </div>
           <div className="navbarMenu">
-            <Link to="/wishlist" className="">
-              <div className="navbarWishlist">
-                <img src={wishlist} alt="wishlist" />
-                <p className="wishlistText">
-                  Favourite <br /> wishlist
-                </p>
-              </div>
-            </Link>
             {!currentUser && (
               <div>
                 <Link
@@ -109,7 +103,7 @@ const Navbar = () => {
                 <img
                   src={cart}
                   alt="cart"
-                  onClick={() => history.push("/cart")}
+                  onClick={() => (currentUser ? history.push("/cart") : null)}
                 />
                 <CartPreview
                   open={openCartPreview}

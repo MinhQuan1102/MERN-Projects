@@ -11,19 +11,40 @@
 .cartBody {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.cartBody .cartStore {
   background-color: #ffffff;
   padding: 20px;
+
 }
 
 .cartBody table {
   width: 100%;
 }
 
-.cartBody table thead, tbody {
+.cartBody table thead,
+tbody {
   width: 100%;
 }
 
+.cartBody .storeInfo {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.cartBody .storeInfo img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cartBody .storeInfo h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
 .cartBody .cartProductTitle {
   width: 100%;
   display: flex;

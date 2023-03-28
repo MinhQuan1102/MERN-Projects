@@ -18,7 +18,7 @@ import "./product.css";
 import ProductDetail from "../../components/Customer/ProductDetail/ProductDetail";
 import ProductReview from "../../components/Customer/ProductReview/ProductReview";
 
-const Product = () => {
+const Product = ({ fetchPreviewCart }) => {
   const { token, BACKEND_URL } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const location = useLocation();
@@ -63,7 +63,7 @@ const Product = () => {
       <BreadCrumb title="Product" />
 
       <div className="productContainer">
-        {product && <ProductDetail product={product}/>}
+        {product && <ProductDetail product={product} fetchPreviewCart={fetchPreviewCart}/>}
 
         {/* store Infomation */}
 

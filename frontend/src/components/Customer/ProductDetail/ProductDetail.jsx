@@ -14,22 +14,30 @@ import "./productDetail.css";
 import ProductImage from "../ProductImage/ProductImage";
 import { useHistory } from "react-router-dom";
 import { formatNumber } from "../../longFunctions";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
+import { AuthContext } from "../../../context/AuthContext";
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = ({ product, fetchPreviewCart }) => {
+  const { BACKEND_URL, config } = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const [mainImageWidth, setMainImageWidth] = useState(0);
 
   const [currentImage, setCurrentImage] = useState(product.images[0]);
-  const [currentDisplayImage, setCurrentDisplayImage] = useState(currentImage)
+  const [currentDisplayImage, setCurrentDisplayImage] = useState(currentImage);
   const [otherImageIndex, setOtherImageIndex] = useState(0);
   const [openImage, setOpenImage] = useState(false);
   const mainImage = useRef();
   const imageDisplay = useRef();
   const history = useHistory();
-
-  const handleQuantity = (amount) => {
-    setQuantity((prev) => prev + amount);
+  const toast = useToast();
+  const handleClickMinus = () => {
+    setQuantity((prev) => (prev === 1 ? prev : prev - 1));
   };
+  const handleClickPlus = () => {
+    setQuantity((prev) => (prev === product.quantity ? prev : prev + 1));
+  };
+
   const handleClickPrev = () => {
     setOtherImageIndex((prev) => (prev === 0 ? prev : prev - 1));
   };
@@ -38,6 +46,39 @@ const ProductDetail = ({ product }) => {
     setOtherImageIndex((prev) =>
       prev === product.images.length - 5 ? product.images.length - 5 : prev + 1
     );
+  };
+
+  console.log(quantity)
+
+  const handleAddToCart = async (productId) => {
+    try {
+      await axios.post(
+        `${BACKEND_URL}/api/customer/add-to-cart`,
+        {
+          item: {
+            productId,
+            quantity,
+          },
+        },
+        config
+      );
+      toast({
+        title: "Add to cart successful",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      fetchPreviewCart();
+    } catch (error) {
+      toast({
+        title: "An error occurred adding product to cart",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
   };
   useEffect(() => {
     const handleResize = () => {
@@ -52,7 +93,7 @@ const ProductDetail = ({ product }) => {
   }, []);
 
   useEffect(() => {
-    setCurrentDisplayImage(currentImage)
+    setCurrentDisplayImage(currentImage);
     setCurrentImage(product.images[0]);
   }, [product]);
 
@@ -79,7 +120,11 @@ const ProductDetail = ({ product }) => {
             {/* <div className="productImage">
                 <ReactImageZoom {...props}/>
               </div> */}
-            <div className="productCurrentImage" ref={mainImage} onClick={() => setOpenImage(true)}>
+            <div
+              className="productCurrentImage"
+              ref={mainImage}
+              onClick={() => setOpenImage(true)}
+            >
               <img src={currentImage} alt="" />
             </div>
             <div className="productOtherImages">
@@ -139,14 +184,12 @@ const ProductDetail = ({ product }) => {
                       <div className="productQuantity">
                         <div
                           className="minus"
-                          onClick={() => handleQuantity(-1)}
+                          onClick={() => handleClickMinus()}
                         >
                           -
                         </div>
-                        <div className="quantity">
-                          {quantity < 1 ? 1 : quantity}
-                        </div>
-                        <div className="plus" onClick={() => handleQuantity(1)}>
+                        <div className="quantity">{quantity}</div>
+                        <div className="plus" onClick={() => handleClickPlus()}>
                           +
                         </div>
                       </div>
@@ -155,7 +198,10 @@ const ProductDetail = ({ product }) => {
                   <tr>
                     <th className="productHeading"></th>
                     <th className="productContent productButtons">
-                      <button className="addToCartBtn">
+                      <button
+                        className="addToCartBtn"
+                        onClick={() => handleAddToCart(product.id)}
+                      >
                         <FontAwesomeIcon icon={faCartPlus} />
                         <span>Add to cart</span>
                       </button>
@@ -189,7 +235,9 @@ const ProductDetail = ({ product }) => {
               {product.images.map((image, i) => (
                 <li
                   key={i}
-                  className={currentDisplayImage === image ? "selectedBorder" : ""}
+                  className={
+                    currentDisplayImage === image ? "selectedBorder" : ""
+                  }
                   onClick={() => setCurrentDisplayImage(image)}
                 >
                   <img

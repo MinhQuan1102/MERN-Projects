@@ -36,8 +36,6 @@ const CategoryFilter = () => {
     setLeft(prev => prev + 20);
   }
 
-  console.log(left)
-
   return (
     <div className="categoryFilter">
       <div className="categoryFilterContainer">

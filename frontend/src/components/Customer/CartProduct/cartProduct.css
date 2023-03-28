@@ -18,7 +18,8 @@
 .cartBody tbody .cartProductName img {
   width: 120px;
   height: 120px;
-  object-fit: cover;
+  object-fit: contain;
+  cursor: pointer;
 }
 
 .cartBody tbody .cartProductName h2 {
@@ -40,14 +41,14 @@
 .cartBody tbody .cartProductQuantity {
   display: flex;
   align-items: center;
-  flex: 1.5
-
+  flex: 1.5;
 }
 
 .cartBody tbody .cartProductDelete {
   flex: 0.5;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .cartBody tbody .productQuantityContainer {

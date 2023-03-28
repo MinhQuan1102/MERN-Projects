@@ -33,7 +33,7 @@
   min-height: 350px !important;
   max-height: 350px !important;
 
-  object-fit: cover;
+  object-fit: contain;
 }
 
 
@@ -373,6 +373,5 @@
     min-height: 450px !important;
     max-height: 450px !important;
   
-    object-fit: cover;
   }
 }

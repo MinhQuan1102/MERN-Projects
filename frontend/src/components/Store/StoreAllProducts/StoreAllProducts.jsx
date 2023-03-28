@@ -11,6 +11,7 @@ import {
 import { useHistory, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
+import { formatNumber } from "../../longFunctions";
 import { useToast } from "@chakra-ui/react";
 
 const Storepage = () => {
@@ -18,7 +19,9 @@ const Storepage = () => {
   const location = useLocation();
   const { BACKEND_URL, config } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  const [stockType, setStockType] = useState(useHistory().location.pathname.split("/")[3]);
+  const [stockType, setStockType] = useState(
+    useHistory().location.pathname.split("/")[3]
+  );
 
   const pageIndex = Math.floor(useHistory().location.search.split("=")[1]);
   const [currentPage, setCurrentPage] = useState(pageIndex);
@@ -45,27 +48,29 @@ const Storepage = () => {
   };
   useEffect(() => {
     history.push(`/store/product/${stockType}?pages=${currentPage}`);
-
-  }, [currentPage])
+  }, [currentPage]);
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get(`${BACKEND_URL}/api/store/products`, config)
+      const { data } = await axios.get(
+        `${BACKEND_URL}/api/store/products`,
+        config
+      );
       setProducts(data.data);
     } catch (error) {
       toast({
-        title: "An error occurred while trying to login",
+        title: "An error occurred fetching products",
         status: "error",
         duration: 3000,
         isClosable: true,
         position: "bottom",
       });
     }
-  }
+  };
 
   useEffect(() => {
     fetchProducts();
-  }, [])
+  }, []);
 
   return (
     <div className="storeAllProducts">
@@ -122,17 +127,34 @@ const Storepage = () => {
                         alignItems: "flex-start",
                       }}
                     >
-                      <img src={product.images[0]} alt="" className="productImage" />
-                      <span className="productName" onClick={() => history.push(`/store/product/${product.id}`)}>
+                      <img
+                        src={product.images[0]}
+                        alt=""
+                        className="productImage"
+                      />
+                      <span
+                        className="productName"
+                        onClick={() =>
+                          history.push(`/store/product/${product.id}`)
+                        }
+                      >
                         {product.name}
                       </span>
                     </th>
                     <th>{product.category}</th>
-                    <th><span className="price-symbol">₫</span>{product.price}</th>
+                    <th>
+                      <span className="price-symbol">₫</span>
+                      {formatNumber(product.price)}
+                    </th>
                     <th>{product.quantity}</th>
                     <th>2</th>
                     <th className="productButtons">
-                      <FontAwesomeIcon icon={faPen} onClick={() => history.push(`/store/product/${product.id}`)}/>
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        onClick={() =>
+                          history.push(`/store/product/${product.id}`)
+                        }
+                      />
                       <FontAwesomeIcon icon={faTrash} />
                     </th>
                   </tr>

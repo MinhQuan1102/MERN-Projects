@@ -9,30 +9,33 @@ import "./cart.css";
 import { CustomerContext } from "../../context/CustomerContext";
 
 const Cart = () => {
-  const [products, setProducts] = useState([]);
+  const [storeProducts, setStoreProducts] = useState([]);
   const { BACKEND_URL, config } = useContext(AuthContext);
-  const [totalPrice, setTotalPrice] = useState(0)
-  const handleQuantityChange = () => {
-    const newTotalPrice = products.reduce((accumulator, product) => {
-      return accumulator + product.product.price * product.quantity;
+
+  const [total, setTotal] = useState(0);
+
+  const totalPrice = storeProducts.reduce((accumulator, currentValue) => {
+    const itemTotal = currentValue.items.reduce((itemAccumulator, item) => {
+      return itemAccumulator + item.product.price * item.quantity;
     }, 0);
-    setTotalPrice(newTotalPrice);
-    console.log(totalPrice)
-  };
+    return accumulator + itemTotal;
+  }, 0)
+  console.log(storeProducts);
   const fetchCart = async () => {
     try {
       const { data } = await axios.get(
         `${BACKEND_URL}/api/customer/cart`,
         config
       );
-      setProducts(data.data);
+      setStoreProducts(data.data);
     } catch (error) {}
   };
-  console.log(totalPrice)
   useEffect(() => {
     fetchCart();
-    handleQuantityChange();
+    // handleQuantityChange();
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="cart">
@@ -40,28 +43,43 @@ const Cart = () => {
 
       <div className="cartContainer">
         <div className="cartBody">
-          <table>
-            <thead>
-              <tr className="cartProductTitle">
-                <td className="cartProductName">Product</td>
-                <td className="cartProductPrice">Price</td>
-                <td className="cartProductQuantity">Quantity</td>
-                <td className="cartProductTotal">Total</td>
-                <td className="cartProductDelete"></td>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <CartProduct
-                  product={product.product}
-                  productQuantity={product.quantity}
-                  key={product.id}
-                  handleQuantityChange={handleQuantityChange}
-                />
-              ))}
-            </tbody>
-          </table>
-
+          {storeProducts &&
+            storeProducts.map((store) => (
+              <div className="cartStore" key={store.id}>
+                <div className="storeInfo">
+                  <img src={store.store.avatar} alt="" />
+                  <h2>{store.store.name}</h2>
+                </div>
+                <table>
+                  <thead>
+                    <tr className="cartProductTitle">
+                      <td className="cartProductName">Product</td>
+                      <td className="cartProductPrice">Price</td>
+                      <td className="cartProductQuantity">Quantity</td>
+                      <td className="cartProductTotal">Total</td>
+                      <td className="cartProductDelete"></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {store.items.map((product) => (
+                      <CartProduct
+                        product={product.product}
+                        productQuantity={product.quantity}
+                        key={product.id}
+                        fetchCart={fetchCart}
+                        setTotal={setTotal}
+                        // handleQuantityChange={handleQuantityChange}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+          {!storeProducts && (
+            <div>
+              <span>Your cart is empty</span>
+            </div>
+          )}
           {/* <ul className="cartItems">
             {products.map((product) => (
               <CartProduct
@@ -72,17 +90,19 @@ const Cart = () => {
             ))}
           </ul> */}
         </div>
-        <div className="cartTotalPrice">
-          <div className="cartTotalPriceContainer">
-            <h2 className="subtotal">{`Subtotal: ₫${formatNumber(
-              totalPrice
-            )}`}</h2>
-            <span>Taxes and shipping calculated at checkout</span>
-            <Link to="/checkout">
-              <button className="checkoutBtn">Checkout</button>
-            </Link>
+        {storeProducts && (
+          <div className="cartTotalPrice">
+            <div className="cartTotalPriceContainer">
+              <h2 className="subtotal">{`Subtotal: ₫${formatNumber(
+                total
+              )}`}</h2>
+              <span>Taxes and shipping calculated at checkout</span>
+              <Link to="/checkout">
+                <button className="checkoutBtn">Checkout</button>
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
