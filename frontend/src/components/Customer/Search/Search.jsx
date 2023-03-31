@@ -6,19 +6,25 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import "./search.css";
 
-const Search = ({ open, setOpen, keyword, setKeyword }) => {
+const Search = ({
+  open,
+  setOpen,
+  keyword,
+  setKeyword,
+
+}) => {
   const search = useRef();
   const { BACKEND_URL } = useContext(AuthContext);
-  const [products, setProducts] = useState([]);
-  const [stores, setStores] = useState([]);
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [searchStores, setSearchStores] = useState([]);
   const history = useHistory();
   const handleSearch = async () => {
     try {
       const { data } = await axios.get(
-        `${BACKEND_URL}/api/search?keyword=${keyword}`
+        `${BACKEND_URL}/api/search?keyword=${keyword.replace(/\s/g, "")}`
       );
-      setProducts(data.data.products);
-      setStores(data.data.stores);
+      setSearchProducts(data.data.products);
+      setSearchStores(data.data.stores);
     } catch (error) {}
   };
 
@@ -38,7 +44,7 @@ const Search = ({ open, setOpen, keyword, setKeyword }) => {
     };
   }, [search]);
   return (
-    <div className={(open) ? "search" : "search hide"} ref={search}>
+    <div className={open ? "search" : "search hide"} ref={search}>
       <div className="searchContainer">
         {!keyword && (
           <div className="recentSearchHeading">
@@ -48,11 +54,11 @@ const Search = ({ open, setOpen, keyword, setKeyword }) => {
 
         {keyword && (
           <div className="searchBody">
-            {products.length > 0 && (
+            {searchProducts.length > 0 && (
               <ul className="searchProducts">
                 <div className="searchProductHeading">Products</div>
 
-                {products.slice(0, 6).map((product) => (
+                {searchProducts.slice(0, 3).map((product) => (
                   <li
                     key={product.id}
                     onClick={() => {
@@ -78,19 +84,19 @@ const Search = ({ open, setOpen, keyword, setKeyword }) => {
               </ul>
             )}
 
-            {stores.length > 0 && (
+            {searchStores.length > 0 && (
               <ul
-                className="searchProducts"
+                className="searchStores"
                 style={{ borderTop: "1px solid #ccc", paddingTop: "10px" }}
               >
-                <div className="searchProductHeading">Stores</div>
-                {stores.slice(0, 4).map((store) => (
+                <div className="searchStoreHeading">Stores</div>
+                {searchStores.slice(0, 4).map((store) => (
                   <li key={store.id}>
-                    <div className="searchProductLeft">
+                    <div className="searchStoreLeft">
                       <img src={store.avatar} alt="" />
                       <h2>{store.name}</h2>
                     </div>
-                    <div className="searchProductRight">
+                    <div className="searchStoreRight">
                       {/* <FontAwesomeIcon icon={faTimes} /> */}
                     </div>
                   </li>
@@ -99,7 +105,9 @@ const Search = ({ open, setOpen, keyword, setKeyword }) => {
             )}
           </div>
         )}
-        {(keyword && (products.length === 0 && stores.length === 0)) && <div className="noResultText">No matching results</div>}
+        {keyword && searchProducts.length === 0 && searchStores.length === 0 && (
+          <div className="noResultText">No matching results</div>
+        )}
       </div>
     </div>
   );

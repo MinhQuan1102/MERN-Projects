@@ -2,12 +2,16 @@ import { useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 import "./addProductImage.css";
 
-const AddProductImage = ({ image, product, setProduct, index }) => {
+const AddProductImage = ({
+  image,
+  product,
+  setProduct,
+  index,
+  productImage,
+}) => {
   const [openDeleteImg, setOpenDeleteImg] = useState(false);
-
   return (
     <div
       className="addProductImage"
@@ -15,9 +19,35 @@ const AddProductImage = ({ image, product, setProduct, index }) => {
       onMouseLeave={() => setOpenDeleteImg(false)}
       key={index}
     >
-      <img src={URL.createObjectURL(image)} alt="" className="productImg" />
-      {openDeleteImg && (
-        <div className="deleteImgContainer" onClick={() => setProduct((prev) => ({...prev, images: product.images.filter(img => img !== image)}))}>
+      {productImage && (
+        <img src={image} alt="" className="productImg" />
+      )}
+      {!productImage && (
+        <img src={URL.createObjectURL(image)} alt="" className="productImg" />
+      )}
+      {productImage && openDeleteImg && (
+        <div
+          className="deleteImgContainer"
+          onClick={() =>
+            setProduct((prev) => ({
+              ...prev,
+              images: product.images.filter((img) => img !== image),
+            }))
+          }
+        >
+          <FontAwesomeIcon icon={faTrash} className="deleteIcon" />
+        </div>
+      )}
+      {!productImage && openDeleteImg && (
+        <div
+          className="deleteImgContainer"
+          onClick={() =>
+            setProduct((prev) => ({
+              ...prev,
+              newImages: product.newImages.filter((img) => img !== image),
+            }))
+          }
+        >
           <FontAwesomeIcon icon={faTrash} className="deleteIcon" />
         </div>
       )}

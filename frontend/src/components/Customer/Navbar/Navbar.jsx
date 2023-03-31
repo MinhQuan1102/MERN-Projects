@@ -13,8 +13,16 @@ import Search from "../Search/Search";
 import CartPreview from "../CartPreview/CartPreview";
 import axios from "axios";
 
-const Navbar = ({ fetchPreviewCart, cartProducts }) => {
-  const { currentUser, setCurrentUser, setRole } = useContext(AuthContext);
+const Navbar = ({
+  fetchPreviewCart,
+  cartProducts,
+  productResults,
+  storeResults,
+  setProductResults,
+  setStoreResults,
+}) => {
+  const { currentUser, setCurrentUser, setRole, BACKEND_URL } =
+    useContext(AuthContext);
 
   const [openSetting, setOpenSetting] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -22,10 +30,21 @@ const Navbar = ({ fetchPreviewCart, cartProducts }) => {
   const [keyword, setKeyword] = useState("");
   const history = useHistory();
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
       history.push(`/search?keyword=${keyword}`);
       setOpenSearch(false);
+
+      try {
+        const { data } = await axios.get(
+          `${BACKEND_URL}/api/search?keyword=${keyword}`
+        );
+        setProductResults(data.data.products);
+        setStoreResults(data.data.stores);
+        console.log(1);
+      } catch (error) {
+        setOpenSearch(false);
+      }
     }
   };
 
@@ -68,6 +87,8 @@ const Navbar = ({ fetchPreviewCart, cartProducts }) => {
                 setOpen={setOpenSearch}
                 keyword={keyword}
                 setKeyword={setKeyword}
+                products={productResults}
+                stores={storeResults}
               />
             </div>
           </div>

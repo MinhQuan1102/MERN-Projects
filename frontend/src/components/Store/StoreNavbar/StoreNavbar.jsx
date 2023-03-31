@@ -14,7 +14,7 @@ const StoreNavbar = () => {
     <div className="storeNavbar">
       <div className="storeNavbarContainer">
         <div className="storeNavbarLeft">
-          <img src={logo} alt="" />
+          <img src={logo} alt="" onClick={() => history.push(`/store/product/all?pages=1`)}/>
         </div>
         <div className="storeNavbarRight">
           <div className="storeInfo">

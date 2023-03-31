@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import "./featuredProduct.css";
 import { formatNumber } from "../../longFunctions";
+import SingleProduct from "../SingleProduct/SingleProduct";
 
 const FeaturedProduct = () => {
   const [products, setProducts] = useState([]);
@@ -24,33 +25,7 @@ const FeaturedProduct = () => {
         <div className="featuredTitle">Featured products</div>
         <ul>
           {products.map((product) => (
-            <li
-              key={product.id}
-              onClick={() => history.push(`/product/${product.id}`)}
-            >
-              <div className="singleProduct">
-                <img
-                  src={product.images[0]}
-                  alt="product"
-                  className="productImage"
-                />
-                <div className="productInfo">
-                  <div className="productTitle">
-                    <h2 className="productName">{`${product.name.substring(
-                      0,
-                      35
-                    )} ${product.name.length > 35 ? "..." : ""}`}</h2>
-                  </div>
-                  <span className="productPrice">{`đ${formatNumber(product.price)}`}</span>
-
-                  <span className="productDesc">
-                    {`${product.description.substring(0, 100)} ${
-                      product.description.length > 100 ? "..." : ""
-                    }`}
-                  </span>
-                </div>
-              </div>
-            </li>
+            <SingleProduct product={product} />
           ))}
         </ul>
       </div>

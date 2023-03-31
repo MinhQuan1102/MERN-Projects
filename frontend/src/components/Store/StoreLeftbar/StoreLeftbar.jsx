@@ -1,10 +1,10 @@
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./storeLeftbar.css";
 import { StoreContext } from "../../../context/StoreContext";
-import { useHistory } from "react-router-dom";
-import { handleChooseOption } from "./storeLeftbarLogic";
+import { useHistory, useLocation } from "react-router-dom";
+import { handleChooseOption, handleNavigateOption } from "./storeLeftbarLogic";
 
 const StoreLeftbar = () => {
   const [openOrderManagement, setOpenOrderManagement] = useState(false);
@@ -13,6 +13,12 @@ const StoreLeftbar = () => {
   const [openMyStore, setOpenMyStore] = useState(false);
   const { option, setOption } = useContext(StoreContext);
   const history = useHistory();
+  const location = useLocation();
+  console.log(location.pathname);
+
+  useEffect(() => {
+    setOption(handleNavigateOption(location.pathname));
+  }, [location]);
 
   return (
     <div className="storeLeftbar">
@@ -101,20 +107,20 @@ const StoreLeftbar = () => {
             className={openPromotionManagement ? "options selected" : "options"}
           >
             <li
-              className={option === "All Products" ? "chosenOption" : ""}
+              className={option === "All Promotions" ? "chosenOption" : ""}
               onClick={() =>
-                handleChooseOption("All Products", setOption, history)
+                handleChooseOption("All Promotions", setOption, history)
               }
             >
-              All Products
+              All Promotions
             </li>
             <li
-              className={option === "Add a Product" ? "chosenOption" : ""}
+              className={option === "Add a Promotion" ? "chosenOption" : ""}
               onClick={() =>
-                handleChooseOption("Add a Product", setOption, history)
+                handleChooseOption("Add a Promotion", setOption, history)
               }
             >
-              Add a Product
+              Add a Promotion
             </li>
           </ul>
         </div>
@@ -126,9 +132,7 @@ const StoreLeftbar = () => {
               className={openMyStore ? "openOption" : "openOption rotate"}
             />
           </div>
-          <ul
-            className={openMyStore? "options selected" : "options"}
-          >
+          <ul className={openMyStore ? "options selected" : "options"}>
             <li
               className={option === "All Products" ? "chosenOption" : ""}
               onClick={() =>

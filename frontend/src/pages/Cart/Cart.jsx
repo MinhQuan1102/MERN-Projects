@@ -14,13 +14,6 @@ const Cart = () => {
 
   const [total, setTotal] = useState(0);
 
-  const totalPrice = storeProducts.reduce((accumulator, currentValue) => {
-    const itemTotal = currentValue.items.reduce((itemAccumulator, item) => {
-      return itemAccumulator + item.product.price * item.quantity;
-    }, 0);
-    return accumulator + itemTotal;
-  }, 0)
-  console.log(storeProducts);
   const fetchCart = async () => {
     try {
       const { data } = await axios.get(

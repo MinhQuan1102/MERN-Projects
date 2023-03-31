@@ -7,9 +7,9 @@ import { useHistory, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import AddProductImage from "../AddProductImage/AddProductImage";
 import "./updateProduct.css";
-import { handleAddProduct } from "./updateProductLogic";
+import { handleUpdateProduct } from "./updateProductLogic";
 
-const AddProduct = () => {
+const UpdateProduct = () => {
   const { BACKEND_URL, config } = useContext(AuthContext);
   const [product, setProduct] = useState({
     name: "",
@@ -18,36 +18,35 @@ const AddProduct = () => {
     quantity: "",
     description: "",
     images: [],
+    newImages: [],
   });
   const toast = useToast();
   const history = useHistory();
   const location = useLocation();
-  const productId = location.pathname.split("/")[3];
-  console.log(productId)
+  const productId = location.pathname.split("/")[4];
+  console.log(product);
 
   const fetchProduct = async () => {
     try {
-      const { data } = await axios.get(`${BACKEND_URL}/api/product/${productId}`);
+      const { data } = await axios.get(
+        `${BACKEND_URL}/api/product/${productId}`
+      );
       const product = data.data;
-      console.log(data)
       setProduct({
         name: product.name,
         price: product.price,
         category: product.category,
         quantity: product.quantity,
         description: product.description,
-        images: product.images
-      })
-    } catch (error) {
-      
-    }
-  }
+        images: product.images,
+        newImages: [],
+      });
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    fetchProduct()
-  }, [productId])
-
-  console.log(product)
+    fetchProduct();
+  }, [productId]);
 
   const handleChange = (e) => {
     setProduct((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -167,12 +166,22 @@ const AddProduct = () => {
               <tr>
                 <td className="productHeading">Product Image</td>
                 <td style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                  {product.images.slice(0, 6).map((image, i) => (
+                  {product.images.map((image, i) => (
                     <AddProductImage
                       image={image}
                       product={product}
                       setProduct={setProduct}
                       index={i}
+                      productImage={true}
+                    />
+                  ))}
+                  {product.newImages.map((image, i) => (
+                    <AddProductImage
+                      image={image}
+                      product={product}
+                      setProduct={setProduct}
+                      index={i}
+                      productImage={false}
                     />
                   ))}
                   <label htmlFor="file">
@@ -182,8 +191,10 @@ const AddProduct = () => {
                         className="addImageIcon"
                       />
                       <span>{`Add image (${
-                        product.images.length > 6 ? 6 : product.images.length
-                      }/6)`}</span>
+                        product.images.length + product.newImages.length > 10
+                          ? 10
+                          : product.images.length + product.newImages.length
+                      }/10)`}</span>
                     </div>
                     <input
                       type="file"
@@ -192,11 +203,16 @@ const AddProduct = () => {
                       multiple
                       accept="image/png, image/jpeg, image/webp"
                       style={{ display: "none" }}
-                      disabled={product.images.length >= 6}
+                      disabled={
+                        product.images.length + product.newImages.length >= 10
+                      }
                       onChange={(event) =>
                         setProduct((prev) => ({
                           ...prev,
-                          images: [...product.images, ...event.target.files],
+                          newImages: [
+                            ...product.newImages,
+                            ...event.target.files,
+                          ],
                         }))
                       }
                     />
@@ -214,7 +230,7 @@ const AddProduct = () => {
                   <button
                     className="addBtn"
                     onClick={() =>
-                      handleAddProduct(
+                      handleUpdateProduct(
                         product,
                         BACKEND_URL,
                         config,
@@ -235,4 +251,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

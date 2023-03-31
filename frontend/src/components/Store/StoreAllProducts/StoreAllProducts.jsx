@@ -152,7 +152,7 @@ const Storepage = () => {
                       <FontAwesomeIcon
                         icon={faPen}
                         onClick={() =>
-                          history.push(`/store/product/${product.id}`)
+                          history.push(`/store/product/update/${product.id}`)
                         }
                       />
                       <FontAwesomeIcon icon={faTrash} />

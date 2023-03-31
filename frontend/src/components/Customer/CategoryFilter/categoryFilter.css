@@ -24,6 +24,8 @@
   overflow: hidden; */
   display: grid;
   grid-template-columns: repeat(10, 20%);
+  overflow-x: scroll;
+
 }
 
 .categoryFilter .categories > div {
@@ -42,7 +44,7 @@
 .categoryFilter .categories .prevBtn {
   position: absolute;
   top: 50%;
-  left: -20px;
+  left: 0px;
   overflow: visible;
   transform: translateY(-50%);
 }
@@ -50,7 +52,7 @@
 .categoryFilter .categories .nextBtn {
   position: absolute;
   top: 50%;
-  right: -20px;
+  right: 0px;
   transform: translateY(-50%);
   padding: 0 !important;
 }
@@ -64,4 +66,27 @@
   list-style: none;
   border: 1px solid lightgray;
   padding: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0C1D26;
+  border-radius: 15px;
+  height: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
