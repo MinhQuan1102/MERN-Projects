@@ -47,12 +47,44 @@ const StoreLeftbar = () => {
               All orders
             </li>
             <li
-              className={option === "Canceled Orders" ? "chosenOption" : ""}
+              className={option === "Pending Orders" ? "chosenOption" : ""}
               onClick={() =>
-                handleChooseOption("Canceled Orders", setOption, history)
+                handleChooseOption("Pending Orders", setOption, history)
               }
             >
-              Canceled orders
+              Pending orders
+            </li>
+            <li
+              className={option === "Ready Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Ready Orders", setOption, history)
+              }
+            >
+              Ready orders
+            </li>
+            <li
+              className={option === "Delivering Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Delivering Orders", setOption, history)
+              }
+            >
+              Delivering orders
+            </li>
+            <li
+              className={option === "Delivered Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Delivered Orders", setOption, history)
+              }
+            >
+              Delivered orders
+            </li>
+            <li
+              className={option === "Cancelled Orders" ? "chosenOption" : ""}
+              onClick={() =>
+                handleChooseOption("Cancelled Orders", setOption, history)
+              }
+            >
+              Cancelled orders
             </li>
           </ul>
         </div>

@@ -27,7 +27,7 @@
 }
 
 .storeLeftbarContainer > div .heading:hover span {
-  color: #6581f1;
+  color: #3a9cc5;
   font-weight: 600;
 }
 
@@ -81,3 +81,8 @@
   font-weight: bold !important;
 }
 
+@media screen and (max-width: 600px) {
+  .storeLeftbar {
+    display: none;
+  }
+}

@@ -32,6 +32,7 @@
   display: flex;
   background-color: #ffffff;
   padding: 25px;
+  cursor: pointer;
 }
 
 .searchResult .singleStore li .storeLeft {

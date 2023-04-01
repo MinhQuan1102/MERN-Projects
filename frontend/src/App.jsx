@@ -12,7 +12,7 @@ import UpdateAddress from "./pages/UpdateAddress/UpdateAddress";
 import UpdatePassword from "./pages/UpdatePassword/UpdatePassword";
 import Checkout from "./pages/Checkout/Checkout";
 import { useContext, useState, useEffect } from "react";
-import StoreAllProduct from "./components/Store/StoreAllProducts/StoreAllProducts";
+import StoreAllProducts from "./components/Store/StoreAllProducts/StoreAllProducts";
 import AddProduct from "./components/Store/AddProduct/AddProduct";
 import UpdateProduct from "./components/Store/UpdateProduct/UpdateProduct";
 import StoreLeftbar from "./components/Store/StoreLeftbar/StoreLeftbar";
@@ -21,23 +21,26 @@ import axios from "axios";
 import { AuthContext } from "./context/AuthContext";
 import SearchResult from "./components/Customer/SearchResult/SearchResult";
 import Store from "./components/Customer/Store/Store";
+import StoreAllOrders from "./components/Store/StoreAllOrders/StoreAllOrders";
 
 function App() {
-  const { role, BACKEND_URL, config } = useContext(AuthContext);
+  const { role, currentUser, BACKEND_URL, config } = useContext(AuthContext);
   const [cartProducts, setCartProducts] = useState([]);
   const history = useHistory();
   const fetchPreviewCart = async () => {
-    try {
-      const { data } = await axios.get(
-        `${BACKEND_URL}/api/customer/preview-cart`,
-        config
-      );
-      setCartProducts(data.data);
-    } catch (error) {}
+    if (role === "CUSTOMER" && currentUser) {
+      try {
+        const { data } = await axios.get(
+          `${BACKEND_URL}/api/customer/preview-cart`,
+          config
+        );
+        setCartProducts(data.data);
+      } catch (error) {}
+    }
   };
   useEffect(() => {
     fetchPreviewCart();
-  }, [history])
+  }, [history]);
   return (
     <div className="app">
       {role === "CUSTOMER" && (
@@ -72,20 +75,28 @@ function App() {
           <div className="storeAppBody">
             <StoreLeftbar />
             <div className="storeAppContent">
+              <Route path="/store/order/all" exact component={StoreAllOrders} />
+              <Route path="/store/order/pending" exact component={StoreAllOrders} />
+
+              <Route path="/store/order/ready" exact component={StoreAllOrders} />
+              <Route path="/store/order/delivering" exact component={StoreAllOrders} />
+              <Route path="/store/order/delivered" exact component={StoreAllOrders} />
+              <Route path="/store/order/cancelled" exact component={StoreAllOrders} />
+
               <Route
                 path="/store/product/all"
                 exact
-                component={StoreAllProduct}
+                component={StoreAllProducts}
               />
               <Route
                 path="/store/product/active"
                 exact
-                component={StoreAllProduct}
+                component={StoreAllProducts}
               />
               <Route
                 path="/store/product/soldout"
                 exact
-                component={StoreAllProduct}
+                component={StoreAllProducts}
               />
 
               <Route path="/store/product/new" exact component={AddProduct} />

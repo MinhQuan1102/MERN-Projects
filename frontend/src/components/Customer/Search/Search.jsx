@@ -14,7 +14,7 @@ const Search = ({
 
 }) => {
   const search = useRef();
-  const { BACKEND_URL } = useContext(AuthContext);
+  const { BACKEND_URL, currentUser } = useContext(AuthContext);
   const [searchProducts, setSearchProducts] = useState([]);
   const [searchStores, setSearchStores] = useState([]);
   const history = useHistory();
@@ -46,7 +46,7 @@ const Search = ({
   return (
     <div className={open ? "search" : "search hide"} ref={search}>
       <div className="searchContainer">
-        {!keyword && (
+        {!keyword && currentUser &&  (
           <div className="recentSearchHeading">
             <span>Recent search</span>
           </div>

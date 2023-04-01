@@ -116,6 +116,43 @@ tbody {
   flex: 0.5;
 }
 
+.cartContainer .emptyCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+.cartContainer .emptyCart img {
+  width: 50%;
+}
+
+.cartContainer .emptyCart .emptyCartText {
+  position: absolute;
+  left: 0;
+  top: 55%;
+  background-color: #fff;
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 50px;
+}
+
+.cartContainer .emptyCart .emptyCartText h2 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.cartContainer .emptyCart .emptyCartText span {
+  font-size: 15px;
+
+}
+
+
 @media screen and (min-width: 1700px) {
   .cartContainer {
     width: 65% !important;

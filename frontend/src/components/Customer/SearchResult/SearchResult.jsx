@@ -41,12 +41,14 @@ const SearchResult = () => {
     >
       <div className="searchResultContainer">
         {loading && <div className="lds-ring">Loading</div>}
-        {storeResults.length === 0 && productResults.length === 0 && !loading && (
-          <div className="noResult">
-            <img src={NoResult} alt="" />
-            <span>No results found</span>
-          </div>
-        )}
+        {storeResults.length === 0 &&
+          productResults.length === 0 &&
+          !loading && (
+            <div className="noResult">
+              <img src={NoResult} alt="" />
+              <span>No results found</span>
+            </div>
+          )}
         {!loading && storeResults.length > 0 && (
           <div className="store">
             <span>{`All stores related to "${keyword}"`}</span>
@@ -65,18 +67,23 @@ const SearchResult = () => {
             </ul>
             {storeResults.length > 2 && (
               <div className="showStoreButtons">
-                <button
-                  className="button"
-                  onClick={() => setCurrentStoreShown((prev) => prev + 2)}
-                >
-                  Show more results
-                </button>
-                <button
-                  className="button"
-                  onClick={() => setCurrentStoreShown(2)}
-                >
-                  Show less results
-                </button>
+                {currentStoreShown < storeResults.length && (
+                  <button
+                    className="button"
+                    onClick={() => setCurrentStoreShown((prev) => prev + 2)}
+                  >
+                    Show more results
+                  </button>
+                )}
+
+                {currentStoreShown > 2 && (
+                  <button
+                    className="button"
+                    onClick={() => setCurrentStoreShown(2)}
+                  >
+                    Show less results
+                  </button>
+                )}
               </div>
             )}
           </div>

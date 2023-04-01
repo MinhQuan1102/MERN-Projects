@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./storeAllProducts.css";
 import DeadOfWinter from "../../../images/dowln.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,16 +22,18 @@ const Storepage = () => {
   const [stockType, setStockType] = useState(
     useHistory().location.pathname.split("/")[3]
   );
-
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(0);
   const pageIndex = Math.floor(useHistory().location.search.split("=")[1]);
   const [currentPage, setCurrentPage] = useState(pageIndex);
-  const [productPerPage, setProductPerPage] = useState(3);
+  const [productPerPage, setProductPerPage] = useState(10);
   const numOfPages = Math.ceil(products.length / productPerPage);
   const productIndexStart = (currentPage - 1) * productPerPage;
   const productIndexEnd = productIndexStart + productPerPage - 1;
   const handleChangeProductPerPage = (e) => {
     setProductPerPage(Math.floor(e.target.value));
   };
+  const confirmDelete = useRef();
 
   const toast = useToast();
 
@@ -46,6 +48,22 @@ const Storepage = () => {
   const handleClickPrev = () => {
     setCurrentPage((prev) => (prev === 1 ? prev : prev - 1));
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        confirmDelete.current &&
+        !confirmDelete.current.contains(event.target)
+      ) {
+        setOpenConfirmDelete(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [confirmDelete]);
   useEffect(() => {
     history.push(`/store/product/${stockType}?pages=${currentPage}`);
   }, [currentPage]);
@@ -60,6 +78,32 @@ const Storepage = () => {
     } catch (error) {
       toast({
         title: "An error occurred fetching products",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+
+  const deleteProduct = async () => {
+    try {
+      await axios.delete(
+        `${BACKEND_URL}/api/store/products/${productToDelete.toString()}`,
+        config
+      );
+      toast({
+        title: "Delete product successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setOpenConfirmDelete(false);
+      fetchProducts();
+    } catch (error) {
+      toast({
+        title: "An error occurred deleting products",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -106,9 +150,17 @@ const Storepage = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ flex: "2" }}>Product name</th>
-                <th>Product category</th>
-                <th>Product price</th>
+                <th
+                  style={{
+                    flex: "4",
+                    justifyContent: "flex-start",
+                    paddingLeft: "10px",
+                  }}
+                >
+                  Product name
+                </th>
+                <th style={{ flex: "2" }}>Product category</th>
+                <th style={{ flex: "2" }}>Price</th>
                 <th>In stock</th>
                 <th>Sales</th>
                 <th>Operation</th>
@@ -122,9 +174,11 @@ const Storepage = () => {
                     <th
                       style={{
                         display: "flex",
-                        flex: "2",
+                        flex: "4",
                         gap: "15px",
                         alignItems: "flex-start",
+                        justifyContent: "flex-start",
+                        paddingLeft: "10px",
                       }}
                     >
                       <img
@@ -141,32 +195,60 @@ const Storepage = () => {
                         {product.name}
                       </span>
                     </th>
-                    <th>{product.category}</th>
-                    <th>
-                      <span className="price-symbol">₫</span>
-                      {formatNumber(product.price)}
+                    <th style={{ flex: "2" }}>
+                      <div className="container"> {product.category}</div>
                     </th>
-                    <th>{product.quantity}</th>
-                    <th>2</th>
-                    <th className="productButtons">
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        onClick={() =>
-                          history.push(`/store/product/update/${product.id}`)
-                        }
-                      />
-                      <FontAwesomeIcon icon={faTrash} />
+                    <th style={{ flex: "2" }}>
+                      <div className="container">
+                        <span className="price-symbol">₫</span>
+                        {formatNumber(product.price)}
+                      </div>
+                    </th>
+                    <th>
+                      <div className="container"> {product.quantity}</div>
+                    </th>
+                    <th>
+                      <div className="container">2</div>
+                    </th>
+                    <th>
+                      <div className="container productButtons">
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          onClick={() =>
+                            history.push(`/store/product/update/${product.id}`)
+                          }
+                        />
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          onClick={() => {
+                            setOpenConfirmDelete(true);
+                            setProductToDelete(product.id);
+                          }}
+                        />
+                      </div>
                     </th>
                   </tr>
                 ))}
 
-              <tr>
+              <tr
+                style={{
+                  position: "absolute",
+                  left: "0px",
+                  bottom: "0px",
+                  paddingBottom: "15px",
+                  zIndex: "50",
+                  backgroundColor: "#fff",
+                  padding: "15px 0",
+                }}
+              >
                 <td className="productNav">
                   <div className="productNavBtn">
                     <div className="prevBtn" onClick={handleClickPrev}>
                       <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
-                    <span>{`${currentPage}/${numOfPages}`}</span>
+                    <span>{`${currentPage}/${
+                      numOfPages !== 1 / 0 ? numOfPages : 1
+                    }`}</span>
                     <div className="nextBtn" onClick={handleClickNext}>
                       <FontAwesomeIcon icon={faChevronRight} />
                     </div>
@@ -185,6 +267,31 @@ const Storepage = () => {
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div
+        className={openConfirmDelete ? "confirmDelete" : "confirmDelete hide"}
+      >
+        <div className="confirmDeleteContainer" ref={confirmDelete}>
+          <div className="deleteTitle">
+            <span>Are you sure you want to delete this product?</span>
+          </div>
+          <div className="deleteBtnContainer">
+            <button
+              className="button"
+              onClick={() => {
+                deleteProduct();
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="button"
+              onClick={() => setOpenConfirmDelete(false)}
+            >
+              No
+            </button>
+          </div>
         </div>
       </div>
     </div>

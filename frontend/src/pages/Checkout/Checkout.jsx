@@ -1,10 +1,59 @@
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { formatNumber } from "../../components/longFunctions";
+import axios from "axios";
+
 import BreadCrumb from "../../components/Customer/BreadCrumb/BreadCrumb";
 import "./checkout.css";
+import { useToast } from "@chakra-ui/react";
 
 const Checkout = () => {
+  const { BACKEND_URL, config } = useContext(AuthContext);
+  const [storeProducts, setStoreProducts] = useState([]);
+  const toast = useToast()
+  const subTotalPrice = storeProducts.reduce((accumulator, currentValue) => {
+    const itemTotal = currentValue.items.reduce((itemAccumulator, item) => {
+      return itemAccumulator + item.product.price * item.quantity;
+    }, 0);
+    return accumulator + itemTotal;
+  }, 0);
+  const fetchCart = async () => {
+    try {
+      const { data } = await axios.get(
+        `${BACKEND_URL}/api/customer/cart`,
+        config
+      );
+      setStoreProducts(data.data);
+    } catch (error) {}
+  };
+
+  const handleCheckout = async () => {
+    try {
+      await axios.post(`${BACKEND_URL}/api/customer/checkout`, config);
+      toast({
+        title: "Checkout successful",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } catch (error) {
+      toast({
+        title: "An error occurred checking out",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  console.log(storeProducts);
   return (
     <div className="checkout">
       <BreadCrumb title="Cart / Checkout" />
@@ -24,172 +73,82 @@ const Checkout = () => {
             <span className="changeLocationText">Change</span>
           </div>
         </div>
-
-        <div className="checkoutProducts">
-          <div className="shopInfo">
-            <img
-              src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/273210834_3086464761611742_3914305251108406206_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GpZUB-TOXNUAX9fnPSj&_nc_ht=scontent.fhan14-3.fna&oh=00_AfA92m10XiplbJb0QeM-d8Rw0HB1neXeo_mJdUsJfh3JqQ&oe=640D4AC3"
-              alt=""
-              className="shopAvatar"
-            />
-            <span className="shopName">MQShop</span>
-          </div>
-          <table>
-            <thead>
-              <tr style={{ display: "flex", paddingBottom: "15px" }}>
-                <th
-                  style={{
-                    flex: "6",
-                    color: "#222",
-                    fontSize: "18px",
-                    fontWeight: "600",
-                  }}
-                >
-                  Product
-                </th>
-                <th style={{ flex: "1.5" }}>Price</th>
-                <th style={{ flex: "1.5", textAlign: "center" }}>Quantity</th>
-                <th style={{ flex: "2.5", textAlign: "right" }}>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ display: "flex" }}>
-                <td
-                  style={{
-                    flex: "6",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
-                  }}
-                >
-                  <img
-                    src="https://cf.shopee.vn/file/sg-11134201-22110-5co0i2evafkve8"
-                    alt=""
-                  />
-                  <span>Suc sieu vip</span>
-                </td>
-                <td style={{ flex: "1.5" }}>2M</td>
-                <td style={{ flex: "1.5", justifyContent: "center" }}>2</td>
-                <td style={{ flex: "2.5", justifyContent: "flex-end" }}>4M</td>
-              </tr>
-              <tr style={{ display: "flex" }}>
-                <td
-                  style={{
-                    flex: "6",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
-                  }}
-                >
-                  <img
-                    src="https://cf.shopee.vn/file/sg-11134201-22110-5co0i2evafkve8"
-                    alt=""
-                  />
-                  <span>Suc sieu vip</span>
-                </td>
-                <td style={{ flex: "1.5" }}>20k</td>
-                <td style={{ flex: "1.5", justifyContent: "center" }}>2</td>
-                <td style={{ flex: "2.5", justifyContent: "flex-end" }}>40k</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="deliveryOption">
-            <div className="deliveryPartner">
-              <span className="deliveryHeading">Delivery Partner: </span>
-              <span className="deliveryPartnerName">Giao hang nhanh vcl</span>
-              <span className="deliveryChangeText">Change</span>
+        {storeProducts.map((product) => (
+          <div className="checkoutProducts" key={product.id}>
+            <div className="shopInfo">
+              <img src={product.store.avatar} alt="" className="shopAvatar" />
+              <span className="shopName">{product.store.name}</span>
             </div>
-            <div className="deliveryPrice">50k</div>
-          </div>
-          <div className="totalProductPrice">
-            <span>{`Total price (2 products): `}</span>
-            <span>90k</span>
-          </div>
-        </div>
-
-        <div className="checkoutProducts">
-          <div className="shopInfo">
-            <img
-              src="https://cf.shopee.vn/file/4ed294e6a967c6977f5471881fb9ef65_tn"
-              alt=""
-              className="shopAvatar"
-            />
-            <span className="shopName">Lucky Shoes VN</span>
-          </div>
-          <table>
-            <thead>
-              <tr style={{ display: "flex", paddingBottom: "15px" }}>
-                <th
-                  style={{
-                    flex: "6",
-                    color: "#222",
-                    fontSize: "18px",
-                    fontWeight: "600",
-                  }}
-                >
-                  Product
-                </th>
-                <th style={{ flex: "1.5" }}>Price</th>
-                <th style={{ flex: "1.5", textAlign: "center" }}>Quantity</th>
-                <th style={{ flex: "2.5", textAlign: "right" }}>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ display: "flex" }}>
-                <td
-                  style={{
-                    flex: "6",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
-                  }}
-                >
-                  <img
-                    src="https://cf.shopee.vn/file/sg-11134201-22110-5co0i2evafkve8"
-                    alt=""
-                  />
-                  <span>Suc sieu vip</span>
-                </td>
-                <td style={{ flex: "1.5" }}>20k</td>
-                <td style={{ flex: "1.5", justifyContent: "center" }}>2</td>
-                <td style={{ flex: "2.5", justifyContent: "flex-end" }}>40k</td>
-              </tr>
-              <tr style={{ display: "flex" }}>
-                <td
-                  style={{
-                    flex: "6",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
-                  }}
-                >
-                  <img
-                    src="https://cf.shopee.vn/file/8a68151c06e45e7c70f7371b073979a6"
-                    alt=""
-                  />
-                  <span>Suc ca map</span>
-                </td>
-                <td style={{ flex: "1.5" }}>50k</td>
-                <td style={{ flex: "1.5", justifyContent: "center" }}>3</td>
-                <td style={{ flex: "2.5", justifyContent: "flex-end" }}>
-                  150k
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="deliveryOption">
-            <div className="deliveryPartner">
-              <span className="deliveryHeading">Delivery Partner: </span>
-              <span className="deliveryPartnerName">Giao hang nhanh vcl</span>
-              <span className="deliveryChangeText">Change</span>
+            <table>
+              <thead>
+                <tr style={{ display: "flex", paddingBottom: "15px" }}>
+                  <th
+                    style={{
+                      flex: "6",
+                      color: "#222",
+                      fontSize: "18px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Product
+                  </th>
+                  <th style={{ flex: "1.5" }}>Price</th>
+                  <th style={{ flex: "1.5", textAlign: "center" }}>Quantity</th>
+                  <th style={{ flex: "2.5", textAlign: "right" }}>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {product.items.map((item) => (
+                  <tr style={{ display: "flex" }}>
+                    <td
+                      style={{
+                        flex: "6",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "15px",
+                      }}
+                    >
+                      <img src={item.product.images[0]} alt="" />
+                      <span>{item.product.name}</span>
+                    </td>
+                    <td style={{ flex: "1.5" }}>
+                      {" "}
+                      <span className="price-symbol">₫</span>
+                      {formatNumber(item.product.price)}
+                    </td>
+                    <td style={{ flex: "1.5", justifyContent: "center" }}>
+                      {item.quantity}
+                    </td>
+                    <td style={{ flex: "2.5", justifyContent: "flex-end" }}>
+                      <span className="price-symbol">₫</span>
+                      {formatNumber(item.product.price * item.quantity)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="deliveryOption">
+              <div className="deliveryPartner">
+                <span className="deliveryHeading">Delivery Partner: </span>
+                <span className="deliveryPartnerName">Giao hang nhanh vcl</span>
+                <span className="deliveryChangeText">Change</span>
+              </div>
+              <div className="deliveryPrice">50k</div>
             </div>
-            <div className="deliveryPrice">50k</div>
+            <div className="totalProductPrice">
+              <span>{`Total price (2 products): `}</span>
+              <span>
+                <span className="price-symbol">₫</span>
+
+                {formatNumber(
+                  product.items.reduce((accumulator, item) => {
+                    return accumulator + item.product.price * item.quantity;
+                  }, 0) + 50000
+                )}
+              </span>
+            </div>
           </div>
-          <div className="totalProductPrice">
-            <span>{`Total price (2 products): `}</span>
-            <span>240k</span>
-          </div>
-        </div>
+        ))}
 
         <div className="cartTotal">
           <div className="cartTotalContainer">
@@ -200,7 +159,10 @@ const Checkout = () => {
               <div className="cartTotalPriceContainer">
                 <div className="productPrice">
                   <h2>Product price</h2>
-                  <span>380k</span>
+                  <span>
+                    <span className="price-symbol">₫</span>
+                    {formatNumber(subTotalPrice)}
+                  </span>
                 </div>
                 <div className="shipmentFee">
                   <h2>Shipment fee</h2>
@@ -210,7 +172,7 @@ const Checkout = () => {
                   <h2>Total price:</h2>
                   <span style={{ fontSize: "25px" }}>480k</span>
                 </div>
-                <button>Checkout</button>
+                <button onClick={handleCheckout}>Checkout</button>
               </div>
             </div>
           </div>

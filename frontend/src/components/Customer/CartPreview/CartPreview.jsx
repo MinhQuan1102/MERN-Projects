@@ -3,6 +3,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import "./cartPreview.css";
 import { formatNumber } from "../../longFunctions";
 import { Link, useHistory } from "react-router-dom";
+import EmptyCart from "../../../images/emptycart.jpg";
 
 const CartPreview = ({ open, setOpen, products }) => {
   const history = useHistory();
@@ -13,7 +14,7 @@ const CartPreview = ({ open, setOpen, products }) => {
       onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      {currentUser && (
+      {currentUser && products.length > 0 && (
         <div className="cartPreviewContainer">
           <div className="cartPreviewHeader">Recently added products</div>
           <div className="cartPreviewProducts">
@@ -50,6 +51,18 @@ const CartPreview = ({ open, setOpen, products }) => {
             >
               View your cart
             </button>
+          </div>
+        </div>
+      )}
+      {currentUser && products.length === 0 && (
+        <div className="cartPreviewContainer">
+          <img src={EmptyCart} alt="" className="emptyCart" />
+          <div className="emptyCartText">
+            <h2>Your cart is empty</h2>
+            <span>
+              Looks like you have not added anything to your cart. Go ahead &
+              explore top categories
+            </span>
           </div>
         </div>
       )}

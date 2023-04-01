@@ -48,7 +48,6 @@ const ProductDetail = ({ product, fetchPreviewCart }) => {
     );
   };
 
-  console.log(quantity)
 
   const handleAddToCart = async (productId) => {
     try {
