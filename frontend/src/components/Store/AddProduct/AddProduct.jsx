@@ -61,7 +61,7 @@ const AddProduct = () => {
                       gap: "5px",
                     }}
                   >
-                    <span className="currencyCharacter">$</span>
+                    <span className="currencyCharacter">₫</span>
                     <input
                       type="number"
                       placeholder="Your product price"

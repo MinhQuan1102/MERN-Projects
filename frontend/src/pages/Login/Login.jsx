@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value.trim() }));
   };
 
   const login = async (e) => {

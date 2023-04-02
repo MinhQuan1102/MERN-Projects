@@ -1,16 +1,21 @@
 .storeAllOrders {
   width: 100%;
-  height: 95vh;
+  max-height: calc(100vh - 70px);
   background-color: #f0f2f5;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: scroll;
+  position: relative;
 }
 
 .storeAllOrdersContainer {
   background-color: #fff;
   width: 70%;
   border: 1px solid #ccc;
+  max-height: calc(100vh - 70px);
+
+  overflow-y: scroll;
 }
 
 .storeOrdersFilter {
@@ -43,6 +48,8 @@
 
 .storeAllOrders table {
   width: 100%;
+  height: 80%;
+
   position: relative;
 }
 

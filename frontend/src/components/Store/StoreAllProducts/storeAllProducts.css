@@ -1,17 +1,19 @@
 .storeAllProducts {
   width: 100%;
-  height: 90vh;
+  max-height: calc(100vh - 70px);
   background-color: #f0f2f5;
   padding: 15px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .storeAllProductsContainer {
   background-color: #fff;
   width: 70%;
-  height: 100%;
+  height: calc(100vh - 70px);
+
   border: 1px solid #ccc;
 }
 
@@ -45,7 +47,7 @@
 
 .storeAllProducts table {
   width: 100%;
-  height: 100%;
+  height: 80%;
   position: relative;
 }
 
@@ -207,14 +209,36 @@
   display: none
 }
 
+@media screen and (max-width: 1400px) {
+  .storeAllProducts table tbody {
+    min-height: 55vh;
+    max-height: 55vh;
+  }
+}
 @media screen and (max-width: 1200px) {
   .storeAllProductsContainer {
     width: 90%;
   }
+
+  .storeAllProducts table tbody {
+    min-height: 60vh;
+    max-height: 60vh;
+  }
 }
 
 @media screen and (max-width: 950px) {
+  .storeAllProducts {
+    padding: 0;
+  }
   .storeAllProductsContainer {
     width: 100%;
   }
+
+  .storeAllProducts table tbody {
+    min-height: 50vh;
+    max-height: 50vh;
+  }
+  /* .storeAllProducts table tbody {
+    margin-bottom: 10px;
+  } */
 }

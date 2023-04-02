@@ -1,8 +1,8 @@
 .addProduct {
   width: 100%;
   height: 100%;
-  padding-top: 20px;
-
+  max-height: calc(100vh - 70px);
+  overflow-y: scroll;
 }
 
 .addProductContainer {
@@ -24,14 +24,15 @@
 
 .productInfo table {
   width: 100%;
-  
+
 }
 
 .productInfo table tbody {
   display: flex;
   flex-direction: column;
   gap: 15px;
-
+  justify-content: center;
+  align-items: center;
 }
 
 .productInfo table tr {
@@ -57,12 +58,13 @@
   padding: 8px;
   border: 1px solid lightgray;
   border-radius: 8px;
-  width: 60%;
+  width: 90% !important;
   display: flex;
 }
 
 .productInfo table tr td .inputField input {
   width: 80%;
+  padding-left: 5px;
 }
 
 .productInfo table tr td .inputField .inputCharacter {
