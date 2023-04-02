@@ -14,7 +14,6 @@ const StoreLeftbar = () => {
   const { option, setOption } = useContext(StoreContext);
   const history = useHistory();
   const location = useLocation();
-  console.log(location.pathname);
 
   useEffect(() => {
     setOption(handleNavigateOption(location.pathname));

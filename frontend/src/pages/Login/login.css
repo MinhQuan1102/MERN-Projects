@@ -26,6 +26,8 @@
 .login {
   width: 100%;
   min-height: 90vh;
+  height: calc(100vh - 70px);
+  background-color: #f5f5f7;
 }
 .register {
   background-color: var(--color-f5f5f7);

@@ -116,6 +116,17 @@
   border-radius: 50%;
 }
 
+.storeAllOrders table tbody .orderInfo .orderRight {
+  display: flex;
+  gap: 50px;
+}
+
+.storeAllOrders table tbody .orderInfo .orderRight .orderCode {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .storeAllOrders table tbody tr .products {
   border: 1px solid #ccc;
   margin: 0 25px 30px 25px;

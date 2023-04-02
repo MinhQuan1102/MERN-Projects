@@ -32,6 +32,7 @@ const StoreAllOrders = () => {
   const handleChangeOrderPerPage = (e) => {
     setOrderPerPage(Math.floor(e.target.value));
   };
+  console.log(orders);
 
   const toast = useToast();
 
@@ -52,19 +53,20 @@ const StoreAllOrders = () => {
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
     const day = date.getDate();
     const suffix = getOrdinalSuffix(day);
     return formattedDate.replace(/\d+/, day + suffix);
-  }
-  
-  const getOrdinalSuffix= (day) => {
-    const suffixes = ['th', 'st', 'nd', 'rd'];
+  };
+
+  const getOrdinalSuffix = (day) => {
+    const suffixes = ["th", "st", "nd", "rd"];
     const remainder = day % 100;
-    const suffix = suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0];
+    const suffix =
+      suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0];
     return suffix;
-  }
+  };
 
   const fetchOrders = async () => {
     try {
@@ -164,16 +166,23 @@ const StoreAllOrders = () => {
                 .slice(orderIndexStart, orderIndexEnd + 1)
                 .map((order, i) => (
                   <tr style={{ marginBottom: "25px" }}>
-                    <div className="orderInfo">
+                    <th className="orderInfo">
                       <div className="customer">
                         <img src={order.customer.avatar} alt="" />
                         <h2>{order.customer.name}</h2>
                       </div>
-                      <div className="date">
-                        <div className="data">{formatTimestamp(order.createdAt)}</div>
+
+                      <div className="orderRight">
+                        <div className="date">
+                          {formatTimestamp(order.createdAt)}
+                        </div>
+                        <div className="orderCode">
+                          <h2>Order Code:</h2>
+                          <span>{order.orderCode}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="products">
+                    </th>
+                    <th className="products">
                       {order.items.map((item, i) => (
                         <div className="productsInfo">
                           <div
@@ -230,12 +239,14 @@ const StoreAllOrders = () => {
                             <span className="totalPriceTxt">Total: </span>
                           </div>
                           <div className="totalPriceRight">
-                            <div className="totalPrice">{formatNumber(3000000)}</div>
+                            <div className="totalPrice">
+                              {formatNumber(order.totalPrice)}
+                            </div>
                             <button className="button">Prepared</button>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </th>
                   </tr>
                 ))}
 

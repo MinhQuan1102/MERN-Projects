@@ -9,7 +9,7 @@ const SingleProduct = ({ product }) => {
     <li
       className="singleProduct"
       key={product.id}
-      onClick={() => history.push(`/product/${product.id}`)}
+      onClick={() => {history.push(`/product/${product.id}`); window.scrollTo(0, 0)}}
     >
       <img src={product.images[0]} alt="singleProduct" className="singleProductImage" />
       <div className="singleProductInfo">

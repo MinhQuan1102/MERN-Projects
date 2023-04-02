@@ -31,7 +31,7 @@ const Checkout = () => {
 
   const handleCheckout = async () => {
     try {
-      await axios.post(`${BACKEND_URL}/api/customer/checkout`, config);
+      await axios.post(`${BACKEND_URL}/api/customer/checkout`, {}, config);
       toast({
         title: "Checkout successful",
         status: "success",
